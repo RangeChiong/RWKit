@@ -1,0 +1,14 @@
+PODS:
+  - RWKit (0.1.0)
+
+DEPENDENCIES:
+  - RWKit (from `../`)
+
+EXTERNAL SOURCES:
+  RWKit:
+    :path: ../
+
+SPEC CHECKSUMS:
+  RWKit: 246a4df232cabf9beb66757b01c0d68344c1a442
+
+COCOAPODS: 0.39.0

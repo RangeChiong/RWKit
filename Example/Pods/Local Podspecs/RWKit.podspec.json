@@ -1,0 +1,22 @@
+{
+  "name": "RWKit",
+  "version": "0.1.0",
+  "summary": "A short description of RWKit.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/<GITHUB_USERNAME>/RWKit",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "蒙牛D罩杯撸废": "rangeChiong@outlook.com"
+  },
+  "source": {
+    "git": "https://github.com/<GITHUB_USERNAME>/RWKit.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "RWKit/Classes/**/*"
+}

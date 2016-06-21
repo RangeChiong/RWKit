@@ -2,10 +2,4 @@ use_frameworks!
 
 target 'RWKit_Example' do
   pod 'RWKit', :path => '../'
-
-  target 'RWKit_Tests' do
-    inherit! :search_paths
-
-    pod 'FBSnapshotTestCase'
-  end
 end
