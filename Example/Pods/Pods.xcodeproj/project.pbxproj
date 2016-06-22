@@ -7,8 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		02DD6CBA1D199DF7008627E1 /* CocoaCracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 02DD6CB81D199DF7008627E1 /* CocoaCracker.h */; };
-		02DD6CBB1D199DF7008627E1 /* CocoaCracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 02DD6CB91D199DF7008627E1 /* CocoaCracker.m */; };
+		02DD6CD81D1ACC03008627E1 /* NSArray+Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 02DD6CBD1D1ACC03008627E1 /* NSArray+Extensions.h */; };
+		02DD6CD91D1ACC03008627E1 /* NSArray+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 02DD6CBE1D1ACC03008627E1 /* NSArray+Extensions.m */; };
+		02DD6CDA1D1ACC03008627E1 /* NSDictionary+Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 02DD6CBF1D1ACC03008627E1 /* NSDictionary+Extensions.h */; };
+		02DD6CDB1D1ACC03008627E1 /* NSDictionary+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 02DD6CC01D1ACC03008627E1 /* NSDictionary+Extensions.m */; };
+		02DD6CDC1D1ACC03008627E1 /* NSObject+KVO.h in Headers */ = {isa = PBXBuildFile; fileRef = 02DD6CC11D1ACC03008627E1 /* NSObject+KVO.h */; };
+		02DD6CDD1D1ACC03008627E1 /* NSObject+KVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 02DD6CC21D1ACC03008627E1 /* NSObject+KVO.m */; };
+		02DD6CDE1D1ACC03008627E1 /* NSObject+Notification.h in Headers */ = {isa = PBXBuildFile; fileRef = 02DD6CC31D1ACC03008627E1 /* NSObject+Notification.h */; };
+		02DD6CDF1D1ACC03008627E1 /* NSObject+Notification.m in Sources */ = {isa = PBXBuildFile; fileRef = 02DD6CC41D1ACC03008627E1 /* NSObject+Notification.m */; };
+		02DD6CE01D1ACC03008627E1 /* NSObject+RWAssociatedObjects.h in Headers */ = {isa = PBXBuildFile; fileRef = 02DD6CC51D1ACC03008627E1 /* NSObject+RWAssociatedObjects.h */; };
+		02DD6CE11D1ACC03008627E1 /* NSObject+RWAssociatedObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = 02DD6CC61D1ACC03008627E1 /* NSObject+RWAssociatedObjects.m */; };
+		02DD6CE21D1ACC03008627E1 /* NSTimer+Block.h in Headers */ = {isa = PBXBuildFile; fileRef = 02DD6CC71D1ACC03008627E1 /* NSTimer+Block.h */; };
+		02DD6CE31D1ACC03008627E1 /* NSTimer+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = 02DD6CC81D1ACC03008627E1 /* NSTimer+Block.m */; };
+		02DD6CE41D1ACC03008627E1 /* UIColor+Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 02DD6CC91D1ACC03008627E1 /* UIColor+Utils.h */; };
+		02DD6CE51D1ACC03008627E1 /* UIColor+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 02DD6CCA1D1ACC03008627E1 /* UIColor+Utils.m */; };
+		02DD6CE61D1ACC03008627E1 /* UIView+EasyShow.h in Headers */ = {isa = PBXBuildFile; fileRef = 02DD6CCB1D1ACC03008627E1 /* UIView+EasyShow.h */; };
+		02DD6CE71D1ACC03008627E1 /* UIView+EasyShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 02DD6CCC1D1ACC03008627E1 /* UIView+EasyShow.m */; };
+		02DD6CE81D1ACC03008627E1 /* UIView+Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 02DD6CCD1D1ACC03008627E1 /* UIView+Utils.h */; };
+		02DD6CE91D1ACC03008627E1 /* UIView+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 02DD6CCE1D1ACC03008627E1 /* UIView+Utils.m */; };
+		02DD6CEA1D1ACC03008627E1 /* RWGlobalFunction.h in Headers */ = {isa = PBXBuildFile; fileRef = 02DD6CD01D1ACC03008627E1 /* RWGlobalFunction.h */; };
+		02DD6CEB1D1ACC03008627E1 /* RWGlobalFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 02DD6CD11D1ACC03008627E1 /* RWGlobalFunction.m */; };
+		02DD6CEC1D1ACC03008627E1 /* RWMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 02DD6CD21D1ACC03008627E1 /* RWMacros.h */; };
+		02DD6CED1D1ACC03008627E1 /* CocoaCracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 02DD6CD41D1ACC03008627E1 /* CocoaCracker.h */; };
+		02DD6CEE1D1ACC03008627E1 /* CocoaCracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 02DD6CD51D1ACC03008627E1 /* CocoaCracker.m */; };
+		02DD6CEF1D1ACC03008627E1 /* RWUserDefaults.h in Headers */ = {isa = PBXBuildFile; fileRef = 02DD6CD61D1ACC03008627E1 /* RWUserDefaults.h */; };
+		02DD6CF01D1ACC03008627E1 /* RWUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 02DD6CD71D1ACC03008627E1 /* RWUserDefaults.m */; };
 		2485BD06D9DF15D3135FA9B36F941861 /* RWKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FF8B64586928BAAADE378504787F20A7 /* RWKit-dummy.m */; };
 		474ABE9A37B439330455DBE9CF98E74A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
 		6360D97CBB22698905C12051C4D014A8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
@@ -28,8 +51,31 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		02DD6CB81D199DF7008627E1 /* CocoaCracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoaCracker.h; sourceTree = "<group>"; };
-		02DD6CB91D199DF7008627E1 /* CocoaCracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CocoaCracker.m; sourceTree = "<group>"; };
+		02DD6CBD1D1ACC03008627E1 /* NSArray+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Extensions.h"; sourceTree = "<group>"; };
+		02DD6CBE1D1ACC03008627E1 /* NSArray+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Extensions.m"; sourceTree = "<group>"; };
+		02DD6CBF1D1ACC03008627E1 /* NSDictionary+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Extensions.h"; sourceTree = "<group>"; };
+		02DD6CC01D1ACC03008627E1 /* NSDictionary+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Extensions.m"; sourceTree = "<group>"; };
+		02DD6CC11D1ACC03008627E1 /* NSObject+KVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+KVO.h"; sourceTree = "<group>"; };
+		02DD6CC21D1ACC03008627E1 /* NSObject+KVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+KVO.m"; sourceTree = "<group>"; };
+		02DD6CC31D1ACC03008627E1 /* NSObject+Notification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Notification.h"; sourceTree = "<group>"; };
+		02DD6CC41D1ACC03008627E1 /* NSObject+Notification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Notification.m"; sourceTree = "<group>"; };
+		02DD6CC51D1ACC03008627E1 /* NSObject+RWAssociatedObjects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+RWAssociatedObjects.h"; sourceTree = "<group>"; };
+		02DD6CC61D1ACC03008627E1 /* NSObject+RWAssociatedObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RWAssociatedObjects.m"; sourceTree = "<group>"; };
+		02DD6CC71D1ACC03008627E1 /* NSTimer+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+Block.h"; sourceTree = "<group>"; };
+		02DD6CC81D1ACC03008627E1 /* NSTimer+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+Block.m"; sourceTree = "<group>"; };
+		02DD6CC91D1ACC03008627E1 /* UIColor+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Utils.h"; sourceTree = "<group>"; };
+		02DD6CCA1D1ACC03008627E1 /* UIColor+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Utils.m"; sourceTree = "<group>"; };
+		02DD6CCB1D1ACC03008627E1 /* UIView+EasyShow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+EasyShow.h"; sourceTree = "<group>"; };
+		02DD6CCC1D1ACC03008627E1 /* UIView+EasyShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+EasyShow.m"; sourceTree = "<group>"; };
+		02DD6CCD1D1ACC03008627E1 /* UIView+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Utils.h"; sourceTree = "<group>"; };
+		02DD6CCE1D1ACC03008627E1 /* UIView+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Utils.m"; sourceTree = "<group>"; };
+		02DD6CD01D1ACC03008627E1 /* RWGlobalFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RWGlobalFunction.h; sourceTree = "<group>"; };
+		02DD6CD11D1ACC03008627E1 /* RWGlobalFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RWGlobalFunction.m; sourceTree = "<group>"; };
+		02DD6CD21D1ACC03008627E1 /* RWMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RWMacros.h; sourceTree = "<group>"; };
+		02DD6CD41D1ACC03008627E1 /* CocoaCracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoaCracker.h; sourceTree = "<group>"; };
+		02DD6CD51D1ACC03008627E1 /* CocoaCracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CocoaCracker.m; sourceTree = "<group>"; };
+		02DD6CD61D1ACC03008627E1 /* RWUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RWUserDefaults.h; sourceTree = "<group>"; };
+		02DD6CD71D1ACC03008627E1 /* RWUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RWUserDefaults.m; sourceTree = "<group>"; };
 		04109034BD872E9442E7F913DA66EEC0 /* Pods-RWKit_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-RWKit_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		126C92E10F3CD404462747DBBEC32398 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		178B09005999B992FAD7EC07DD7F600A /* Pods-RWKit_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-RWKit_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
@@ -72,11 +118,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		02DD6CB71D199DF7008627E1 /* Helper */ = {
+		02DD6CBC1D1ACC03008627E1 /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				02DD6CB81D199DF7008627E1 /* CocoaCracker.h */,
-				02DD6CB91D199DF7008627E1 /* CocoaCracker.m */,
+				02DD6CBD1D1ACC03008627E1 /* NSArray+Extensions.h */,
+				02DD6CBE1D1ACC03008627E1 /* NSArray+Extensions.m */,
+				02DD6CBF1D1ACC03008627E1 /* NSDictionary+Extensions.h */,
+				02DD6CC01D1ACC03008627E1 /* NSDictionary+Extensions.m */,
+				02DD6CC11D1ACC03008627E1 /* NSObject+KVO.h */,
+				02DD6CC21D1ACC03008627E1 /* NSObject+KVO.m */,
+				02DD6CC31D1ACC03008627E1 /* NSObject+Notification.h */,
+				02DD6CC41D1ACC03008627E1 /* NSObject+Notification.m */,
+				02DD6CC51D1ACC03008627E1 /* NSObject+RWAssociatedObjects.h */,
+				02DD6CC61D1ACC03008627E1 /* NSObject+RWAssociatedObjects.m */,
+				02DD6CC71D1ACC03008627E1 /* NSTimer+Block.h */,
+				02DD6CC81D1ACC03008627E1 /* NSTimer+Block.m */,
+				02DD6CC91D1ACC03008627E1 /* UIColor+Utils.h */,
+				02DD6CCA1D1ACC03008627E1 /* UIColor+Utils.m */,
+				02DD6CCB1D1ACC03008627E1 /* UIView+EasyShow.h */,
+				02DD6CCC1D1ACC03008627E1 /* UIView+EasyShow.m */,
+				02DD6CCD1D1ACC03008627E1 /* UIView+Utils.h */,
+				02DD6CCE1D1ACC03008627E1 /* UIView+Utils.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		02DD6CCF1D1ACC03008627E1 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				02DD6CD01D1ACC03008627E1 /* RWGlobalFunction.h */,
+				02DD6CD11D1ACC03008627E1 /* RWGlobalFunction.m */,
+				02DD6CD21D1ACC03008627E1 /* RWMacros.h */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		02DD6CD31D1ACC03008627E1 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				02DD6CD41D1ACC03008627E1 /* CocoaCracker.h */,
+				02DD6CD51D1ACC03008627E1 /* CocoaCracker.m */,
+				02DD6CD61D1ACC03008627E1 /* RWUserDefaults.h */,
+				02DD6CD71D1ACC03008627E1 /* RWUserDefaults.m */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -140,7 +223,9 @@
 		86B3424E95278DA7B6360B3DD6043C53 /* RWKit */ = {
 			isa = PBXGroup;
 			children = (
-				02DD6CB71D199DF7008627E1 /* Helper */,
+				02DD6CBC1D1ACC03008627E1 /* Category */,
+				02DD6CCF1D1ACC03008627E1 /* Config */,
+				02DD6CD31D1ACC03008627E1 /* Helper */,
 			);
 			path = RWKit;
 			sourceTree = "<group>";
@@ -198,8 +283,20 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02DD6CBA1D199DF7008627E1 /* CocoaCracker.h in Headers */,
+				02DD6CD81D1ACC03008627E1 /* NSArray+Extensions.h in Headers */,
+				02DD6CDE1D1ACC03008627E1 /* NSObject+Notification.h in Headers */,
+				02DD6CE61D1ACC03008627E1 /* UIView+EasyShow.h in Headers */,
+				02DD6CDA1D1ACC03008627E1 /* NSDictionary+Extensions.h in Headers */,
+				02DD6CEA1D1ACC03008627E1 /* RWGlobalFunction.h in Headers */,
+				02DD6CDC1D1ACC03008627E1 /* NSObject+KVO.h in Headers */,
+				02DD6CE01D1ACC03008627E1 /* NSObject+RWAssociatedObjects.h in Headers */,
+				02DD6CE21D1ACC03008627E1 /* NSTimer+Block.h in Headers */,
+				02DD6CEC1D1ACC03008627E1 /* RWMacros.h in Headers */,
+				02DD6CED1D1ACC03008627E1 /* CocoaCracker.h in Headers */,
+				02DD6CE81D1ACC03008627E1 /* UIView+Utils.h in Headers */,
+				02DD6CE41D1ACC03008627E1 /* UIColor+Utils.h in Headers */,
 				FBEC891FE9E4263880A1DB68D1D9A962 /* Pods-RWKit_Example-umbrella.h in Headers */,
+				02DD6CEF1D1ACC03008627E1 /* RWUserDefaults.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,8 +378,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02DD6CE11D1ACC03008627E1 /* NSObject+RWAssociatedObjects.m in Sources */,
 				86027CFF8A40748782F5D61A5AA82C85 /* Pods-RWKit_Example-dummy.m in Sources */,
-				02DD6CBB1D199DF7008627E1 /* CocoaCracker.m in Sources */,
+				02DD6CE31D1ACC03008627E1 /* NSTimer+Block.m in Sources */,
+				02DD6CF01D1ACC03008627E1 /* RWUserDefaults.m in Sources */,
+				02DD6CD91D1ACC03008627E1 /* NSArray+Extensions.m in Sources */,
+				02DD6CDD1D1ACC03008627E1 /* NSObject+KVO.m in Sources */,
+				02DD6CEB1D1ACC03008627E1 /* RWGlobalFunction.m in Sources */,
+				02DD6CE91D1ACC03008627E1 /* UIView+Utils.m in Sources */,
+				02DD6CDB1D1ACC03008627E1 /* NSDictionary+Extensions.m in Sources */,
+				02DD6CDF1D1ACC03008627E1 /* NSObject+Notification.m in Sources */,
+				02DD6CE71D1ACC03008627E1 /* UIView+EasyShow.m in Sources */,
+				02DD6CE51D1ACC03008627E1 /* UIColor+Utils.m in Sources */,
+				02DD6CEE1D1ACC03008627E1 /* CocoaCracker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
