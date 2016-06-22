@@ -6,8 +6,10 @@ Pod::Spec.new do |s|
   s.license      = "MIT"
   s.author             = { "蒙牛D罩杯撸废" => "rangechiong@outlook.com" }
   s.platform     = :ios, "7.0"
-  s.source       = { :git => "https://github.com/RangeChiong/RWKit.git", :tag => "v0.0.4" }
+  s.source       = { :git => "https://github.com/RangeChiong/RWKit.git", :tag => "v0.0.4", :submodules => true }
   s.requires_arc = true
+  s.public_header_files = 'RWKit/RWKit.h'
+  s.source_files = 'RWKit/RWKit.h'
 
   s.subspec 'Helper' do |helper|
       helper.source_files = 'RWKit/Helper/**/*.{h,m}'
