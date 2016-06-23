@@ -12,6 +12,9 @@
 //----------------------------------常用----------------------------------
 #pragma mark-   常用UI
 
+// 获取key window
+#define Key_Window [UIApplication sharedApplication].keyWindow
+
 // 从xib中load view
 #define LoadXibWithClass(__class__) [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([__class__ class]) owner:self options:nil] firstObject];
 
