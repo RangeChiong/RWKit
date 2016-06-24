@@ -26,34 +26,43 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  *  获取类的属性 block返回属性名
  */
-- (void)copyModelPropertyName:(void(^)(NSString *pName))block;
+- (void)copyPropertyName:(void(^)(NSString *pName))block;
 
 /*!
  *  获取类的属性 block返回简短的属性类型名
  */
-- (void)copyModelPropertyType:(void(^)(NSString *pType))block;
+- (void)copyPropertyType:(void(^)(NSString *pType))block;
 
 /*!
  *  获取类的属性 block返回完整的属性类型名
  */
-- (void)copyModelPropertyTypeEntirely:(void(^)(NSString *pTypeEntirely))block;
+- (void)copyPropertyTypeEntirely:(void(^)(NSString *pTypeEntirely))block;
 
 /*!
  *  获取类的属性 block返回属性对象
  */
-- (void)copyModelPropertyInfo:(void(^)(NSString *pName, NSString *pType))block
+- (void)copyPropertyInfo:(void(^)(NSString *pName, NSString *pType))block
             copyAttriEntirely:(BOOL)isCopy;
 
 /*!
  *  获取类的属性 block返回属性对象
  */
-- (void)copyModelPropertyList:(void(^)(objc_property_t property))propertyBlock;
+- (void)copyPropertyList:(void(^)(objc_property_t property))block;
 
 /*!
  *  用一个方法替换另一个方法
  */
 - (BOOL)swizzleMethod:(SEL)oldSelector withMethod:(SEL)newSelector;
 
+/*!
+ *  获取类的所有方法名
+ */
+- (void)copyMethodName:(void (^)(NSString *selectorName))block;
+
+/*!
+ *  获取类的所有方法
+ */
+- (void)copyMethodList:(void (^)(SEL aSelector))block;
 
 @end
 

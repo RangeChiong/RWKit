@@ -30,37 +30,37 @@
     return self;
 }
 
-#pragma mark-  copy property
+#pragma mark-  copy property list
 
-- (void)copyModelPropertyName:(void(^)(NSString *pName))block {
+- (void)copyPropertyName:(void(^)(NSString *pName))block {
     
-    [self copyModelPropertyInfo:^(NSString *pName, NSString *pType) {
+    [self copyPropertyInfo:^(NSString *pName, NSString *pType) {
         if (block)
             block(pName);
     } copyAttriEntirely:NO];
 }
 
 
-- (void)copyModelPropertyType:(void(^)(NSString *pType))block {
+- (void)copyPropertyType:(void(^)(NSString *pType))block {
     
-    [self copyModelPropertyInfo:^(NSString *pName, NSString *pType) {
+    [self copyPropertyInfo:^(NSString *pName, NSString *pType) {
         if (block)
             block(pType);
     } copyAttriEntirely:NO];
 }
 
-- (void)copyModelPropertyTypeEntirely:(void(^)(NSString *pTypeEntirely))block {
+- (void)copyPropertyTypeEntirely:(void(^)(NSString *pTypeEntirely))block {
     
-    [self copyModelPropertyInfo:^(NSString *pName, NSString *pTypeEntirely) {
+    [self copyPropertyInfo:^(NSString *pName, NSString *pTypeEntirely) {
         if (block)
             block(pTypeEntirely);
     } copyAttriEntirely:YES];
 }
 
-- (void)copyModelPropertyInfo:(void(^)(NSString *pName, NSString *pTypeEntirely))block
+- (void)copyPropertyInfo:(void(^)(NSString *pName, NSString *pTypeEntirely))block
             copyAttriEntirely:(BOOL)isCopy {
     
-    [self copyModelPropertyList:^(objc_property_t property) {
+    [self copyPropertyList:^(objc_property_t property) {
         NSString *pName = [NSString stringWithUTF8String:property_getName(property)];
         NSString *pType;
         if (isCopy)
@@ -73,13 +73,13 @@
     }];
 }
 
-- (void)copyModelPropertyList:(void(^)(objc_property_t property))propertyBlock {
+- (void)copyPropertyList:(void(^)(objc_property_t property))block {
 
     u_int count;
     objc_property_t *properties = class_copyPropertyList(_targetCls, &count);
     for (u_int i = 0; i < count; i++) {
-        if (propertyBlock)
-            propertyBlock(properties[i]);
+        if (block)
+            block(properties[i]);
     }
     
     free(properties);
@@ -107,6 +107,25 @@
         method_exchangeImplementations(oldMethod, newMethod);
     }
     return didAddMethod;
+}
+
+#pragma mark-  copy method list
+- (void)copyMethodName:(void (^)(NSString *selectorName))block {
+    [self copyMethodList:^(SEL aSelector) {
+        if (block)
+            block(NSStringFromSelector(aSelector));
+    }];
+}
+
+- (void)copyMethodList:(void (^)(SEL aSelector))block {
+    u_int count;
+    Method *methods = class_copyMethodList(_targetCls, &count);
+    for (int i = 0; i < count ; i++) {
+        SEL aSelector = method_getName(methods[i]);
+        if (block)
+            block(aSelector);
+    }
+    free(methods);
 }
 
 @end
