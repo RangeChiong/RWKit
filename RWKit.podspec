@@ -10,11 +10,11 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.public_header_files = 'RWKit/RWKit.h'
   s.source_files = 'RWKit/RWKit.h'
-  s.dependency 'AFNetworking', '~> 3.1.0'
 
   s.subspec 'Helper' do |helper|
       helper.source_files = 'RWKit/Helper/**/*.{h,m}'
       helper.public_header_files = 'RWKit/Helper/**/*.h'
+      helper.dependency 'AFNetworking', '~> 3.1.0'
   end
 
   s.subspec 'Category' do |category|
