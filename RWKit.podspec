@@ -8,9 +8,9 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "8.0"
   s.source       = { :git => "https://github.com/RangeChiong/RWKit.git", :tag => "v0.0.5", :submodules => true }
   s.requires_arc = true
-  s.public_header_files = "RWKit/RWKit.h"
-  s.source_files = "RWKit/RWKit.h"
-  s.dependency "AFNetworking", "~> 3.1.0"
+  s.public_header_files = 'RWKit/RWKit.h'
+  s.source_files = 'RWKit/RWKit.h'
+  s.dependency 'AFNetworking', '~> 3.1.0'
 
   s.subspec 'Helper' do |helper|
       helper.source_files = 'RWKit/Helper/**/*.{h,m}'
