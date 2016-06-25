@@ -41,9 +41,11 @@ static NSString *const TimeOutKeyPath = @"timeoutInterval";
 
 - (instancetype)init {
     if (self = [super init]) {
+        
         _requestManager = [AFHTTPSessionManager manager];
         _requestManager.requestSerializer = [AFHTTPRequestSerializer serializer];
         _requestManager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        [self setTimeoutInterval:20.0];
     }
     return self;
 }

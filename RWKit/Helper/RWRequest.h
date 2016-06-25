@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 typedef NS_ENUM(NSInteger, RequestNormalType) {
     RequestNormalType_Get = 0,
     RequestNormalType_Post,
@@ -21,7 +23,7 @@ typedef NS_ENUM(NSInteger, RequestNormalType) {
 + (instancetype)shareRequest;
 
 /*!
- *  设置请求超时时间
+ *  设置请求超时时间  默认20s
  */
 - (void)setTimeoutInterval:(NSTimeInterval)timeoutInterval;
 
@@ -32,7 +34,7 @@ typedef NS_ENUM(NSInteger, RequestNormalType) {
            type:(RequestNormalType)type
          params:(NSDictionary *)params
         success:(void (^)(NSDictionary *dict))success
-        failure:(void (^)(NSError *error))failure;
+        failure:(nullable void (^)(NSError *error))failure;
 
 /*!
  *  上传文件
@@ -41,7 +43,7 @@ typedef NS_ENUM(NSInteger, RequestNormalType) {
       params:(NSDictionary *)params
         body:(void (^)(id<AFMultipartFormData> formData))body
      success:(void (^)(NSDictionary* dic))success
-     failure:(void (^)(NSError *error))failure;
+     failure:(nullable void (^)(NSError *error))failure;
 
 /*!
  *  取消网络请求
@@ -69,3 +71,7 @@ typedef NS_ENUM(NSInteger, RequestNormalType) {
 + (void)removeAllCachedResponses;
 
 @end
+
+NS_ASSUME_NONNULL_END
+
+

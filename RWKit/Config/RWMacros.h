@@ -91,8 +91,8 @@ return instance; \
 #pragma mark-   打印日志
 
 #ifdef DEBUG
-#   define DLog(format, ...) do {                                             \
-fprintf(stderr, "<File:[%s] ~~ Line:[%d]> %s\n",                            \
+#   define DLog(format, ...) do {                                           \
+fprintf(stderr, "<File:[%s] : Line:[%d]> ---%s\n",                          \
 [[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String],  \
 __LINE__, __func__);                                                        \
 (NSLog)((format), ##__VA_ARGS__);                                           \
