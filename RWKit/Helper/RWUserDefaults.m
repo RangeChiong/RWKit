@@ -110,7 +110,7 @@ typedef NS_ENUM(NSUInteger, PropertyType) {
 
 - (NSMutableDictionary *)allProperty:(Class)aClass {
     NSMutableDictionary *propertiesDict = [NSMutableDictionary new];
-    [[CocoaCracker handle:aClass] copyModelPropertyInfo:^(NSString *pName, NSString *pType) {
+    [[CocoaCracker handle:aClass] copyPropertyInfo:^(NSString *pName, NSString *pType) {
         NSString *type = [self typeName:pType];
         propertiesDict[pName] = type;
     } copyAttriEntirely:YES];

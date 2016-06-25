@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0220BE5A1D1E7D0C00B11FCE /* RWKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 0220BE591D1E7D0C00B11FCE /* RWKit.h */; };
 		02DD6CD81D1ACC03008627E1 /* NSArray+Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 02DD6CBD1D1ACC03008627E1 /* NSArray+Extensions.h */; };
 		02DD6CD91D1ACC03008627E1 /* NSArray+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 02DD6CBE1D1ACC03008627E1 /* NSArray+Extensions.m */; };
 		02DD6CDA1D1ACC03008627E1 /* NSDictionary+Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 02DD6CBF1D1ACC03008627E1 /* NSDictionary+Extensions.h */; };
@@ -51,6 +52,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0220BE591D1E7D0C00B11FCE /* RWKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RWKit.h; sourceTree = "<group>"; };
 		02DD6CBD1D1ACC03008627E1 /* NSArray+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Extensions.h"; sourceTree = "<group>"; };
 		02DD6CBE1D1ACC03008627E1 /* NSArray+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Extensions.m"; sourceTree = "<group>"; };
 		02DD6CBF1D1ACC03008627E1 /* NSDictionary+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Extensions.h"; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 		86B3424E95278DA7B6360B3DD6043C53 /* RWKit */ = {
 			isa = PBXGroup;
 			children = (
+				0220BE591D1E7D0C00B11FCE /* RWKit.h */,
 				02DD6CBC1D1ACC03008627E1 /* Category */,
 				02DD6CCF1D1ACC03008627E1 /* Config */,
 				02DD6CD31D1ACC03008627E1 /* Helper */,
@@ -286,6 +289,7 @@
 				02DD6CD81D1ACC03008627E1 /* NSArray+Extensions.h in Headers */,
 				02DD6CDE1D1ACC03008627E1 /* NSObject+Notification.h in Headers */,
 				02DD6CE61D1ACC03008627E1 /* UIView+EasyShow.h in Headers */,
+				0220BE5A1D1E7D0C00B11FCE /* RWKit.h in Headers */,
 				02DD6CDA1D1ACC03008627E1 /* NSDictionary+Extensions.h in Headers */,
 				02DD6CEA1D1ACC03008627E1 /* RWGlobalFunction.h in Headers */,
 				02DD6CDC1D1ACC03008627E1 /* NSObject+KVO.h in Headers */,
