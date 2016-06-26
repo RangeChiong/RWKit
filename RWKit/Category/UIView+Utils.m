@@ -9,6 +9,18 @@
 #import "UIView+Utils.h"
 @import ObjectiveC.runtime;
 
+@implementation UIView (Handle)
+
+- (UIImage *)rw_snapshot {
+    UIGraphicsBeginImageContextWithOptions(self.frame.size, YES, [[UIScreen mainScreen] scale]);
+    [self drawViewHierarchyInRect:self.bounds afterScreenUpdates:NO];
+    UIImage *snapshot = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return snapshot;
+}
+
+@end
+
 @implementation UIView (Utils)
 
 - (void)rw_eachSubview:(void (^)(UIView *subview))block {

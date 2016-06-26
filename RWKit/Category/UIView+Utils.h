@@ -10,6 +10,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@interface UIView (Handle)
+
+/** 截取当前view */
+- (UIImage *)rw_snapshot;
+
+@end
+
 @interface UIView (Utils)
 
 /** 遍历子视图 */
