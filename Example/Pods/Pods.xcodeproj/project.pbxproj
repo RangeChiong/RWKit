@@ -37,6 +37,8 @@
 		02DD6CF01D1ACC03008627E1 /* RWUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 02DD6CD71D1ACC03008627E1 /* RWUserDefaults.m */; };
 		2485BD06D9DF15D3135FA9B36F941861 /* RWKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FF8B64586928BAAADE378504787F20A7 /* RWKit-dummy.m */; };
 		474ABE9A37B439330455DBE9CF98E74A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
+		49FF8C2F1D20BE8C00437C46 /* NSDate+EasyDate.h in Headers */ = {isa = PBXBuildFile; fileRef = 49FF8C2D1D20BE8C00437C46 /* NSDate+EasyDate.h */; };
+		49FF8C301D20BE8C00437C46 /* NSDate+EasyDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FF8C2E1D20BE8C00437C46 /* NSDate+EasyDate.m */; };
 		6360D97CBB22698905C12051C4D014A8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
 		84E76D57A1ADF42F77BF521EBB06B9F3 /* RWKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A670FA2F68A54B1CD0A9C4F20E137D9 /* RWKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86027CFF8A40748782F5D61A5AA82C85 /* Pods-RWKit_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BFEC0926F2AB00A35D8F690B0739AC9E /* Pods-RWKit_Example-dummy.m */; };
@@ -88,6 +90,8 @@
 		253404527C0FAF34CDAF1A9F6D3554C3 /* Pods-RWKit_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-RWKit_Example.modulemap"; sourceTree = "<group>"; };
 		3C36D09155625DAB49C5B6790A7EDD03 /* Pods-RWKit_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-RWKit_Example-frameworks.sh"; sourceTree = "<group>"; };
 		3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		49FF8C2D1D20BE8C00437C46 /* NSDate+EasyDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+EasyDate.h"; sourceTree = "<group>"; };
+		49FF8C2E1D20BE8C00437C46 /* NSDate+EasyDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+EasyDate.m"; sourceTree = "<group>"; };
 		4A670FA2F68A54B1CD0A9C4F20E137D9 /* RWKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RWKit-umbrella.h"; sourceTree = "<group>"; };
 		62A405B52D7B7DA4A01E617857AFFBDC /* Pods-RWKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RWKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		6C6E0EA9FE1255275550C7FF8D1907AF /* RWKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RWKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +131,8 @@
 		02DD6CBC1D1ACC03008627E1 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				49FF8C2D1D20BE8C00437C46 /* NSDate+EasyDate.h */,
+				49FF8C2E1D20BE8C00437C46 /* NSDate+EasyDate.m */,
 				02DD6CBD1D1ACC03008627E1 /* NSArray+Extensions.h */,
 				02DD6CBE1D1ACC03008627E1 /* NSArray+Extensions.m */,
 				02DD6CBF1D1ACC03008627E1 /* NSDictionary+Extensions.h */,
@@ -293,6 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02DD6CD81D1ACC03008627E1 /* NSArray+Extensions.h in Headers */,
+				49FF8C2F1D20BE8C00437C46 /* NSDate+EasyDate.h in Headers */,
 				02DD6CDE1D1ACC03008627E1 /* NSObject+Notification.h in Headers */,
 				02DD6CE61D1ACC03008627E1 /* UIView+EasyShow.h in Headers */,
 				0220BE611D1E889700B11FCE /* RWRequest.h in Headers */,
@@ -397,6 +404,7 @@
 				02DD6CDD1D1ACC03008627E1 /* NSObject+KVO.m in Sources */,
 				0220BE621D1E889700B11FCE /* RWRequest.m in Sources */,
 				02DD6CEB1D1ACC03008627E1 /* RWGlobalFunction.m in Sources */,
+				49FF8C301D20BE8C00437C46 /* NSDate+EasyDate.m in Sources */,
 				02DD6CE91D1ACC03008627E1 /* UIView+Utils.m in Sources */,
 				02DD6CDB1D1ACC03008627E1 /* NSDictionary+Extensions.m in Sources */,
 				02DD6CDF1D1ACC03008627E1 /* NSObject+Notification.m in Sources */,
