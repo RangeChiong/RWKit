@@ -1,5 +1,27 @@
 PODS:
-  - RWKit (0.1.0)
+  - AFNetworking (3.1.0):
+    - AFNetworking/NSURLSession (= 3.1.0)
+    - AFNetworking/Reachability (= 3.1.0)
+    - AFNetworking/Security (= 3.1.0)
+    - AFNetworking/Serialization (= 3.1.0)
+    - AFNetworking/UIKit (= 3.1.0)
+  - AFNetworking/NSURLSession (3.1.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.1.0)
+  - AFNetworking/Security (3.1.0)
+  - AFNetworking/Serialization (3.1.0)
+  - AFNetworking/UIKit (3.1.0):
+    - AFNetworking/NSURLSession
+  - RWKit (0.0.7):
+    - RWKit/Category (= 0.0.7)
+    - RWKit/Config (= 0.0.7)
+    - RWKit/Helper (= 0.0.7)
+  - RWKit/Category (0.0.7)
+  - RWKit/Config (0.0.7)
+  - RWKit/Helper (0.0.7):
+    - AFNetworking (~> 3.1.0)
 
 DEPENDENCIES:
   - RWKit (from `../`)
@@ -9,6 +31,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  RWKit: 246a4df232cabf9beb66757b01c0d68344c1a442
+  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  RWKit: e78e7cf9204b9781545aece8bf24420f22826612
 
 COCOAPODS: 0.39.0

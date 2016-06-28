@@ -1,12 +1,12 @@
 Pod::Spec.new do |s|
   s.name         = "RWKit"
-  s.version      = "0.0.7"
+  s.version      = "0.1.0"
   s.summary      = "Reivent Wheels Kit"
   s.homepage     = "https://github.com/RangeChiong/RWKit"
   s.license      = "MIT"
   s.author       = { "蒙牛D罩杯撸废" => "rangechiong@outlook.com" }
   s.platform     = :ios, "8.0"
-  s.source       = { :git => "https://github.com/RangeChiong/RWKit.git", :tag => "v0.0.7", :submodules => true }
+  s.source       = { :git => "https://github.com/RangeChiong/RWKit.git", :tag => s.version, :submodules => true }
   s.requires_arc = true
   s.public_header_files = 'RWKit/RWKit.h'
   s.source_files = 'RWKit/RWKit.h'

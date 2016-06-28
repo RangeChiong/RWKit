@@ -1,22 +1,43 @@
 {
   "name": "RWKit",
-  "version": "0.1.0",
-  "summary": "A short description of RWKit.",
-  "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/<GITHUB_USERNAME>/RWKit",
-  "license": {
-    "type": "MIT",
-    "file": "LICENSE"
-  },
+  "version": "0.0.7",
+  "summary": "Reivent Wheels Kit",
+  "homepage": "https://github.com/RangeChiong/RWKit",
+  "license": "MIT",
   "authors": {
-    "蒙牛D罩杯撸废": "rangeChiong@outlook.com"
-  },
-  "source": {
-    "git": "https://github.com/<GITHUB_USERNAME>/RWKit.git",
-    "tag": "0.1.0"
+    "蒙牛D罩杯撸废": "rangechiong@outlook.com"
   },
   "platforms": {
     "ios": "8.0"
   },
-  "source_files": "RWKit/Classes/**/*"
+  "source": {
+    "git": "https://github.com/RangeChiong/RWKit.git",
+    "tag": "v0.0.7",
+    "submodules": true
+  },
+  "requires_arc": true,
+  "public_header_files": "RWKit/RWKit.h",
+  "source_files": "RWKit/RWKit.h",
+  "subspecs": [
+    {
+      "name": "Helper",
+      "source_files": "RWKit/Helper/**/*.{h,m}",
+      "public_header_files": "RWKit/Helper/**/*.h",
+      "dependencies": {
+        "AFNetworking": [
+          "~> 3.1.0"
+        ]
+      }
+    },
+    {
+      "name": "Category",
+      "source_files": "RWKit/Category/**/*.{h,m}",
+      "public_header_files": "RWKit/Category/**/*.h"
+    },
+    {
+      "name": "Config",
+      "source_files": "RWKit/Config/**/*.{h,m}",
+      "public_header_files": "RWKit/Config/**/*.h"
+    }
+  ]
 }
