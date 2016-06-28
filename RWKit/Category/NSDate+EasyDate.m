@@ -15,19 +15,19 @@
 + (NSString *)rw_stringFromTimeInterval:(NSTimeInterval)interval {
     //  处理时间
     NSDate *receivedDate = [NSDate dateWithTimeIntervalSince1970:interval / 1000.0];
-    return [self stringFromDate:receivedDate];
+    return [self rw_stringFromDate:receivedDate];
 }
 
 + (NSString *)rw_stringFromTimeInterval:(NSTimeInterval)interval
-                          withFormat:(NSString *)format {
+                             withFormat:(NSString *)format {
     //  处理时间
     NSDate *receivedDate = [NSDate dateWithTimeIntervalSince1970:interval / 1000.0];
-    return [self stringFromDate:receivedDate withFormat:format];
+    return [self rw_stringFromDate:receivedDate withFormat:format];
 }
 
 + (NSString *)rw_stringFromNow {
 
-    return [self stringFromNowWithFormat:@"yyyy-MM-dd HH:mm:ss"];
+    return [self rw_stringFromNowWithFormat:@"yyyy-MM-dd HH:mm:ss"];
 }
 
 + (NSString *)rw_stringFromNowWithFormat:(NSString *)format {
@@ -40,7 +40,7 @@
 
 + (NSString *)rw_stringFromDate:(NSDate *)date {
 
-    return [self stringFromDate:date withFormat:@"yyyy-MM-dd HH:mm:ss"];
+    return [self rw_stringFromDate:date withFormat:@"yyyy-MM-dd HH:mm:ss"];
 }
 
 + (NSString *)rw_stringFromDate:(NSDate *)date withFormat:(NSString *)format {
@@ -55,7 +55,7 @@
 
 + (NSDate *)rw_dateFromString:(NSString *)string {
 
-    return [self dateFromString:string withFormat:@"yyyy-MM-dd HH:mm:ss"];
+    return [self rw_dateFromString:string withFormat:@"yyyy-MM-dd HH:mm:ss"];
 }
 
 + (NSDate *)rw_dateFromString:(NSString *)string withFormat:(NSString *)format {
