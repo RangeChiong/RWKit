@@ -39,6 +39,8 @@
 		474ABE9A37B439330455DBE9CF98E74A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
 		49FF8C2F1D20BE8C00437C46 /* NSDate+EasyDate.h in Headers */ = {isa = PBXBuildFile; fileRef = 49FF8C2D1D20BE8C00437C46 /* NSDate+EasyDate.h */; };
 		49FF8C301D20BE8C00437C46 /* NSDate+EasyDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FF8C2E1D20BE8C00437C46 /* NSDate+EasyDate.m */; };
+		49FF8C5C1D22682C00437C46 /* NSString+Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 49FF8C5A1D22682B00437C46 /* NSString+Utils.h */; };
+		49FF8C5D1D22682C00437C46 /* NSString+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FF8C5B1D22682C00437C46 /* NSString+Utils.m */; };
 		6360D97CBB22698905C12051C4D014A8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
 		84E76D57A1ADF42F77BF521EBB06B9F3 /* RWKit-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A670FA2F68A54B1CD0A9C4F20E137D9 /* RWKit-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		86027CFF8A40748782F5D61A5AA82C85 /* Pods-RWKit_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BFEC0926F2AB00A35D8F690B0739AC9E /* Pods-RWKit_Example-dummy.m */; };
@@ -92,6 +94,8 @@
 		3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		49FF8C2D1D20BE8C00437C46 /* NSDate+EasyDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+EasyDate.h"; sourceTree = "<group>"; };
 		49FF8C2E1D20BE8C00437C46 /* NSDate+EasyDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+EasyDate.m"; sourceTree = "<group>"; };
+		49FF8C5A1D22682B00437C46 /* NSString+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Utils.h"; sourceTree = "<group>"; };
+		49FF8C5B1D22682C00437C46 /* NSString+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Utils.m"; sourceTree = "<group>"; };
 		4A670FA2F68A54B1CD0A9C4F20E137D9 /* RWKit-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "RWKit-umbrella.h"; sourceTree = "<group>"; };
 		62A405B52D7B7DA4A01E617857AFFBDC /* Pods-RWKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-RWKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		6C6E0EA9FE1255275550C7FF8D1907AF /* RWKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RWKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,6 +155,8 @@
 				02DD6CCC1D1ACC03008627E1 /* UIView+EasyShow.m */,
 				02DD6CCD1D1ACC03008627E1 /* UIView+Utils.h */,
 				02DD6CCE1D1ACC03008627E1 /* UIView+Utils.m */,
+				49FF8C5A1D22682B00437C46 /* NSString+Utils.h */,
+				49FF8C5B1D22682C00437C46 /* NSString+Utils.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -298,6 +304,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49FF8C5C1D22682C00437C46 /* NSString+Utils.h in Headers */,
 				02DD6CD81D1ACC03008627E1 /* NSArray+Extensions.h in Headers */,
 				49FF8C2F1D20BE8C00437C46 /* NSDate+EasyDate.h in Headers */,
 				02DD6CDE1D1ACC03008627E1 /* NSObject+Notification.h in Headers */,
@@ -411,6 +418,7 @@
 				02DD6CE71D1ACC03008627E1 /* UIView+EasyShow.m in Sources */,
 				02DD6CE51D1ACC03008627E1 /* UIColor+Utils.m in Sources */,
 				0220BE601D1E889700B11FCE /* CocoaCracker.m in Sources */,
+				49FF8C5D1D22682C00437C46 /* NSString+Utils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
