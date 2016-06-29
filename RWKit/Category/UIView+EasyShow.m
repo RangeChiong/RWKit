@@ -53,7 +53,7 @@
 }
 
 - (void)setBottom:(CGFloat)maxY {
-    [self setBottom:maxY];
+    [self setMaxY:maxY];
 }
 
 - (CGFloat)bottom {
