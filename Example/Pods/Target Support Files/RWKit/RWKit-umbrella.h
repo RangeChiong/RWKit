@@ -15,6 +15,8 @@
 #import "RWGlobalFunction.h"
 #import "RWMacros.h"
 #import "CocoaCracker.h"
+#import "RWDatabase.h"
+#import "RWDatabaseManager.h"
 #import "RWRequest.h"
 #import "RWUserDefaults.h"
 

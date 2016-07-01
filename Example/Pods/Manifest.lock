@@ -14,13 +14,13 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - RWKit (0.0.7):
-    - RWKit/Category (= 0.0.7)
-    - RWKit/Config (= 0.0.7)
-    - RWKit/Helper (= 0.0.7)
-  - RWKit/Category (0.0.7)
-  - RWKit/Config (0.0.7)
-  - RWKit/Helper (0.0.7):
+  - RWKit (0.1.0):
+    - RWKit/Category (= 0.1.0)
+    - RWKit/Config (= 0.1.0)
+    - RWKit/Helper (= 0.1.0)
+  - RWKit/Category (0.1.0)
+  - RWKit/Config (0.1.0)
+  - RWKit/Helper (0.1.0):
     - AFNetworking (~> 3.1.0)
 
 DEPENDENCIES:
@@ -32,6 +32,6 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  RWKit: e78e7cf9204b9781545aece8bf24420f22826612
+  RWKit: 6aba68f67943b8ebc2efdab0c0f3a1d90b8063cc
 
 COCOAPODS: 0.39.0
