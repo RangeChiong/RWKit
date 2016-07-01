@@ -145,7 +145,26 @@ static NSString *const TimeOutKeyPath = @"timeoutInterval";
 
 #pragma mark-  download
 
-
+- (void)downloadFile:(NSString *)url progress:(void (^)(CGFloat progress))progress {
+    
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    
+    NSURL *URL = [NSURL URLWithString:url];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    
+    NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:^(NSProgress * _Nonnull downloadProgress) {
+        if (progress)
+            progress(downloadProgress.fractionCompleted);
+        
+    } destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+        NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+        return [documentsDirectoryURL URLByAppendingPathComponent:[response suggestedFilename]];
+    } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+        NSLog(@"File downloaded to: %@", filePath);
+    }];
+    [downloadTask resume];
+}
 
 
 #pragma mark-  network status
@@ -169,11 +188,11 @@ static NSString *const TimeOutKeyPath = @"timeoutInterval";
     NSURLCache *URLCache = [[NSURLCache alloc] initWithMemoryCapacity:4 * 1024 * 1024
                                                          diskCapacity:20 * 1024 * 1024
                                                              diskPath:nil];
-    [NSURLCache setSharedURLCache:URLCache];}
+    [NSURLCache setSharedURLCache:URLCache];
+}
 
 + (void)removeAllCachedResponses {
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
-
 }
 
 @end
