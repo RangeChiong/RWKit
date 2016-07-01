@@ -881,11 +881,11 @@ NS_INLINE int RWDatabaseExecuteBulkSQLCallback(void *theBlockAsVoid, int columns
     return returnValue ? returnValue : [NSNull null];
 }
 
-- (id)objectForColumnName:(NSString*)columnName {
+- (id)objectForColumnName:(NSString *)columnName {
     return [self objectForColumnIndex:[self columnIndexForName:columnName]];
 }
 
-- (int)columnIndexForName:(NSString*)columnName {
+- (int)columnIndexForName:(NSString *)columnName {
     columnName = [columnName lowercaseString];
     
     NSNumber *n = self.columnNameToIndexMap[columnName];
@@ -901,7 +901,7 @@ NS_INLINE int RWDatabaseExecuteBulkSQLCallback(void *theBlockAsVoid, int columns
     return [NSString stringWithUTF8String:sqlite3_column_name(_myStatement.sqlStatement, columnIdx)];
 }
 
-- (int)intForColumn:(NSString*)columnName {
+- (int)intForColumn:(NSString *)columnName {
     return [self intForColumnIndex:[self columnIndexForName:columnName]];
 }
 
@@ -909,7 +909,7 @@ NS_INLINE int RWDatabaseExecuteBulkSQLCallback(void *theBlockAsVoid, int columns
     return sqlite3_column_int(_myStatement.sqlStatement, columnIdx);
 }
 
-- (long)longForColumn:(NSString*)columnName {
+- (long)longForColumn:(NSString *)columnName {
     return [self longForColumnIndex:[self columnIndexForName:columnName]];
 }
 
@@ -921,7 +921,7 @@ NS_INLINE int RWDatabaseExecuteBulkSQLCallback(void *theBlockAsVoid, int columns
     return sqlite3_column_int64(_myStatement.sqlStatement, columnIdx);
 }
 
-- (unsigned long long int)unsignedLongLongIntForColumn:(NSString*)columnName {
+- (unsigned long long int)unsignedLongLongIntForColumn:(NSString *)columnName {
     return [self unsignedLongLongIntForColumnIndex:[self columnIndexForName:columnName]];
 }
 
@@ -929,7 +929,7 @@ NS_INLINE int RWDatabaseExecuteBulkSQLCallback(void *theBlockAsVoid, int columns
     return (unsigned long long int)[self longLongIntForColumnIndex:columnIdx];
 }
 
-- (BOOL)boolForColumn:(NSString*)columnName {
+- (BOOL)boolForColumn:(NSString *)columnName {
     return [self boolForColumnIndex:[self columnIndexForName:columnName]];
 }
 
@@ -937,7 +937,7 @@ NS_INLINE int RWDatabaseExecuteBulkSQLCallback(void *theBlockAsVoid, int columns
     return ([self intForColumnIndex:columnIdx] != 0);
 }
 
-- (double)doubleForColumn:(NSString*)columnName {
+- (double)doubleForColumn:(NSString *)columnName {
     return [self doubleForColumnIndex:[self columnIndexForName:columnName]];
 }
 
@@ -945,11 +945,11 @@ NS_INLINE int RWDatabaseExecuteBulkSQLCallback(void *theBlockAsVoid, int columns
     return sqlite3_column_double(_myStatement.sqlStatement, columnIdx);
 }
 
-- (NSDate*)dateForColumn:(NSString*)columnName {
+- (NSDate *)dateForColumn:(NSString *)columnName {
     return [self dateForColumnIndex:[self columnIndexForName:columnName]];
 }
 
-- (NSDate*)dateForColumnIndex:(int)columnIdx {
+- (NSDate *)dateForColumnIndex:(int)columnIdx {
     
     if (sqlite3_column_type(_myStatement.sqlStatement, columnIdx) == SQLITE_NULL || (columnIdx < 0))
         return nil;
@@ -957,11 +957,11 @@ NS_INLINE int RWDatabaseExecuteBulkSQLCallback(void *theBlockAsVoid, int columns
     return [_parentDB hasDateFormatter] ? [_parentDB dateFromString:[self stringForColumnIndex:columnIdx]] : [NSDate dateWithTimeIntervalSince1970:[self doubleForColumnIndex:columnIdx]];
 }
 
-- (NSData*)dataForColumn:(NSString*)columnName {
+- (NSData *)dataForColumn:(NSString *)columnName {
     return [self dataForColumnIndex:[self columnIndexForName:columnName]];
 }
 
-- (NSData*)dataForColumnIndex:(int)columnIdx {
+- (NSData *)dataForColumnIndex:(int)columnIdx {
     
     if (sqlite3_column_type(_myStatement.sqlStatement, columnIdx) == SQLITE_NULL || (columnIdx < 0))
         return nil;
@@ -973,11 +973,11 @@ NS_INLINE int RWDatabaseExecuteBulkSQLCallback(void *theBlockAsVoid, int columns
                                                        length:(NSUInteger)dataSize];
 }
 
-- (NSData*)dataNoCopyForColumn:(NSString*)columnName {
+- (NSData *)dataNoCopyForColumn:(NSString *)columnName {
     return [self dataNoCopyForColumnIndex:[self columnIndexForName:columnName]];
 }
 
-- (NSData*)dataNoCopyForColumnIndex:(int)columnIdx {
+- (NSData *)dataNoCopyForColumnIndex:(int)columnIdx {
     
     if (sqlite3_column_type(_myStatement.sqlStatement, columnIdx) == SQLITE_NULL || (columnIdx < 0)) {
         return nil;
@@ -991,11 +991,11 @@ NS_INLINE int RWDatabaseExecuteBulkSQLCallback(void *theBlockAsVoid, int columns
                           freeWhenDone:NO];
 }
 
-- (NSString*)stringForColumn:(NSString*)columnName {
+- (NSString *)stringForColumn:(NSString *)columnName {
     return [self stringForColumnIndex:[self columnIndexForName:columnName]];
 }
 
-- (NSString*)stringForColumnIndex:(int)columnIdx {
+- (NSString *)stringForColumnIndex:(int)columnIdx {
     
     if (sqlite3_column_type(_myStatement.sqlStatement, columnIdx) == SQLITE_NULL || (columnIdx < 0))
         return nil;
@@ -1009,7 +1009,7 @@ NS_INLINE int RWDatabaseExecuteBulkSQLCallback(void *theBlockAsVoid, int columns
     return sqlite3_column_type(_myStatement.sqlStatement, columnIdx) == SQLITE_NULL;
 }
 
-- (BOOL)columnIsNull:(NSString*)columnName {
+- (BOOL)columnIsNull:(NSString *)columnName {
     return [self columnIndexIsNull:[self columnIndexForName:columnName]];
 }
 
