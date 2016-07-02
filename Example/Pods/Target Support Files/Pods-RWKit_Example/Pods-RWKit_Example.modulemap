@@ -1,6 +1,0 @@
-framework module Pods_RWKit_Example {
-  umbrella header "Pods-RWKit_Example-umbrella.h"
-
-  export *
-  module * { export * }
-}

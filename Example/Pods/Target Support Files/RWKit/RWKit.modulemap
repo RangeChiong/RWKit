@@ -1,6 +1,0 @@
-framework module RWKit {
-  umbrella header "RWKit-umbrella.h"
-
-  export *
-  module * { export * }
-}
