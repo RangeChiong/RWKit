@@ -1,6 +1,6 @@
 {
   "name": "RWKit",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "summary": "Reivent Wheels Kit",
   "homepage": "https://github.com/RangeChiong/RWKit",
   "license": "MIT",
@@ -12,7 +12,7 @@
   },
   "source": {
     "git": "https://github.com/RangeChiong/RWKit.git",
-    "tag": "v0.0.7",
+    "tag": "0.1.0",
     "submodules": true
   },
   "requires_arc": true,

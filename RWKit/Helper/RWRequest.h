@@ -46,6 +46,11 @@ typedef NS_ENUM(NSInteger, RequestNormalType) {
      failure:(nullable void (^)(NSError *error))failure;
 
 /*!
+ *  下载文件
+ */
+- (void)downloadFile:(NSString *)url progress:(void (^)(CGFloat progress))progress;
+
+/*!
  *  取消网络请求
  */
 - (void)cancelAllRequest;
