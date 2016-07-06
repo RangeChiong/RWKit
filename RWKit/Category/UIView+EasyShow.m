@@ -10,144 +10,144 @@
 
 @implementation UIView (EasyShow)
 
-- (void)setX:(CGFloat)x {
+- (void)setRw_x:(CGFloat)rw_x {
     CGRect frame = self.frame;
-    frame.origin.x = x;
+    frame.origin.x = rw_x;
     self.frame = frame;
 }
 
-- (CGFloat)x {
+- (CGFloat)rw_x {
     return self.frame.origin.x;
 }
 
-- (void)setLeft:(CGFloat)x {
-    [self setX:x];
+- (void)setRw_left:(CGFloat)rw_x {
+    [self setRw_x:rw_x];
 }
 
-- (CGFloat)left {
+- (CGFloat)rw_left {
     return self.frame.origin.x;
 }
 
-- (void)setMaxX:(CGFloat)maxX {
-    self.x = maxX - self.width;
+- (void)setRw_maxX:(CGFloat)rw_maxX {
+    self.rw_x = rw_maxX - self.rw_width;
 }
 
-- (CGFloat)maxX {
+- (CGFloat)rw_maxX {
     return CGRectGetMaxX(self.frame);
 }
 
-- (void)setRight:(CGFloat)maxX {
-    [self setMaxX:maxX];
+- (void)setRw_right:(CGFloat)rw_maxX {
+    [self setRw_maxX:rw_maxX];
 }
 
-- (CGFloat)right {
+- (CGFloat)rw_right {
     return CGRectGetMaxX(self.frame);
 }
 
-- (void)setMaxY:(CGFloat)maxY {
-    self.y = maxY - self.height;
+- (void)setRw_maxY:(CGFloat)rw_maxY {
+    self.rw_y = rw_maxY - self.rw_height;
 }
 
-- (CGFloat)maxY {
+- (CGFloat)rw_maxY {
     return CGRectGetMaxY(self.frame);
 }
 
-- (void)setBottom:(CGFloat)maxY {
-    [self setMaxY:maxY];
+- (void)setrw_bottom:(CGFloat)rw_maxY {
+    [self setRw_maxY:rw_maxY];
 }
 
-- (CGFloat)bottom {
+- (CGFloat)rw_bottom {
     return CGRectGetMaxY(self.frame);
 }
 
-- (void)setY:(CGFloat)y {
+- (void)setRw_y:(CGFloat)rw_y {
     CGRect frame = self.frame;
-    frame.origin.y = y;
+    frame.origin.y = rw_y;
     self.frame = frame;
 }
 
-- (CGFloat)y {
+- (CGFloat)rw_y {
     return self.frame.origin.y;
 }
 
-- (void)setTop:(CGFloat)y {
-    [self setY:y];
+- (void)setRw_top:(CGFloat)rw_y {
+    [self setRw_y:rw_y];
 }
 
-- (CGFloat)top {
+- (CGFloat)rw_top {
     return self.frame.origin.y;
 }
 
-- (void)setCenterX:(CGFloat)centerX {
+- (void)setRw_centerX:(CGFloat)rw_centerX {
     CGPoint center = self.center;
-    center.x = centerX;
+    center.x = rw_centerX;
     self.center = center;
 }
 
-- (CGFloat)centerX {
+- (CGFloat)rw_centerX {
     return self.center.x;
 }
 
-- (void)setCenterY:(CGFloat)centerY {
+- (void)setRw_centerY:(CGFloat)rw_centerY {
     CGPoint center = self.center;
-    center.y = centerY;
+    center.y = rw_centerY;
     self.center = center;
 }
 
-- (CGFloat)centerY {
+- (CGFloat)rw_centerY {
     return self.center.y;
 }
 
-- (void)setWidth:(CGFloat)width {
+- (void)setRw_width:(CGFloat)rw_width {
     CGRect frame = self.frame;
-    frame.size.width = width;
+    frame.size.width = rw_width;
     self.frame = frame;
 }
 
-- (CGFloat)width {
+- (CGFloat)rw_width {
     return self.frame.size.width;
 }
 
-- (void)setHeight:(CGFloat)height {
+- (void)setRw_height:(CGFloat)rw_height {
     CGRect frame = self.frame;
-    frame.size.height = height;
+    frame.size.height = rw_height;
     self.frame = frame;
 }
 
-- (CGFloat)height {
+- (CGFloat)rw_height {
     return self.frame.size.height;
 }
 
-- (CGPoint)origin {
+- (void)setRw_origin:(CGPoint)rw_origin {
+    CGRect frame = self.frame;
+    frame.origin = rw_origin;
+    self.frame = frame;
+}
+
+- (CGPoint)rw_origin {
     return self.frame.origin;
 }
 
-- (void)setOrigin:(CGPoint)origin {
+- (void)setRw_size:(CGSize)rw_size {
     CGRect frame = self.frame;
-    frame.origin = origin;
+    frame.size = rw_size;
     self.frame = frame;
 }
 
-- (void)setSize:(CGSize)size {
-    CGRect frame = self.frame;
-    frame.size = size;
-    self.frame = frame;
-}
-
-- (CGSize)size {
+- (CGSize)rw_size {
     return self.frame.size;
 }
 
-- (void)setCornerRadius:(CGFloat)radius {
-    self.layer.cornerRadius = radius;
+- (void)setRw_cornerRadius:(CGFloat)rw_cornerRadius {
+    self.layer.cornerRadius = rw_cornerRadius;
     self.layer.masksToBounds = YES;
 }
 
-- (CGFloat)cornerRadius {
+- (CGFloat)rw_cornerRadius {
     return self.layer.cornerRadius;
 }
 
-- (void)round {
+- (void)rw_round {
     [self setCornerRadius:self.frame.size.height/2];
 }
 
