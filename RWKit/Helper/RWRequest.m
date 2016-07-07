@@ -8,7 +8,7 @@
 
 #import "RWRequest.h"
 
-@implementation NSData (utils)
+@implementation NSData (util)
 
 - (NSDictionary *)parseJson {
     NSError *error;
@@ -19,6 +19,41 @@
 }
 
 @end
+
+
+@implementation NSDictionary (util)
+
+- (void)printCode {
+    
+    // 属性跟字典的key一一对应
+    NSMutableString *codes = [NSMutableString string];
+    // 遍历字典中所有key取出来
+    [self enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        // key:属性名
+        NSString *code;
+        if ([obj isKindOfClass:[NSString class]]) {
+            code = [NSString stringWithFormat:@"@property (nonatomic ,copy) NSString *%@;",key];
+        }
+        else if ([obj isKindOfClass:NSClassFromString(@"__NSCFBoolean")]) {
+            code = [NSString stringWithFormat:@"@property (nonatomic ,assign) BOOL %@;",key];
+        }
+        else if ([obj isKindOfClass:[NSNumber class]]) {
+            code = [NSString stringWithFormat:@"@property (nonatomic ,assign) NSInteger %@;",key];
+        }
+        else if ([obj isKindOfClass:[NSArray class]]) {
+            code = [NSString stringWithFormat:@"@property (nonatomic ,strong) NSArray *%@;",key];
+        }
+        else if ([obj isKindOfClass:[NSDictionary class]]) {
+            code = [NSString stringWithFormat:@"@property (nonatomic ,strong) NSDictionary *%@;",key];
+        }
+        [codes appendFormat:@"\n%@\n",code];
+    }];
+    
+    NSLog(@"%@",codes);
+}
+
+@end
+
 
 static NSString *const TimeOutKeyPath = @"timeoutInterval";
 
@@ -69,6 +104,9 @@ static NSString *const TimeOutKeyPath = @"timeoutInterval";
     void (^successfulRequest) (NSURLSessionDataTask *, id) = ^(NSURLSessionDataTask *task, id responseObject) {
         if (success) {
             NSDictionary *dict = [responseObject parseJson];
+#ifdef DEBUG
+            [dict printCode];
+#endif
             success(dict);
         }
     };

@@ -14,7 +14,11 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
+<<<<<<< HEAD
                BlueprintIdentifier = 'B6E4C0223EA57048BEAE2CFD'
+=======
+               BlueprintIdentifier = '30EB5F3ED65F4BAC0807D92D'
+>>>>>>> origin/master
                BlueprintName = 'RWKit'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'RWKit.framework'>
