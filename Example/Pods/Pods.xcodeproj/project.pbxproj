@@ -127,7 +127,7 @@
 		16B66C0AEBC9F9724A670DCF79BE4531 /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLRequestSerialization.m; path = AFNetworking/AFURLRequestSerialization.m; sourceTree = "<group>"; };
 		178B09005999B992FAD7EC07DD7F600A /* Pods-RWKit_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-RWKit_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		1892B6F0777CD0F4F6870673037F454E /* RWUserDefaults.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RWUserDefaults.h; sourceTree = "<group>"; };
-		1D33AE9E273C596D9FB8E23165594DD8 /* RWKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RWKit.h; sourceTree = "<group>"; };
+		1D33AE9E273C596D9FB8E23165594DD8 /* RWKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RWKit.h; path = RWKit/RWKit.h; sourceTree = "<group>"; };
 		1DDB74F91DD24FA2F145AB90848218AA /* RWGlobalFunction.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RWGlobalFunction.m; sourceTree = "<group>"; };
 		1DE5F6E2155E6D6A03A95898A65E8701 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		209F12C038E1448AF32EB17DE2A3B297 /* UIView+EasyShow.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIView+EasyShow.m"; sourceTree = "<group>"; };
@@ -256,36 +256,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00BD311230BFCBB1FE1263104F344713 /* RWKit */ = {
-			isa = PBXGroup;
-			children = (
-				1D33AE9E273C596D9FB8E23165594DD8 /* RWKit.h */,
-			);
-			path = RWKit;
-			sourceTree = "<group>";
-		};
 		0E4C558E7C3BB6412470D0C13231F389 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
 				4AE897C24DFAA860349DDEA4BEE1D888 /* RWKit */,
 			);
 			name = "Development Pods";
-			sourceTree = "<group>";
-		};
-		1193C5BE9C1EB86997F712F14F1DAF11 /* RWKit */ = {
-			isa = PBXGroup;
-			children = (
-				B4330E900619D04A7A9AECF998C42244 /* Config */,
-			);
-			path = RWKit;
-			sourceTree = "<group>";
-		};
-		193843E4D554F4DB7C9926BC6BA78DB8 /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-				A5F74B0DD9E9982A8EE2D570402E71FF /* RWKit */,
-			);
-			name = Helper;
 			sourceTree = "<group>";
 		};
 		48C0C6E9F662F0D805644FEAE8AA7D0D /* Category */ = {
@@ -314,16 +290,17 @@
 				DD7A139E336A98306F37E1BC044F1269 /* UIView+Utils.h */,
 				4A63912D58320958EAE1B9F14E723C38 /* UIView+Utils.m */,
 			);
-			path = Category;
+			name = Category;
+			path = RWKit/Category;
 			sourceTree = "<group>";
 		};
 		4AE897C24DFAA860349DDEA4BEE1D888 /* RWKit */ = {
 			isa = PBXGroup;
 			children = (
-				58C5318B5D5A19E6FF1637111AD08F1E /* Category */,
-				C25C311CB03553D81E4AF2CABC93CD1F /* Config */,
-				193843E4D554F4DB7C9926BC6BA78DB8 /* Helper */,
-				00BD311230BFCBB1FE1263104F344713 /* RWKit */,
+				1D33AE9E273C596D9FB8E23165594DD8 /* RWKit.h */,
+				48C0C6E9F662F0D805644FEAE8AA7D0D /* Category */,
+				EC9429F6CFC657A72B5A4F08EE5A6BFE /* Helper */,
+				B4330E900619D04A7A9AECF998C42244 /* Config */,
 				802B800429728F8FB6E2A0DAECB3BD9E /* Support Files */,
 			);
 			name = RWKit;
@@ -346,22 +323,6 @@
 			);
 			name = "Pods-RWKit_Example";
 			path = "Target Support Files/Pods-RWKit_Example";
-			sourceTree = "<group>";
-		};
-		53D42728C1760025B365A74420DC66A3 /* RWKit */ = {
-			isa = PBXGroup;
-			children = (
-				48C0C6E9F662F0D805644FEAE8AA7D0D /* Category */,
-			);
-			path = RWKit;
-			sourceTree = "<group>";
-		};
-		58C5318B5D5A19E6FF1637111AD08F1E /* Category */ = {
-			isa = PBXGroup;
-			children = (
-				53D42728C1760025B365A74420DC66A3 /* RWKit */,
-			);
-			name = Category;
 			sourceTree = "<group>";
 		};
 		641BDD347DE7B8BB81D6CA5727C6EC5A /* Pods */ = {
@@ -461,14 +422,6 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		A5F74B0DD9E9982A8EE2D570402E71FF /* RWKit */ = {
-			isa = PBXGroup;
-			children = (
-				EC9429F6CFC657A72B5A4F08EE5A6BFE /* Helper */,
-			);
-			path = RWKit;
-			sourceTree = "<group>";
-		};
 		B4330E900619D04A7A9AECF998C42244 /* Config */ = {
 			isa = PBXGroup;
 			children = (
@@ -476,7 +429,8 @@
 				1DDB74F91DD24FA2F145AB90848218AA /* RWGlobalFunction.m */,
 				6924483CDDD66DF3EB8937259631A3FD /* RWMacros.h */,
 			);
-			path = Config;
+			name = Config;
+			path = RWKit/Config;
 			sourceTree = "<group>";
 		};
 		BD9809B54EFAD2AA31F4D4867DB33AFA /* Database */ = {
@@ -515,14 +469,6 @@
 				766A8DB58B1DEC0150E36AD843786FF3 /* UIWebView+AFNetworking.m */,
 			);
 			name = UIKit;
-			sourceTree = "<group>";
-		};
-		C25C311CB03553D81E4AF2CABC93CD1F /* Config */ = {
-			isa = PBXGroup;
-			children = (
-				1193C5BE9C1EB86997F712F14F1DAF11 /* RWKit */,
-			);
-			name = Config;
 			sourceTree = "<group>";
 		};
 		C45D249FB5DB8E034FDE4F14853D1D8B /* Support Files */ = {
@@ -571,7 +517,8 @@
 				44FE3F3CEB666B9D562773ABCB64F132 /* RWUserDefaults.m */,
 				BD9809B54EFAD2AA31F4D4867DB33AFA /* Database */,
 			);
-			path = Helper;
+			name = Helper;
+			path = RWKit/Helper;
 			sourceTree = "<group>";
 		};
 		EFC8D1216166DE80CF4A6175E6193664 /* Frameworks */ = {
