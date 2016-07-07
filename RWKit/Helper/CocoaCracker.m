@@ -65,11 +65,8 @@
         NSString *pType;
         if (isCopy)
             pType = [NSString stringWithUTF8String:property_getAttributes(property)];
-        else {
-            char *propertyType = property_copyAttributeValue(property, "T");
-            pType = [NSString stringWithUTF8String:propertyType];
-            free(propertyType);
-        }
+        else
+            pType = [NSString stringWithUTF8String:property_copyAttributeValue(property, "T")];
         
         if (block)
             block(pName, pType);

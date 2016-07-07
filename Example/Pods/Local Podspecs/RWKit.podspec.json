@@ -21,8 +21,8 @@
   "subspecs": [
     {
       "name": "Helper",
-      "source_files": "RWKit/Helper",
-      "public_header_files": "RWKit/Helper/*.h",
+      "source_files": "RWKit/Helper/**/*.{h,m}",
+      "public_header_files": "RWKit/Helper/**/*.h",
       "dependencies": {
         "AFNetworking": [
           "~> 3.1.0"
@@ -31,13 +31,13 @@
     },
     {
       "name": "Category",
-      "source_files": "RWKit/Category",
-      "public_header_files": "RWKit/Category/*.h"
+      "source_files": "RWKit/Category/**/*.{h,m}",
+      "public_header_files": "RWKit/Category/**/*.h"
     },
     {
       "name": "Config",
-      "source_files": "RWKit/Config",
-      "public_header_files": "RWKit/Config/*.h"
+      "source_files": "RWKit/Config/**/*.{h,m}",
+      "public_header_files": "RWKit/Config/**/*.h"
     }
   ]
 }

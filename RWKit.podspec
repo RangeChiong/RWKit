@@ -12,18 +12,18 @@ Pod::Spec.new do |s|
   s.source_files = 'RWKit/RWKit.h'
 
   s.subspec 'Helper' do |helper|
-      helper.source_files = 'RWKit/Helper'
-      helper.public_header_files = 'RWKit/Helper/*.h'
+      helper.source_files = 'RWKit/Helper/**/*.{h,m}'
+      helper.public_header_files = 'RWKit/Helper/**/*.h'
       helper.dependency 'AFNetworking', '~> 3.1.0'
   end
 
   s.subspec 'Category' do |category|
-      category.source_files = 'RWKit/Category'
-      category.public_header_files = 'RWKit/Category/*.h'
+      category.source_files = 'RWKit/Category/**/*.{h,m}'
+      category.public_header_files = 'RWKit/Category/**/*.h'
   end
 
   s.subspec 'Config' do |config|
-      config.source_files = 'RWKit/Config'
-      config.public_header_files = 'RWKit/Config/*.h'
+      config.source_files = 'RWKit/Config/**/*.{h,m}'
+      config.public_header_files = 'RWKit/Config/**/*.h'
   end
 end
