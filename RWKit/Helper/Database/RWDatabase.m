@@ -917,16 +917,16 @@ NS_INLINE int RWDatabaseExecuteBulkSQLCallback(void *theBlockAsVoid, int columns
     return (long)sqlite3_column_int64(_myStatement.sqlStatement, columnIdx);
 }
 
-- (long long int)longLongIntForColumnIndex:(int)columnIdx {
+- (sqlite_int64)longLongIntForColumnIndex:(int)columnIdx {
     return sqlite3_column_int64(_myStatement.sqlStatement, columnIdx);
 }
 
-- (unsigned long long int)unsignedLongLongIntForColumn:(NSString *)columnName {
+- (sqlite3_uint64)unsignedLongLongIntForColumn:(NSString *)columnName {
     return [self unsignedLongLongIntForColumnIndex:[self columnIndexForName:columnName]];
 }
 
-- (unsigned long long int)unsignedLongLongIntForColumnIndex:(int)columnIdx {
-    return (unsigned long long int)[self longLongIntForColumnIndex:columnIdx];
+- (sqlite3_uint64)unsignedLongLongIntForColumnIndex:(int)columnIdx {
+    return (sqlite3_uint64)[self longLongIntForColumnIndex:columnIdx];
 }
 
 - (BOOL)boolForColumn:(NSString *)columnName {
@@ -996,7 +996,6 @@ NS_INLINE int RWDatabaseExecuteBulkSQLCallback(void *theBlockAsVoid, int columns
 }
 
 - (NSString *)stringForColumnIndex:(int)columnIdx {
-    
     if (sqlite3_column_type(_myStatement.sqlStatement, columnIdx) == SQLITE_NULL || (columnIdx < 0))
         return nil;
     
