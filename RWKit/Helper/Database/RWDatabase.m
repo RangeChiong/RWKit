@@ -622,7 +622,7 @@
     
     if (!_db) {
         DBLog(@"数据库[%@] 没有打开", self);
-        DBLog(@"The FMDatabase %@ is not open.", self);
+        DBLog(@"The RWDatabase %@ is not open.", self);
         
 #ifndef NS_BLOCK_ASSERTIONS
         if (_crashOnErrors) {
@@ -807,7 +807,7 @@ NS_INLINE int RWDatabaseExecuteBulkSQLCallback(void *theBlockAsVoid, int columns
             if (_parentDB)  *outErr = _parentDB.lastError;
             else {
                 NSDictionary* errorMessage = [NSDictionary dictionaryWithObject:@"parentDB does not exist" forKey:NSLocalizedDescriptionKey];
-                *outErr = [NSError errorWithDomain:@"FMDatabase" code:SQLITE_MISUSE userInfo:errorMessage];
+                *outErr = [NSError errorWithDomain:@"RWDatabase" code:SQLITE_MISUSE userInfo:errorMessage];
             }
         }
     }
