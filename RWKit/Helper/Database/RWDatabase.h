@@ -117,30 +117,30 @@
 - (void)close;
 
 - (id)objectForColumnIndex:(int)columnIdx;
-- (id)objectForColumnName:(NSString*)columnName;
-- (int)columnIndexForName:(NSString*)columnName;
-- (NSString*)columnNameForIndex:(int)columnIdx;
-- (int)intForColumn:(NSString*)columnName;
+- (id)objectForColumnName:(NSString *)columnName;
+- (int)columnIndexForName:(NSString *)columnName;
+- (NSString *)columnNameForIndex:(int)columnIdx;
+- (int)intForColumn:(NSString *)columnName;
 - (int)intForColumnIndex:(int)columnIdx;
-- (long)longForColumn:(NSString*)columnName;
+- (long)longForColumn:(NSString *)columnName;
 - (long)longForColumnIndex:(int)columnIdx;
-- (long long int)longLongIntForColumnIndex:(int)columnIdx;
-- (unsigned long long int)unsignedLongLongIntForColumn:(NSString*)columnName;
-- (unsigned long long int)unsignedLongLongIntForColumnIndex:(int)columnIdx;
-- (BOOL)boolForColumn:(NSString*)columnName;
+- (sqlite3_int64)longLongIntForColumnIndex:(int)columnIdx;
+- (sqlite3_uint64)unsignedLongLongIntForColumn:(NSString *)columnName;
+- (sqlite3_uint64)unsignedLongLongIntForColumnIndex:(int)columnIdx;
+- (BOOL)boolForColumn:(NSString *)columnName;
 - (BOOL)boolForColumnIndex:(int)columnIdx;
-- (double)doubleForColumn:(NSString*)columnName;
+- (double)doubleForColumn:(NSString *)columnName;
 - (double)doubleForColumnIndex:(int)columnIdx;
-- (NSDate*)dateForColumn:(NSString*)columnName;
-- (NSDate*)dateForColumnIndex:(int)columnIdx;
-- (NSData*)dataForColumn:(NSString*)columnName;
-- (NSData*)dataForColumnIndex:(int)columnIdx;
-- (NSData*)dataNoCopyForColumn:(NSString*)columnName;
-- (NSData*)dataNoCopyForColumnIndex:(int)columnIdx;
-- (NSString*)stringForColumn:(NSString*)columnName;
-- (NSString*)stringForColumnIndex:(int)columnIdx;
+- (NSDate *)dateForColumn:(NSString *)columnName;
+- (NSDate *)dateForColumnIndex:(int)columnIdx;
+- (NSData *)dataForColumn:(NSString *)columnName;
+- (NSData *)dataForColumnIndex:(int)columnIdx;
+- (NSData *)dataNoCopyForColumn:(NSString *)columnName;
+- (NSData *)dataNoCopyForColumnIndex:(int)columnIdx;
+- (NSString *)stringForColumn:(NSString *)columnName;
+- (NSString *)stringForColumnIndex:(int)columnIdx;
 - (BOOL)columnIndexIsNull:(int)columnIdx;
-- (BOOL)columnIsNull:(NSString*)columnName;
+- (BOOL)columnIsNull:(NSString *)columnName;
 
 @end
 
