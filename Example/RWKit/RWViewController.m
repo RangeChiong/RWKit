@@ -14,8 +14,7 @@
 
 @implementation RWViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
 
 }
