@@ -15,6 +15,7 @@ Pod::Spec.new do |s|
       helper.source_files = 'RWKit/Helper/**/*.{h,m}'
       helper.public_header_files = 'RWKit/Helper/**/*.h'
       helper.dependency 'AFNetworking', '~> 3.1.0'
+      helper.dependency 'sqlite3/fts'
   end
 
   s.subspec 'Category' do |category|
