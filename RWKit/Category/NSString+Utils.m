@@ -10,6 +10,28 @@
 
 @implementation NSString (Utils)
 
++ (NSString *)rw_documentsPath {
+    return [self rw_searchPathFrom:NSDocumentDirectory];
+}
+
++ (NSString *)rw_cachesPath {
+    return [self rw_searchPathFrom:NSCachesDirectory];
+}
+
++ (NSString *)rw_documentsContentDirectory:(NSString *)name {
+    return [NSString stringWithFormat:@"%@/%@", [self rw_documentsPath], name];
+}
+
++ (NSString *)rw_cachesContentDirectory:(NSString *)name {
+    return [NSString stringWithFormat:@"%@/%@", [self rw_cachesPath], name];
+}
+
+#pragma mark-  private methods
+
++ (NSString *)rw_searchPathFrom:(NSSearchPathDirectory)directory {
+    return NSSearchPathForDirectoriesInDomains(directory, NSUserDomainMask, YES)[0];
+}
+
 #pragma 正则匹配11位手机号
 - (BOOL)rw_checkPhoneNumber {
     
