@@ -13,10 +13,10 @@
 
 @interface RWKVOHelper : NSObject {
     @package
-    id               _target;       ///< 被观察的对象的值改变时后, target会调用响应方法
-    id               _sourceObject; ///< 被观察的对象
-    SEL                     _selector;     ///< 被观察的对象的值改变时后的响应方法
-    NSString                *_keyPath;     ///< 被观察的对象的keyPath
+    id              _target;        ///< 被观察的对象的值改变时后, target会调用响应方法
+    id              _sourceObject;  ///< 被观察的对象
+    SEL             _selector;      ///< 被观察的对象的值改变时后的响应方法
+    NSString        *_keyPath;      ///< 被观察的对象的keyPath
 
     void (^_block)(id newValue, id oldValue);        ///< 值改变时执行的block
 }
@@ -96,9 +96,9 @@ static const void *NSObject_Observers = &NSObject_Observers;
     NSAssert(anObject, @"被观察的对象object不能为nil 必须存在");
     
     RWKVOHelper *observer = [[RWKVOHelper alloc] initWithObject:anObject
-                                                          keyPath:keyPath
-                                                           target:target
-                                                         selector:aSelector];
+                                                        keyPath:keyPath
+                                                         target:target
+                                                       selector:aSelector];
     NSString *key = [NSString stringWithFormat:@"%@_%@", anObject, keyPath];
     self.kvoContainer[key] = observer;
 }
@@ -109,8 +109,8 @@ static const void *NSObject_Observers = &NSObject_Observers;
     NSAssert(anObject, @"被观察的对象object 不能为nil 必须存在");
     
     RWKVOHelper *observer = [[RWKVOHelper alloc] initWithObject:anObject
-                                                          keyPath:keyPath
-                                                            block:block];
+                                                        keyPath:keyPath
+                                                          block:block];
     
     NSString *key = [NSString stringWithFormat:@"%@_%@", anObject, keyPath];
     self.kvoContainer[key] = observer;

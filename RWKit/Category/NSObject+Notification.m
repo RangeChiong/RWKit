@@ -11,11 +11,11 @@
 
 @interface RWNotificationHelper : NSObject {
     @package
-    id            _notiTarget;     //!< 处理通知那个类的实例 用来调用接受通知后的方法
-    id            _postNotiObject; //!< 通知的来源 即谁发的通知 为nil时接受所有的通知
-    SEL                  _notiSelector;   //!< 接受到通知后调用的方法
-    NSString            *_notiName;       //!< 通知的名字
-    NSDictionary        *_userInfo;       //!< 通知传递的参数NSNotification的属性 类型为字典
+    id              _notiTarget;        //!< 处理通知那个类的实例 用来调用接受通知后的方法
+    id              _postNotiObject;    //!< 通知的来源 即谁发的通知 为nil时接受所有的通知
+    SEL             _notiSelector;      //!< 接受到通知后调用的方法
+    NSString        *_notiName;         //!< 通知的名字
+    NSDictionary    *_userInfo;         //!< 通知传递的参数NSNotification的属性 类型为字典
 
     void(^_block)(NSNotification *noti);  //!< 传递参数的回调
 }
