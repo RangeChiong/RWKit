@@ -34,4 +34,7 @@
 /** 正则匹配11位手机号码 */
 - (BOOL)rw_checkPhoneNumber;
 
+/** 判断纯数字字符串 */
+- (BOOL)rw_isPureInt;
+
 @end

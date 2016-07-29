@@ -59,4 +59,11 @@
     }
 }
 
+#pragma mark-  判断纯数字字符串
+- (BOOL)rw_isPureInt {
+    NSScanner *scan = [NSScanner scannerWithString:self];
+    int val;
+    return [scan scanInt:&val] && [scan isAtEnd];
+}
+
 @end

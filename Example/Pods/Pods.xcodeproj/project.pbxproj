@@ -27,6 +27,8 @@
 		3D2789FC760A97301909F0B1201626CD /* AFNetworking-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 98A189FDEF0AD08BC5DC357020B8DB5A /* AFNetworking-dummy.m */; };
 		3F1BC9BAFFEEABB1ABC7614DF0FC97D5 /* AFAutoPurgingImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = BAEEB3CDE859F3F412940D15AA031037 /* AFAutoPurgingImageCache.m */; };
 		46C90357B1CD766749035C07B709E497 /* NSDictionary+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F37942A0B8A4A49EA0772E6E64F742 /* NSDictionary+Extensions.m */; };
+		49FBE3AE1D49B4B8000F0805 /* RWSimpleTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 49FBE3AC1D49B4B8000F0805 /* RWSimpleTool.h */; };
+		49FBE3AF1D49B4B8000F0805 /* RWSimpleTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FBE3AD1D49B4B8000F0805 /* RWSimpleTool.m */; };
 		49FF8D991D26745A00437C46 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 49FF8D981D26745A00437C46 /* libsqlite3.0.tbd */; };
 		505B1356E4CAE508652CDD3D6D4CDCF9 /* RWDatabaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 56A335370B3D0420A467B75B9763176A /* RWDatabaseManager.m */; };
 		560698A4D707DCBCC1C8F98BC9B89B23 /* AFURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 434E574D60CF3205EB86C49EB8453D2E /* AFURLSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -147,6 +149,8 @@
 		43581AD63883CAA415A71F817EED5D51 /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLRequestSerialization.h; path = AFNetworking/AFURLRequestSerialization.h; sourceTree = "<group>"; };
 		44FE3F3CEB666B9D562773ABCB64F132 /* RWUserDefaults.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RWUserDefaults.m; sourceTree = "<group>"; };
 		456884974FCD65674016A0D296E8D846 /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFNetworkReachabilityManager.h; path = AFNetworking/AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
+		49FBE3AC1D49B4B8000F0805 /* RWSimpleTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RWSimpleTool.h; sourceTree = "<group>"; };
+		49FBE3AD1D49B4B8000F0805 /* RWSimpleTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RWSimpleTool.m; sourceTree = "<group>"; };
 		49FF8D981D26745A00437C46 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/usr/lib/libsqlite3.0.tbd; sourceTree = DEVELOPER_DIR; };
 		4A63912D58320958EAE1B9F14E723C38 /* UIView+Utils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIView+Utils.m"; sourceTree = "<group>"; };
 		4A8E70C6C628645363A394B112D55654 /* RWRequest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RWRequest.m; sourceTree = "<group>"; };
@@ -515,6 +519,8 @@
 				4A8E70C6C628645363A394B112D55654 /* RWRequest.m */,
 				1892B6F0777CD0F4F6870673037F454E /* RWUserDefaults.h */,
 				44FE3F3CEB666B9D562773ABCB64F132 /* RWUserDefaults.m */,
+				49FBE3AC1D49B4B8000F0805 /* RWSimpleTool.h */,
+				49FBE3AD1D49B4B8000F0805 /* RWSimpleTool.m */,
 				BD9809B54EFAD2AA31F4D4867DB33AFA /* Database */,
 			);
 			name = Helper;
@@ -551,6 +557,7 @@
 				5808B477EFF509D810B5CDCFDC944F80 /* AFImageDownloader.h in Headers */,
 				1480F4923DBBF217F60572EEECB4027C /* AFNetworkActivityIndicatorManager.h in Headers */,
 				EC7CADE416A78A1CD6936018A6695126 /* AFNetworking-umbrella.h in Headers */,
+				49FBE3AE1D49B4B8000F0805 /* RWSimpleTool.h in Headers */,
 				E7988678C81F7CCB95D239375FC6986D /* AFNetworking.h in Headers */,
 				68152D921ABF6A423C192C04FDF94F0F /* AFNetworkReachabilityManager.h in Headers */,
 				C2DD28375E1F0B1D0D1D2E4E607C499F /* AFSecurityPolicy.h in Headers */,
@@ -686,6 +693,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F1BC9BAFFEEABB1ABC7614DF0FC97D5 /* AFAutoPurgingImageCache.m in Sources */,
+				49FBE3AF1D49B4B8000F0805 /* RWSimpleTool.m in Sources */,
 				E0D4045AC4C1B41917FCA23A042D18B2 /* AFHTTPSessionManager.m in Sources */,
 				CFA8D6B529A0EBFF0316F2629AB2556E /* AFImageDownloader.m in Sources */,
 				A6C6019D45BE62C61210A9CC619368EF /* AFNetworkActivityIndicatorManager.m in Sources */,

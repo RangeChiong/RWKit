@@ -13,7 +13,7 @@
 - (NSDictionary *)parseJson {
     NSError *error;
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:self
-                                                         options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves
+                                                         options:NSJSONReadingMutableContainers | NSJSONReadingMutableLeaves
                                                            error:&error];
     return dict;
 }
