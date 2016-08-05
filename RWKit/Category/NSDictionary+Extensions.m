@@ -10,19 +10,19 @@
 
 @implementation NSDictionary (Extensions)
 
-- (void)rw_each:(void (^)(id key, id obj))block {
+- (void)rw_each:(BOOL (^)(id key, id obj))block {
     NSParameterAssert(block != nil);
     
     [self enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-        block(key, obj);
+        *stop = block(key, obj);
     }];
 }
 
-- (void)rw_apply:(void (^)(id key, id obj))block {
+- (void)rw_apply:(BOOL (^)(id key, id obj))block {
     NSParameterAssert(block != nil);
     
     [self enumerateKeysAndObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(id key, id obj, BOOL *stop) {
-        block(key, obj);
+        *stop = block(key, obj);
     }];
 }
 
@@ -55,9 +55,10 @@
     
     NSMutableDictionary *result = [NSMutableDictionary dictionaryWithCapacity:self.count];
     
-    [self rw_each:^(id key, id obj) {
+    [self rw_each:^BOOL(id key, id obj) {
         id value = block(key, obj) ?: [NSNull null];
         result[key] = value;
+        return NO;
     }];
     
     return result;

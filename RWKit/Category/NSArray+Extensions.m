@@ -10,19 +10,19 @@
 
 @implementation NSArray (Extensions)
 
-- (void)rw_each:(void (^)(id obj))block {
+- (void)rw_each:(BOOL (^)(id obj))block {
     NSParameterAssert(block != nil);
     
     [self enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        block(obj);
+        *stop = block(obj);
     }];
 }
 
-- (void)rw_apply:(void (^)(id obj))block {
+- (void)rw_apply:(BOOL (^)(id obj))block {
     NSParameterAssert(block != nil);
 
     [self enumerateObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        block(obj);
+        *stop = block(obj);
     }];
 }
 
@@ -50,11 +50,11 @@
     
     NSMutableArray *result = [NSMutableArray arrayWithCapacity:self.count];
     
-    [self enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [self rw_each:^BOOL(id  _Nonnull obj) {
         id value = block(obj) ?: [NSNull null];
         [result addObject:value];
+        return NO;
     }];
-    
     return result;
 }
 

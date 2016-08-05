@@ -13,10 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface NSDictionary (Extensions)
 
 /** 快速遍历 */
-- (void)rw_each:(void (^)(id key, id obj))block;
+- (void)rw_each:(BOOL (^)(id key, id obj))block;
 
 /** 无序遍历 速度up */
-- (void)rw_apply:(void (^)(id key, id obj))block;
+- (void)rw_apply:(BOOL (^)(id key, id obj))block;
 
 /** 匹配一个需要的对象，返回nil或者匹配到的对象 */
 - (nullable id)rw_match:(BOOL (^)(id key, id obj))block;

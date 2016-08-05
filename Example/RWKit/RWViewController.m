@@ -7,6 +7,7 @@
 //
 
 #import "RWViewController.h"
+#import "NSArray+Extensions.h"
 
 @interface RWViewController ()
 
@@ -16,7 +17,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
 }
 
 @end
