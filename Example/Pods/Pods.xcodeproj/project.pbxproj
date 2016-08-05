@@ -27,6 +27,10 @@
 		3D2789FC760A97301909F0B1201626CD /* AFNetworking-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 98A189FDEF0AD08BC5DC357020B8DB5A /* AFNetworking-dummy.m */; };
 		3F1BC9BAFFEEABB1ABC7614DF0FC97D5 /* AFAutoPurgingImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = BAEEB3CDE859F3F412940D15AA031037 /* AFAutoPurgingImageCache.m */; };
 		46C90357B1CD766749035C07B709E497 /* NSDictionary+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F37942A0B8A4A49EA0772E6E64F742 /* NSDictionary+Extensions.m */; };
+		492E1A4A1D546D0000AEA247 /* UIImage+Handle.h in Headers */ = {isa = PBXBuildFile; fileRef = 492E1A461D546D0000AEA247 /* UIImage+Handle.h */; };
+		492E1A4B1D546D0000AEA247 /* UIImage+Handle.m in Sources */ = {isa = PBXBuildFile; fileRef = 492E1A471D546D0000AEA247 /* UIImage+Handle.m */; };
+		492E1A4C1D546D0000AEA247 /* UITextField+Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 492E1A481D546D0000AEA247 /* UITextField+Utils.h */; };
+		492E1A4D1D546D0000AEA247 /* UITextField+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 492E1A491D546D0000AEA247 /* UITextField+Utils.m */; };
 		49FBE3AE1D49B4B8000F0805 /* RWSimpleTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 49FBE3AC1D49B4B8000F0805 /* RWSimpleTool.h */; };
 		49FBE3AF1D49B4B8000F0805 /* RWSimpleTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FBE3AD1D49B4B8000F0805 /* RWSimpleTool.m */; };
 		49FF8D991D26745A00437C46 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 49FF8D981D26745A00437C46 /* libsqlite3.0.tbd */; };
@@ -149,6 +153,10 @@
 		43581AD63883CAA415A71F817EED5D51 /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLRequestSerialization.h; path = AFNetworking/AFURLRequestSerialization.h; sourceTree = "<group>"; };
 		44FE3F3CEB666B9D562773ABCB64F132 /* RWUserDefaults.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RWUserDefaults.m; sourceTree = "<group>"; };
 		456884974FCD65674016A0D296E8D846 /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFNetworkReachabilityManager.h; path = AFNetworking/AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
+		492E1A461D546D0000AEA247 /* UIImage+Handle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Handle.h"; sourceTree = "<group>"; };
+		492E1A471D546D0000AEA247 /* UIImage+Handle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Handle.m"; sourceTree = "<group>"; };
+		492E1A481D546D0000AEA247 /* UITextField+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Utils.h"; sourceTree = "<group>"; };
+		492E1A491D546D0000AEA247 /* UITextField+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Utils.m"; sourceTree = "<group>"; };
 		49FBE3AC1D49B4B8000F0805 /* RWSimpleTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RWSimpleTool.h; sourceTree = "<group>"; };
 		49FBE3AD1D49B4B8000F0805 /* RWSimpleTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RWSimpleTool.m; sourceTree = "<group>"; };
 		49FF8D981D26745A00437C46 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/usr/lib/libsqlite3.0.tbd; sourceTree = DEVELOPER_DIR; };
@@ -293,6 +301,10 @@
 				209F12C038E1448AF32EB17DE2A3B297 /* UIView+EasyShow.m */,
 				DD7A139E336A98306F37E1BC044F1269 /* UIView+Utils.h */,
 				4A63912D58320958EAE1B9F14E723C38 /* UIView+Utils.m */,
+				492E1A461D546D0000AEA247 /* UIImage+Handle.h */,
+				492E1A471D546D0000AEA247 /* UIImage+Handle.m */,
+				492E1A481D546D0000AEA247 /* UITextField+Utils.h */,
+				492E1A491D546D0000AEA247 /* UITextField+Utils.m */,
 			);
 			name = Category;
 			path = RWKit/Category;
@@ -556,6 +568,7 @@
 				AB39AC9746E7575D7449700475E41B0B /* AFHTTPSessionManager.h in Headers */,
 				5808B477EFF509D810B5CDCFDC944F80 /* AFImageDownloader.h in Headers */,
 				1480F4923DBBF217F60572EEECB4027C /* AFNetworkActivityIndicatorManager.h in Headers */,
+				492E1A4A1D546D0000AEA247 /* UIImage+Handle.h in Headers */,
 				EC7CADE416A78A1CD6936018A6695126 /* AFNetworking-umbrella.h in Headers */,
 				49FBE3AE1D49B4B8000F0805 /* RWSimpleTool.h in Headers */,
 				E7988678C81F7CCB95D239375FC6986D /* AFNetworking.h in Headers */,
@@ -567,6 +580,7 @@
 				1E5B8F12ED7CC40ECDB9B1F755F387E5 /* UIActivityIndicatorView+AFNetworking.h in Headers */,
 				81B617F8D26BB10C5726D75E85D21EB7 /* UIButton+AFNetworking.h in Headers */,
 				9E1E90DED74B73ECE53C9AD76DE53E2D /* UIImage+AFNetworking.h in Headers */,
+				492E1A4C1D546D0000AEA247 /* UITextField+Utils.h in Headers */,
 				60E3009342BEE96D32C546BE2DB60052 /* UIImageView+AFNetworking.h in Headers */,
 				659960F7E28E993E08CCC1E8A383E710 /* UIKit+AFNetworking.h in Headers */,
 				D9F4E833E37B611B432F6B5D7072DDA2 /* UIProgressView+AFNetworking.h in Headers */,
@@ -692,6 +706,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				492E1A4D1D546D0000AEA247 /* UITextField+Utils.m in Sources */,
 				3F1BC9BAFFEEABB1ABC7614DF0FC97D5 /* AFAutoPurgingImageCache.m in Sources */,
 				49FBE3AF1D49B4B8000F0805 /* RWSimpleTool.m in Sources */,
 				E0D4045AC4C1B41917FCA23A042D18B2 /* AFHTTPSessionManager.m in Sources */,
@@ -700,6 +715,7 @@
 				3D2789FC760A97301909F0B1201626CD /* AFNetworking-dummy.m in Sources */,
 				68A38977EBAE334DC3C22386D00D2622 /* AFNetworkReachabilityManager.m in Sources */,
 				20607BE2B1E5F31765026E5AC64DB27D /* AFSecurityPolicy.m in Sources */,
+				492E1A4B1D546D0000AEA247 /* UIImage+Handle.m in Sources */,
 				DFFA215EEAA8DDBD540076927535275C /* AFURLRequestSerialization.m in Sources */,
 				B5852322ADE88AAD56EE042B80BA81E4 /* AFURLResponseSerialization.m in Sources */,
 				707B1A7541C8DBDDE8C27896A61370BE /* AFURLSessionManager.m in Sources */,
