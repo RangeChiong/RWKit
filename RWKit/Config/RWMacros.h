@@ -12,6 +12,9 @@
 //----------------------------------常用----------------------------------
 #pragma mark-   常用UI
 
+// 获取工程中的文件
+#define Project_File(__fileName__)  [[NSBundle mainBundle] pathForResource:__fileName__ ofType:nil]
+
 // 获取key window
 #define Key_Window [UIApplication sharedApplication].keyWindow
 
