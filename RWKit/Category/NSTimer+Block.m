@@ -10,13 +10,24 @@
 
 @implementation NSTimer (Block)
 
-+ (instancetype)rw_scheduleTimerWithTimeInterval:(NSTimeInterval)ti repeats:(BOOL)rep usingBlock:(void (^)(NSTimer *timer))block {
++ (instancetype)rw_scheduleTimerWithTimeInterval:(NSTimeInterval)ti
+                                         repeats:(BOOL)rep
+                                      usingBlock:(void (^)(NSTimer *timer))block {
+    return [self rw_scheduleTimerWithTimeInterval:ti repeats:rep mode:NSRunLoopCommonModes usingBlock:block];
+}
+
++ (instancetype)rw_scheduleTimerWithTimeInterval:(NSTimeInterval)ti
+                                         repeats:(BOOL)rep
+                                            mode:(NSString *)mode
+                                      usingBlock:(void (^)(NSTimer *timer))block {
     NSTimer *timer = [self rw_timerWithTimeInterval:ti repeats:rep usingBlock:block];
-    [NSRunLoop.currentRunLoop addTimer:timer forMode:NSDefaultRunLoopMode];
+    [NSRunLoop.currentRunLoop addTimer:timer forMode:mode];
     return timer;
 }
 
-+ (instancetype)rw_timerWithTimeInterval:(NSTimeInterval)ti repeats:(BOOL)rep usingBlock:(void (^)(NSTimer *t))block {
++ (instancetype)rw_timerWithTimeInterval:(NSTimeInterval)ti
+                                 repeats:(BOOL)rep
+                              usingBlock:(void (^)(NSTimer *t))block {
     
     NSParameterAssert(block != nil);
     CFAbsoluteTime seconds = fmax(ti, 0.0001);
