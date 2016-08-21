@@ -157,7 +157,7 @@
 
 @implementation UIView (XibHelper)
 
-+ (instancetype)viewFromXib {
++ (instancetype)rw_viewFromXib {
     return [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil] lastObject];
 }
 

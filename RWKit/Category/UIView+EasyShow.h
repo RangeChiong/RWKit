@@ -34,7 +34,7 @@ IB_DESIGNABLE
 @property (nonatomic, assign) IBInspectable CGFloat borderWidth;
 @property (nonatomic, assign) IBInspectable UIColor *borderColor;
 
-+ (instancetype)viewFromXib;    //!< 从Xib加载视图
++ (instancetype)rw_viewFromXib;    //!< 从Xib加载视图
 
 @end
 

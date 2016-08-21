@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0237AD9E1D69F593009102B5 /* UITableView+Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 0237AD981D69F593009102B5 /* UITableView+Utils.h */; };
+		0237AD9F1D69F593009102B5 /* UITableView+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0237AD991D69F593009102B5 /* UITableView+Utils.m */; };
+		0237ADA01D69F593009102B5 /* UITableViewCell+Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 0237AD9A1D69F593009102B5 /* UITableViewCell+Utils.h */; };
+		0237ADA11D69F593009102B5 /* UITableViewCell+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0237AD9B1D69F593009102B5 /* UITableViewCell+Utils.m */; };
+		0237ADA21D69F593009102B5 /* UIViewController+Utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 0237AD9C1D69F593009102B5 /* UIViewController+Utils.h */; };
+		0237ADA31D69F593009102B5 /* UIViewController+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 0237AD9D1D69F593009102B5 /* UIViewController+Utils.m */; };
 		02BA1BBBF79862705ED28CD178A9DEAD /* RWKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 428D904AD6BB72F18EFD040AA7C57AE1 /* RWKit-dummy.m */; };
 		0727A4E45C99A89FE0056D025B946B47 /* UIView+EasyShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 209F12C038E1448AF32EB17DE2A3B297 /* UIView+EasyShow.m */; };
 		119AFA3B8253FB8124FBF26275B7C1D0 /* NSObject+KVO.h in Headers */ = {isa = PBXBuildFile; fileRef = 8894BA292CEFA40299DDBCB640807772 /* NSObject+KVO.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -124,6 +130,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0237AD981D69F593009102B5 /* UITableView+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Utils.h"; sourceTree = "<group>"; };
+		0237AD991D69F593009102B5 /* UITableView+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Utils.m"; sourceTree = "<group>"; };
+		0237AD9A1D69F593009102B5 /* UITableViewCell+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+Utils.h"; sourceTree = "<group>"; };
+		0237AD9B1D69F593009102B5 /* UITableViewCell+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+Utils.m"; sourceTree = "<group>"; };
+		0237AD9C1D69F593009102B5 /* UIViewController+Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Utils.h"; sourceTree = "<group>"; };
+		0237AD9D1D69F593009102B5 /* UIViewController+Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Utils.m"; sourceTree = "<group>"; };
 		038DE6D856DFAE2F85304D036588D065 /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLResponseSerialization.h; path = AFNetworking/AFURLResponseSerialization.h; sourceTree = "<group>"; };
 		04109034BD872E9442E7F913DA66EEC0 /* Pods-RWKit_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-RWKit_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		077A1959F6F952532F523B4F8E9B751D /* UIActivityIndicatorView+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIActivityIndicatorView+AFNetworking.h"; path = "UIKit+AFNetworking/UIActivityIndicatorView+AFNetworking.h"; sourceTree = "<group>"; };
@@ -279,6 +291,12 @@
 		48C0C6E9F662F0D805644FEAE8AA7D0D /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				0237AD981D69F593009102B5 /* UITableView+Utils.h */,
+				0237AD991D69F593009102B5 /* UITableView+Utils.m */,
+				0237AD9A1D69F593009102B5 /* UITableViewCell+Utils.h */,
+				0237AD9B1D69F593009102B5 /* UITableViewCell+Utils.m */,
+				0237AD9C1D69F593009102B5 /* UIViewController+Utils.h */,
+				0237AD9D1D69F593009102B5 /* UIViewController+Utils.m */,
 				D9D65EC064C168FAE4FDAB8DCA5985A5 /* NSArray+Extensions.h */,
 				3382A2E7BD540B20C220A78E666DBFCD /* NSArray+Extensions.m */,
 				AA79AA5190ED15B1D15EDC17251FA601 /* NSDate+EasyDate.h */,
@@ -569,6 +587,7 @@
 				5808B477EFF509D810B5CDCFDC944F80 /* AFImageDownloader.h in Headers */,
 				1480F4923DBBF217F60572EEECB4027C /* AFNetworkActivityIndicatorManager.h in Headers */,
 				492E1A4A1D546D0000AEA247 /* UIImage+Handle.h in Headers */,
+				0237AD9E1D69F593009102B5 /* UITableView+Utils.h in Headers */,
 				EC7CADE416A78A1CD6936018A6695126 /* AFNetworking-umbrella.h in Headers */,
 				49FBE3AE1D49B4B8000F0805 /* RWSimpleTool.h in Headers */,
 				E7988678C81F7CCB95D239375FC6986D /* AFNetworking.h in Headers */,
@@ -581,10 +600,12 @@
 				81B617F8D26BB10C5726D75E85D21EB7 /* UIButton+AFNetworking.h in Headers */,
 				9E1E90DED74B73ECE53C9AD76DE53E2D /* UIImage+AFNetworking.h in Headers */,
 				492E1A4C1D546D0000AEA247 /* UITextField+Utils.h in Headers */,
+				0237ADA01D69F593009102B5 /* UITableViewCell+Utils.h in Headers */,
 				60E3009342BEE96D32C546BE2DB60052 /* UIImageView+AFNetworking.h in Headers */,
 				659960F7E28E993E08CCC1E8A383E710 /* UIKit+AFNetworking.h in Headers */,
 				D9F4E833E37B611B432F6B5D7072DDA2 /* UIProgressView+AFNetworking.h in Headers */,
 				C6354FEC7728A4C86DAD8092509BA7D4 /* UIRefreshControl+AFNetworking.h in Headers */,
+				0237ADA21D69F593009102B5 /* UIViewController+Utils.h in Headers */,
 				AE2A07407FB50BA249984DC0620E84C0 /* UIWebView+AFNetworking.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -718,13 +739,16 @@
 				492E1A4B1D546D0000AEA247 /* UIImage+Handle.m in Sources */,
 				DFFA215EEAA8DDBD540076927535275C /* AFURLRequestSerialization.m in Sources */,
 				B5852322ADE88AAD56EE042B80BA81E4 /* AFURLResponseSerialization.m in Sources */,
+				0237ADA31D69F593009102B5 /* UIViewController+Utils.m in Sources */,
 				707B1A7541C8DBDDE8C27896A61370BE /* AFURLSessionManager.m in Sources */,
 				6ED4ABEE8A5F51F5ECB59FA1781D29C6 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				AF03C11A1FAC8132AD3749D8F541701A /* UIButton+AFNetworking.m in Sources */,
+				0237ADA11D69F593009102B5 /* UITableViewCell+Utils.m in Sources */,
 				2E8A32ED46194EDBE22146271F6D26DE /* UIImageView+AFNetworking.m in Sources */,
 				5FF6453E55785669885F626B853FD2AA /* UIProgressView+AFNetworking.m in Sources */,
 				174202BD6AE0E4A41F5CE66E975EAE52 /* UIRefreshControl+AFNetworking.m in Sources */,
 				A462945883F7729B185B64B679A6BFBE /* UIWebView+AFNetworking.m in Sources */,
+				0237AD9F1D69F593009102B5 /* UITableView+Utils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

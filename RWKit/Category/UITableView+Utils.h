@@ -10,6 +10,6 @@
 
 @interface UITableView (Utils)
 
-- (void)registerCellFromXib:(Class)cls;
+- (void)rw_registerCellFromXib:(Class)cls;
 
 @end

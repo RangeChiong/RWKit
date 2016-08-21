@@ -10,7 +10,7 @@
 
 @implementation UITableViewCell (Utils)
 
-+ (NSString *)reuseIdentifier {
++ (NSString *)rw_reuseIdentifier {
     return NSStringFromClass([self class]);
 }
 
