@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSString (Utils)
+#pragma mark-  FolderPath
+
+@interface NSString (FolderPath)
 
 /*!
  *  获取沙盒下documens文件夹路径
@@ -30,11 +32,34 @@
  */
 + (NSString *)rw_cachesContentDirectory:(NSString *)name;
 
+@end
+
+#pragma mark-  Reg
+
+@interface NSString (Reg)
 
 /** 正则匹配11位手机号码 */
 - (BOOL)rw_checkPhoneNumber;
 
 /** 判断纯数字字符串 */
 - (BOOL)rw_isPureInt;
+
+@end
+
+#pragma mark-  Project
+
+@interface NSString (Project)
+
+/** 获取当前工程的发布版本 */
++ (NSString *)rw_shortVersion;
+
+/** 获取当前工程的内部版本 */
++ (NSInteger)rw_buildVersion;
+
+/** 获取当前工程的唯一标识 */
++ (NSString *)rw_identifier;
+
+/** 从mainBundle中根据key获取信息 */
++ (NSString *)rw_objectFromMainBundleForKey:(NSString *)key;
 
 @end

@@ -17,21 +17,21 @@
 //| ----------------------------------------------------------------------------
 - (UIImage *)rw_applyingLightEffect {
     UIColor *tintColor = [UIColor colorWithWhite:1.0 alpha:0.3];
-    return [self imageByApplyingBlurWithRadius:60 tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil];
+    return [self rw_applyingBlurWithRadius:60 tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil];
 }
 
 
 //| ----------------------------------------------------------------------------
 - (UIImage *)rw_applyingExtraLightEffect {
     UIColor *tintColor = [UIColor colorWithWhite:0.97 alpha:0.82];
-    return [self imageByApplyingBlurWithRadius:40 tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil];
+    return [self rw_applyingBlurWithRadius:40 tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil];
 }
 
 
 //| ----------------------------------------------------------------------------
 - (UIImage *)rw_applyingDarkEffect {
     UIColor *tintColor = [UIColor colorWithWhite:0.11 alpha:0.73];
-    return [self imageByApplyingBlurWithRadius:40 tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil];
+    return [self rw_applyingBlurWithRadius:40 tintColor:tintColor saturationDeltaFactor:1.8 maskImage:nil];
 }
 
 
@@ -52,14 +52,14 @@
             effectColor = [UIColor colorWithRed:r green:g blue:b alpha:EffectColorAlpha];
         }
     }
-    return [self imageByApplyingBlurWithRadius:20 tintColor:effectColor saturationDeltaFactor:-1.0 maskImage:nil];
+    return [self rw_applyingBlurWithRadius:20 tintColor:effectColor saturationDeltaFactor:-1.0 maskImage:nil];
 }
 
 #pragma mark -
 #pragma mark - Implementation
 
 //| ----------------------------------------------------------------------------
-- (UIImage *)imageByApplyingBlurWithRadius:(CGFloat)blurRadius tintColor:(UIColor *)tintColor saturationDeltaFactor:(CGFloat)saturationDeltaFactor maskImage:(UIImage *)maskImage {
+- (UIImage *)rw_applyingBlurWithRadius:(CGFloat)blurRadius tintColor:(UIColor *)tintColor saturationDeltaFactor:(CGFloat)saturationDeltaFactor maskImage:(UIImage *)maskImage {
 #define ENABLE_BLUR                     1
 #define ENABLE_SATURATION_ADJUSTMENT    1
 #define ENABLE_TINT                     1

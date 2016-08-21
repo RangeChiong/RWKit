@@ -8,7 +8,9 @@
 
 #import "NSString+Utils.h"
 
-@implementation NSString (Utils)
+#pragma mark-  FolderPath
+
+@implementation NSString (FolderPath)
 
 + (NSString *)rw_documentsPath {
     return [self rw_searchPathFrom:NSDocumentDirectory];
@@ -31,6 +33,20 @@
 + (NSString *)rw_searchPathFrom:(NSSearchPathDirectory)directory {
     return NSSearchPathForDirectoriesInDomains(directory, NSUserDomainMask, YES)[0];
 }
+
+@end
+
+#pragma mark-  Reg
+
+@implementation NSString (Reg)
+
+#pragma mark-  判断纯数字字符串
+- (BOOL)rw_isPureInt {
+    NSScanner *scan = [NSScanner scannerWithString:self];
+    int val;
+    return [scan scanInt:&val] && [scan isAtEnd];
+}
+
 
 #pragma 正则匹配11位手机号
 - (BOOL)rw_checkPhoneNumber {
@@ -59,11 +75,27 @@
     }
 }
 
-#pragma mark-  判断纯数字字符串
-- (BOOL)rw_isPureInt {
-    NSScanner *scan = [NSScanner scannerWithString:self];
-    int val;
-    return [scan scanInt:&val] && [scan isAtEnd];
+@end
+
+#pragma mark-  Project
+
+@implementation NSString (Project)
+
++ (NSString *)rw_shortVersion {
+    return [self rw_objectFromMainBundleForKey:@"CFBundleShortVersionString"];
+}
+
++ (NSInteger)rw_buildVersion {
+    return [self rw_objectFromMainBundleForKey:@"CFBundleVersion"].integerValue;
+}
+
++ (NSString *)rw_identifier {
+    return [self rw_objectFromMainBundleForKey:@"CFBundleIdentifier"];
+}
+
++ (NSString *)rw_objectFromMainBundleForKey:(NSString *)key {
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    return  [infoDictionary objectForKey:key];
 }
 
 @end

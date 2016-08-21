@@ -9,6 +9,8 @@
 #import "UIView+Utils.h"
 @import ObjectiveC.runtime;
 
+#pragma mark-  Handle
+
 @implementation UIView (Handle)
 
 - (UIImage *)rw_snapshot {
@@ -41,7 +43,7 @@
 
 static const void *GestureRecognizerHandler = &GestureRecognizerHandler;
 
-@interface UIView (GesturePrivate)
+@interface UIView (RWGesturePrivate)
 
 @property (nonatomic, copy) void (^handler)(UITapGestureRecognizer *tap);
 

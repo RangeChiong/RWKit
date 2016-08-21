@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#pragma mark-  EasyShow
+
 @interface UIView (EasyShow)
 
 @property (nonatomic, assign, getter = left,   setter = setLeft:)  CGFloat x;
@@ -26,7 +28,8 @@
 
 @end
 
-//---------------------------------- XibHelper ----------------------------------
+#pragma mark-  XibHelper
+
 IB_DESIGNABLE
 @interface UIView (XibHelper)
 

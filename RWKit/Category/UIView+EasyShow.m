@@ -8,6 +8,8 @@
 
 #import "UIView+EasyShow.h"
 
+#pragma mark-  EasyShow
+
 @implementation UIView (EasyShow)
 
 - (void)setX:(CGFloat)x {

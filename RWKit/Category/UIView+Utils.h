@@ -10,6 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#pragma mark-  Handle
+
 @interface UIView (Handle)
 
 /** 截取当前view */
@@ -27,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-//---------------------------------- 手势 ----------------------------------
+#pragma mark-  Gesture
 
 @interface UIView (Gesture)
 
