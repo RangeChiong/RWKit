@@ -51,6 +51,19 @@ static const void *GestureRecognizerHandler = &GestureRecognizerHandler;
 
 @implementation UIView (Gesture)
 
+#pragma mark-  限制view连续点击
+
+- (void)limitViewUserInteractionEnabled {
+    [self limitViewUserInteractionEnabledForCustomerTimeInterval:1.5];
+}
+
+- (void)limitViewUserInteractionEnabledForCustomerTimeInterval:(NSTimeInterval)ti {
+    self.userInteractionEnabled = NO;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(ti * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        self.userInteractionEnabled = YES;
+    });
+}
+
 #pragma mark-  添加 tap 手势
 
 - (UITapGestureRecognizer *)rw_tapWithTarget:(id)target action:(SEL)aSelector {
