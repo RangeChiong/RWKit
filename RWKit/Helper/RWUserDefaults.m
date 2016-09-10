@@ -10,6 +10,164 @@
 #import "CocoaCracker.h"
 @import UIKit;
 
+#define Make_Setter_Method(type, setStatement)  \
+method_setImplementation(setter, imp_implementationWithBlock(^(id self, type param) {  \
+[userDefault setStatement:param forKey:key];   \
+[userDefault synchronize];\
+}))
+
+#define Make_Getter_Method(type, getStatement)  \
+method_setImplementation(getter, imp_implementationWithBlock(^(id self) {  \
+type returnParam = [userDefault getStatement:key];  \
+return returnParam;    \
+}))
+
+#define OverrideSetterGetterMethod(type, setStatement, getStatement)   \
+Make_Setter_Method(type, setStatement);    \
+Make_Getter_Method(type, getStatement)
+
+NS_INLINE Method *rwud_setterGetterMethods(Class cls, const char *name) {
+    char *ch_setter;
+    asprintf(&ch_setter, "set%c%s:", toupper(name[0]), name + 1);
+    SEL setterSel = sel_registerName(ch_setter);
+    Method setterMethod = class_getInstanceMethod(cls, setterSel);
+    
+    SEL getterSel = sel_registerName(name);
+    Method getterMethod = class_getInstanceMethod(cls, getterSel);
+    
+    Method methods[2];
+    methods[0] = setterMethod;
+    methods[1] = getterMethod;
+    
+    Method *retMethods = methods;
+    return retMethods;
+}
+
+NS_INLINE void rwud_typeEncodings(NSUserDefaults *userDefault, Method *methods, const char *attribute) {
+    Method setter = methods[0];
+    Method getter = methods[1];
+    NSString *key = NSStringFromSelector(method_getName(getter));
+    switch (attribute[0]) {
+        case 's':  // short
+        case 'i':  // int
+        case 'l':  // long
+        case 'q':  // long long
+        case 'C':  // unsigned char
+        case 'S':  // unsigned short
+        case 'I':  // unsigned int
+        case 'L':  // unsigned long
+        case 'Q':  // unsigned long long
+        {
+            OverrideSetterGetterMethod(NSInteger, setInteger, integerForKey);
+            break;
+        }
+            
+        case 'B':  // BOOL
+        case 'c':  // char
+        {
+            OverrideSetterGetterMethod(NSInteger, setBool, boolForKey);
+            break;
+        }
+            
+        case 'f':  // float
+        {
+            OverrideSetterGetterMethod(float, setFloat, floatForKey);
+            break;
+        }
+            
+        case 'd':  // double
+        {
+            OverrideSetterGetterMethod(double, setDouble, floatForKey);
+            break;
+        }
+            
+        case '@':  // object
+        {
+            if (strstr(attribute, class_getName([NSString class])) != NULL
+                || strstr(attribute, class_getName([NSMutableString class])) != NULL) {
+                OverrideSetterGetterMethod(NSString *, setObject, objectForKey);
+            }
+            else if (strstr(attribute, class_getName([NSNumber class])) != NULL) {
+                OverrideSetterGetterMethod(NSNumber *, setObject, objectForKey);
+            }
+            else if (strstr(attribute, class_getName([NSArray class])) != NULL
+                     || strstr(attribute, class_getName([NSMutableArray class])) != NULL) {
+                OverrideSetterGetterMethod(NSArray *, setObject, arrayForKey);
+            }
+            else if (strstr(attribute, class_getName([NSDictionary class])) != NULL
+                     || strstr(attribute, class_getName([NSMutableDictionary class])) != NULL) {
+                OverrideSetterGetterMethod(NSDictionary *, setObject, dictionaryForKey);
+            }
+            else if (strstr(attribute, class_getName([NSData class])) != NULL) {
+                OverrideSetterGetterMethod(NSData *, setObject, dataForKey);
+            }
+            else if (strstr(attribute, class_getName([NSURL class])) != NULL) {
+                OverrideSetterGetterMethod(NSNumber *, setObject, objectForKey);
+            }
+            else if (strstr(attribute, class_getName([NSDate class])) != NULL) {
+                OverrideSetterGetterMethod(NSDate *, setObject, objectForKey);
+            }
+
+            break;
+        }
+        default: break;
+    }
+};
+
+@interface RWUserDefaults () {
+    NSUserDefaults  *_userDefault;
+    Class _registeredClass;
+}
+
+@end
+
+@implementation RWUserDefaults
+
++ (instancetype)shareInstance {
+    static id instance;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [self new];
+    });
+    return instance;
+}
+
+- (instancetype)init {
+    if (self = [super init]) {
+        _userDefault = [NSUserDefaults standardUserDefaults];
+    }
+    return self;
+}
+
+#pragma mark-   public methods
+
+- (void)registerClass:(Class)aClass {
+    _registeredClass = aClass;
+    CFAbsoluteTime start = CFAbsoluteTimeGetCurrent();
+
+    [[CocoaCracker handle:aClass] copyPropertyList:^(objc_property_t  _Nonnull property) {
+        const char *name = property_getName(property);
+        const char *attributes = property_copyAttributeValue(property, "T");
+        Method *methods = rwud_setterGetterMethods(aClass, name);
+        rwud_typeEncodings(_userDefault, methods, attributes);
+    }];
+
+    // do something
+    CFAbsoluteTime end = CFAbsoluteTimeGetCurrent();
+    NSLog(@"time cost: %lf seconds", end - start);
+}
+
+- (void)unregisterClass {
+    _registeredClass = nil;
+}
+
+@end
+
+
+
+/*
+
+
 #define Make_Setter_Method(_paramClass_, _setStatement_)  \
 method_setImplementation(setterMethod, imp_implementationWithBlock(^(id obj, _paramClass_ param) {  \
 [_userDefault _setStatement_:param forKey:name];\
@@ -42,9 +200,10 @@ typedef NS_ENUM(NSUInteger, PropertyType) {
     PropertyType_color
 };
 
+
 @interface RWUserDefaults () {
     NSUserDefaults  *_userDefault;
-    NSMutableDictionary   *_propertyStore;
+    NSMutableDictionary  *_propertyStorage;
     Class _registeredClass;
 }
 
@@ -74,16 +233,21 @@ typedef NS_ENUM(NSUInteger, PropertyType) {
 
 - (void)registerClass:(Class)aClass {
     _registeredClass = aClass;
-    _propertyStore = [self allProperty:aClass];
-    [_propertyStore enumerateKeysAndObjectsUsingBlock:^(NSString *property,
+    _propertyStorage = [self allProperty:aClass];
+    CFAbsoluteTime start = CFAbsoluteTimeGetCurrent();
+
+    [_propertyStorage enumerateKeysAndObjectsUsingBlock:^(NSString *property,
                                                        NSString *type,
                                                        BOOL * _Nonnull stop) {
         [self checkType:type propertyName:property];
     }];
+    // do something
+    CFAbsoluteTime end = CFAbsoluteTimeGetCurrent();
+    NSLog(@"time cost: %f seconds", end - start);
 }
 
 - (void)unregisterClass:(Class)aClass {
-    [_propertyStore removeAllObjects];
+    [_propertyStorage removeAllObjects];
     _registeredClass = nil;
 }
 
@@ -93,7 +257,7 @@ typedef NS_ENUM(NSUInteger, PropertyType) {
 
 - (void)removeObjectsForKeys:(NSArray *)keys {
     for (NSString *key in keys) {
-        for (NSString *property in [_propertyStore allKeys]) {
+        for (NSString *property in [_propertyStorage allKeys]) {
             if ([key isEqualToString:property]) {
                 [self removeObjectForKey:key];
             }
@@ -102,7 +266,7 @@ typedef NS_ENUM(NSUInteger, PropertyType) {
 }
 
 - (void)cleanUserdefaults {
-    [self removeObjectsForKeys:[_propertyStore allKeys]];
+    [self removeObjectsForKeys:[_propertyStorage allKeys]];
 }
 
 #pragma mark-   private methods
@@ -293,3 +457,4 @@ typedef NS_ENUM(NSUInteger, PropertyType) {
 }
 
 @end
+*/

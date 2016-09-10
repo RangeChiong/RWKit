@@ -158,5 +158,7 @@ fprintf(stderr, "-------\n");                                               \
 
 #define Static_Const_Char_String(__string)               static const char * __string = #__string;
 
+// 使用时 @Keypath(ObjA.property1.property2)  获取对象的属性的字符串  用在KVO等场景
+#define Keypath(keypath) (strchr(#keypath, '.') + 1)
 
 #endif /* RWMacros_h */

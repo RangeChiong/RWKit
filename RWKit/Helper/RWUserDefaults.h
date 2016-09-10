@@ -13,10 +13,10 @@
 + (instancetype)shareInstance;
 
 - (void)registerClass:(Class)aClass;
-- (void)unregisterClass:(Class)aClass;
+- (void)unregisterClass;
 
-- (void)removeObjectForKey:(NSString *)key;
-- (void)removeObjectsForKeys:(NSArray *)keys;
-- (void)cleanUserdefaults;
+//- (void)removeObjectForKey:(NSString *)key;
+//- (void)removeObjectsForKeys:(NSArray *)keys;
+//- (void)cleanUserdefaults;
 
 @end
