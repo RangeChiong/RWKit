@@ -63,3 +63,11 @@
 + (NSString *)rw_objectFromMainBundleForKey:(NSString *)key;
 
 @end
+
+#pragma mark-  string calcalation
+
+@interface NSString (Calculation)
+
+- (CGSize)stringSize:(UIFont *)font regularHeight:(CGFloat)height;
+
+@end
