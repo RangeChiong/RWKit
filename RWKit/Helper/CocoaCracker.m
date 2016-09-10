@@ -33,33 +33,32 @@
 #pragma mark-  copy property list
 
 - (void)copyPropertyName:(void(^)(NSString *pName))block {
-    
+    NSParameterAssert(block);
+
     [self copyPropertyInfo:^(NSString *pName, NSString *pType) {
-        if (block)
-            block(pName);
+        block(pName);
     } copyAttriEntirely:NO];
 }
 
 
 - (void)copyPropertyType:(void(^)(NSString *pType))block {
-    
+    NSParameterAssert(block);
+
     [self copyPropertyInfo:^(NSString *pName, NSString *pType) {
-        if (block)
-            block(pType);
+        block(pType);
     } copyAttriEntirely:NO];
 }
 
 - (void)copyPropertyTypeEntirely:(void(^)(NSString *pTypeEntirely))block {
-    
+    NSParameterAssert(block);
     [self copyPropertyInfo:^(NSString *pName, NSString *pTypeEntirely) {
-        if (block)
-            block(pTypeEntirely);
+        block(pTypeEntirely);
     } copyAttriEntirely:YES];
 }
 
 - (void)copyPropertyInfo:(void(^)(NSString *pName, NSString *pTypeEntirely))block
             copyAttriEntirely:(BOOL)isCopy {
-    
+    NSParameterAssert(block);
     [self copyPropertyList:^(objc_property_t property) {
         NSString *pName = [NSString stringWithUTF8String:property_getName(property)];
         NSString *pType;
@@ -68,18 +67,16 @@
         else
             pType = [NSString stringWithUTF8String:property_copyAttributeValue(property, "T")];
         
-        if (block)
-            block(pName, pType);
+        block(pName, pType);
     }];
 }
 
 - (void)copyPropertyList:(void(^)(objc_property_t property))block {
-
+    NSParameterAssert(block);
     u_int count;
     objc_property_t *properties = class_copyPropertyList(_targetCls, &count);
     for (u_int i = 0; i < count; i++) {
-        if (block)
-            block(properties[i]);
+        block(properties[i]);
     }
     
     free(properties);
@@ -111,19 +108,20 @@
 
 #pragma mark-  copy method list
 - (void)copyMethodName:(void (^)(NSString *selectorName))block {
+    NSParameterAssert(block);
+
     [self copyMethodList:^(SEL aSelector) {
-        if (block)
-            block(NSStringFromSelector(aSelector));
+        block(NSStringFromSelector(aSelector));
     }];
 }
 
 - (void)copyMethodList:(void (^)(SEL aSelector))block {
+    NSParameterAssert(block);
     u_int count;
     Method *methods = class_copyMethodList(_targetCls, &count);
     for (int i = 0; i < count ; i++) {
         SEL aSelector = method_getName(methods[i]);
-        if (block)
-            block(aSelector);
+        block(aSelector);
     }
     free(methods);
 }
