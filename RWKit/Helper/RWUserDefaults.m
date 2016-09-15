@@ -152,7 +152,6 @@ NS_INLINE void rwud_typeEncodings(NSUserDefaults *userDefault, Method *methods, 
         rwud_typeEncodings(_userDefault, methods, attributes);
     }];
 
-    // do something
     CFAbsoluteTime end = CFAbsoluteTimeGetCurrent();
     NSLog(@"time cost: %lf seconds", end - start);
 }
