@@ -143,7 +143,7 @@ NS_INLINE void rwud_typeEncodings(NSUserDefaults *userDefault, Method *methods, 
 
 - (void)registerClass:(Class)aClass {
     _registeredClass = aClass;
-    CFAbsoluteTime start = CFAbsoluteTimeGetCurrent();
+//    CFAbsoluteTime start = CFAbsoluteTimeGetCurrent();
 
     [[CocoaCracker handle:aClass] copyPropertyList:^(objc_property_t  _Nonnull property) {
         const char *name = property_getName(property);
@@ -152,8 +152,8 @@ NS_INLINE void rwud_typeEncodings(NSUserDefaults *userDefault, Method *methods, 
         rwud_typeEncodings(_userDefault, methods, attributes);
     }];
 
-    CFAbsoluteTime end = CFAbsoluteTimeGetCurrent();
-    NSLog(@"time cost: %lf seconds", end - start);
+//    CFAbsoluteTime end = CFAbsoluteTimeGetCurrent();
+//    NSLog(@"time cost: %lf seconds", end - start);
 }
 
 - (void)unregisterClass {

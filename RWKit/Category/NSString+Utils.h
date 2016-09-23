@@ -68,6 +68,13 @@
 
 @interface NSString (Calculation)
 
+/** 计算单位 ：xxx万 xxx亿 */
+- (NSString *)calculateUnit;
+
+/** 添加千分符号 1,000,000 */
+- (NSString *)addSeparator;
+
+/** 计算文字宽高 */
 - (CGSize)stringSize:(UIFont *)font regularHeight:(CGFloat)height;
 
 @end
