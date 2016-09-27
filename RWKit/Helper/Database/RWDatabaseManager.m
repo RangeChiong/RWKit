@@ -53,7 +53,7 @@
         _database = nil;
     }
     
-    _dbQueue = dispatch_queue_create("com.rangerchiong.com.rwdatabase", DISPATCH_QUEUE_SERIAL);
+    _dbQueue = dispatch_queue_create("com.rangerchiong.rwdatabase", DISPATCH_QUEUE_SERIAL);
     
     _database = [RWDatabase databaseWithPath:sqliteFilePath];
     _database.shouldCacheStatements = YES;

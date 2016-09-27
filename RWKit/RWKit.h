@@ -11,7 +11,7 @@
 
     // Macros
     #import "RWMacros.h"
-    #import "RWGlobalFunction.h"
+    #import "GCDHelper.h"
 
     // Categories
     #import "UIView+EasyShow.h"
