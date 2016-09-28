@@ -104,6 +104,34 @@
 
 @implementation NSString (Calculation)
 
+#pragma mark-  handler
+// 计算单位
+- (NSString *)calculateUnit {
+    NSInteger nRet = 0;
+    NSInteger value = self.integerValue;
+    NSString *resultStr = @"";
+    if (value > 1e8l) { //100000000
+        nRet = value/1e8l;
+        resultStr = [NSString stringWithFormat:@"%zd亿",nRet];
+    }
+    else if (value > 1e4l) {
+        nRet = value/1e4l; //10000
+        resultStr = [NSString stringWithFormat:@"%zd万",nRet];
+    }
+    return resultStr;
+}
+
+// 添加逗号分割 20000 = 20,000
+- (NSString *)addSeparator {
+    NSMutableString *mStr = self.mutableCopy;
+    NSRange range = [mStr rangeOfString:@"."];  // 防止有小数点
+    NSInteger index = (range.location != NSNotFound) ? range.location : self.length;
+    while ((index - 3) > 0) {
+        index -= 3;
+        [mStr insertString:@"," atIndex:index];
+    }
+    return mStr.copy;
+}
 
 #pragma mark-  string length
 
