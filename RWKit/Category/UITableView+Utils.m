@@ -10,8 +10,12 @@
 
 @implementation UITableView (Utils)
 
-- (void)rw_registerCellFromXib:(Class)cls {
+- (void)rw_registerCellXib:(Class)cls {
     [self registerNib:[UINib nibWithNibName:NSStringFromClass(cls) bundle:nil] forCellReuseIdentifier:NSStringFromClass(cls)];
+}
+
+- (void)rw_registerCellClass:(Class)cls {
+    [self registerClass:cls forCellReuseIdentifier:NSStringFromClass(cls)];
 }
 
 @end
