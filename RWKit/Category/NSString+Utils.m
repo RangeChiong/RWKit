@@ -145,7 +145,6 @@
                               range:NSMakeRange(0, self.length)];
     CGRect stringRect = [attributedString boundingRectWithSize:CGSizeMake(MAXFLOAT, height)
                                                        options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
-                         
                                                        context:nil];
     return stringRect.size;
 }

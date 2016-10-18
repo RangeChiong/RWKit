@@ -17,6 +17,7 @@
             [self deleteBackward];
         }
     }];
+    self
 }
 
 @end

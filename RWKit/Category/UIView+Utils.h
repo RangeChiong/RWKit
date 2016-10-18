@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIView (Gesture)
 
-/** 限制view的连续点击 默认为1.5秒间隔 */
+/** 限制view的连续点击 默认为0.5秒间隔 */
 - (void)limitViewUserInteractionEnabled;
 
 /** 限制view的连续点击 自定义时间间隔 */

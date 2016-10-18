@@ -54,7 +54,7 @@ static const void *GestureRecognizerHandler = &GestureRecognizerHandler;
 #pragma mark-  限制view连续点击
 
 - (void)limitViewUserInteractionEnabled {
-    [self limitViewUserInteractionEnabledForCustomerTimeInterval:1.5];
+    [self limitViewUserInteractionEnabledForCustomerTimeInterval:0.5];
 }
 
 - (void)limitViewUserInteractionEnabledForCustomerTimeInterval:(NSTimeInterval)ti {

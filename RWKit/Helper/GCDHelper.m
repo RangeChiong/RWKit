@@ -439,7 +439,7 @@ static GCDQueue *backgroundPriorityGlobalQueue;
 
 void Run_Main(dispatch_block_t RunMain) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        RunMain();
+        if (RunMain) RunMain();
     });
 }
 
@@ -447,7 +447,7 @@ void Run_Main(dispatch_block_t RunMain) {
 
 void Run_Async(dispatch_block_t RunAsync, dispatch_block_t RunMain) {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        RunAsync();
+        if (RunAsync) RunAsync();
         if (RunMain) Run_Main(RunMain);
     });
 }
@@ -456,7 +456,7 @@ void Run_Async(dispatch_block_t RunAsync, dispatch_block_t RunMain) {
 
 void Run_Delay(CGFloat Seconds ,dispatch_block_t RunDelay) {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(Seconds * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        RunDelay();
+        if (RunDelay) RunDelay();
     });
 }
 
