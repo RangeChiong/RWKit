@@ -14,4 +14,14 @@
     return NSStringFromClass([self class]);
 }
 
++ (instancetype)rw_loadWithStyleDefault {
+    
+    return [[self alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:NSStringFromClass(self)];
+}
+
++ (instancetype)rw_loadWithStyle:(UITableViewCellStyle)cellStyle {
+    
+    return [[self alloc] initWithStyle:cellStyle reuseIdentifier:NSStringFromClass(self)];
+}
+
 @end

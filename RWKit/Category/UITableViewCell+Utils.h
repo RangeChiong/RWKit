@@ -12,4 +12,7 @@
 
 + (NSString *)rw_reuseIdentifier;
 
++ (instancetype)rw_loadWithStyleDefault;
++ (instancetype)rw_loadWithStyle:(UITableViewCellStyle)cellStyle;
+
 @end
