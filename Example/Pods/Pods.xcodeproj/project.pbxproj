@@ -34,6 +34,8 @@
 		3A10EF6ABF51D1D00B06AC5EF3A8C28C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BFB376F56AA6C68DE7319C8E4C53130 /* SystemConfiguration.framework */; };
 		3D2789FC760A97301909F0B1201626CD /* AFNetworking-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 98A189FDEF0AD08BC5DC357020B8DB5A /* AFNetworking-dummy.m */; };
 		3F1BC9BAFFEEABB1ABC7614DF0FC97D5 /* AFAutoPurgingImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = BAEEB3CDE859F3F412940D15AA031037 /* AFAutoPurgingImageCache.m */; };
+		44A2481A1DC1E3B800D6CF65 /* UIApplication+OpenURL.h in Headers */ = {isa = PBXBuildFile; fileRef = 44A248181DC1E3B800D6CF65 /* UIApplication+OpenURL.h */; };
+		44A2481B1DC1E3B800D6CF65 /* UIApplication+OpenURL.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A248191DC1E3B800D6CF65 /* UIApplication+OpenURL.m */; };
 		46C90357B1CD766749035C07B709E497 /* NSDictionary+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 39F37942A0B8A4A49EA0772E6E64F742 /* NSDictionary+Extensions.m */; };
 		492E1A4A1D546D0000AEA247 /* UIImage+Handle.h in Headers */ = {isa = PBXBuildFile; fileRef = 492E1A461D546D0000AEA247 /* UIImage+Handle.h */; };
 		492E1A4B1D546D0000AEA247 /* UIImage+Handle.m in Sources */ = {isa = PBXBuildFile; fileRef = 492E1A471D546D0000AEA247 /* UIImage+Handle.m */; };
@@ -164,6 +166,8 @@
 		428D904AD6BB72F18EFD040AA7C57AE1 /* RWKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "RWKit-dummy.m"; sourceTree = "<group>"; };
 		434E574D60CF3205EB86C49EB8453D2E /* AFURLSessionManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLSessionManager.h; path = AFNetworking/AFURLSessionManager.h; sourceTree = "<group>"; };
 		43581AD63883CAA415A71F817EED5D51 /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLRequestSerialization.h; path = AFNetworking/AFURLRequestSerialization.h; sourceTree = "<group>"; };
+		44A248181DC1E3B800D6CF65 /* UIApplication+OpenURL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+OpenURL.h"; sourceTree = "<group>"; };
+		44A248191DC1E3B800D6CF65 /* UIApplication+OpenURL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+OpenURL.m"; sourceTree = "<group>"; };
 		44FE3F3CEB666B9D562773ABCB64F132 /* RWUserDefaults.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RWUserDefaults.m; sourceTree = "<group>"; };
 		456884974FCD65674016A0D296E8D846 /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFNetworkReachabilityManager.h; path = AFNetworking/AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
 		492E1A461D546D0000AEA247 /* UIImage+Handle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Handle.h"; sourceTree = "<group>"; };
@@ -323,6 +327,8 @@
 				492E1A471D546D0000AEA247 /* UIImage+Handle.m */,
 				492E1A481D546D0000AEA247 /* UITextField+Utils.h */,
 				492E1A491D546D0000AEA247 /* UITextField+Utils.m */,
+				44A248181DC1E3B800D6CF65 /* UIApplication+OpenURL.h */,
+				44A248191DC1E3B800D6CF65 /* UIApplication+OpenURL.m */,
 			);
 			name = Category;
 			path = RWKit/Category;
@@ -631,6 +637,7 @@
 				79F7DF1D20E8E5BFE422A5DAF20A3A8D /* RWMacros.h in Headers */,
 				E81914EB835C4C9A79E283E6EF36231A /* RWRequest.h in Headers */,
 				68E5F7BDE8D1D046FCEFC2533D4779E8 /* RWUserDefaults.h in Headers */,
+				44A2481A1DC1E3B800D6CF65 /* UIApplication+OpenURL.h in Headers */,
 				2FF2B283C35C2028AFE9C553AE07CF00 /* UIColor+Utils.h in Headers */,
 				FD2C3D431BBCD0648C466DC72B266151 /* UIView+EasyShow.h in Headers */,
 				1231FA5DD6F50A52AEF53F00A528D00C /* UIView+Utils.h in Headers */,
@@ -768,6 +775,7 @@
 				D06396ED8C2233E23D05B8FE788E71FA /* NSTimer+Block.m in Sources */,
 				D8F20C1CC329A2A198C30D7168A36703 /* RWDatabase.m in Sources */,
 				505B1356E4CAE508652CDD3D6D4CDCF9 /* RWDatabaseManager.m in Sources */,
+				44A2481B1DC1E3B800D6CF65 /* UIApplication+OpenURL.m in Sources */,
 				02BA1BBBF79862705ED28CD178A9DEAD /* RWKit-dummy.m in Sources */,
 				C92CA6837B48E4CF0B136BD23952B127 /* RWRequest.m in Sources */,
 				956DA93F01864C0697F89A4ABA58452F /* RWUserDefaults.m in Sources */,

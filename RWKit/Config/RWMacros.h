@@ -149,16 +149,28 @@ fprintf(stderr, "-------\n");                                               \
 #define IS_IPHONE6P (IS_IPHONE && Screen_Height == 736.0f) ? YES : NO
 
 // app版本号
-#define Project_ShortVersion  [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]
+#define Project_ShortVersion  [[NSBundle mainBundle] infoDictionary][@"CFBundleShortVersionString"]
+
+//获取当前语言
+#define Project_CurrentLanguage [NSLocale preferredLanguages][0]
 
 //----------------------------------其他----------------------------------
 #pragma mark-   其他
 // 获取变量名     转换成NSString 用%s格式化
-#define VariableName(type)  #type
+#define Variable_Name(type)  #type
 
 #define Static_Const_Char_String(__string)               static const char * __string = #__string;
 
 // 使用时 @Keypath(ObjA.property1.property2)  获取对象的属性的字符串  用在KVO等场景
-#define Keypath(keypath) (strchr(#keypath, '.') + 1)
+#define Key_Path(keypath) (strchr(#keypath, '.') + 1)
+
+// 消除 self preform selector的警告
+#define NO_Warning_Leak(__perform__) \
+do { \
+_Pragma("clang diagnostic push") \
+_Pragma("clang diagnostic ignored \"-Warc-performSelector-leaks\"") \
+__perform__; \
+_Pragma("clang diagnostic pop") \
+} while (0)
 
 #endif /* RWMacros_h */
