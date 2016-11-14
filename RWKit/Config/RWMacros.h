@@ -43,10 +43,11 @@
 #define Font_System_Bold(size) [UIFont boldSystemFontOfSize:size]
 
 // 16进制颜色转UIColor  ColorHex(0x000000)
-#define ColorHex(hexValue)   [UIColor colorWithRed:((float)((hexValue & 0xFF0000) >> 16)) / 255.0 green:((float)((hexValue & 0xFF00) >> 8)) / 255.0 blue:((float)(hexValue & 0xFF)) / 255.0 alpha:1.0]
+#define Color_Hex(hexValue)   [UIColor colorWithRed:((float)((hexValue & 0xFF0000) >> 16)) / 255.0 green:((float)((hexValue & 0xFF00) >> 8)) / 255.0 blue:((float)(hexValue & 0xFF)) / 255.0 alpha:1.0]
 // RGB颜色
-#define ColorRGBA(r,g,b,a)   [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a]
-#define ColorRGB(r,g,b)      ColorRGBA(r,g,b,1.0f)
+#define Color_RGBA(r,g,b,a)   [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a]
+#define Color_RGB(r,g,b)      ColorRGBA(r,g,b,1.0f)
+#define Color_Random ColorRGB(arc4random_uniform(256), arc4random_uniform(256), arc4random_uniform(256))
 
 // 常用色
 #define Color_Main  ColorHex(0x915cd2)
