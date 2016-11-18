@@ -26,26 +26,41 @@ return returnParam;    \
 Make_Setter_Method(type, setStatement);    \
 Make_Getter_Method(type, getStatement)
 
-NS_INLINE Method *rwud_setterGetterMethods(Class cls, const char *name) {
+//NS_INLINE Method *rwud_setterGetterMethods(Class cls, const char *name) {
+////    char ch_setter[30];
+//    char *ch_setter;
+//    asprintf(&ch_setter, "set%c%s:", toupper(name[0]), name + 1);
+////    snprintf(ch_setter, sizeof(ch_setter), "set%c%s:", toupper(name[0]), name + 1);
+//    SEL setterSel = sel_registerName(ch_setter);
+//    Method setterMethod = class_getInstanceMethod(cls, setterSel);
+//
+//    SEL getterSel = sel_registerName(name);
+//    Method getterMethod = class_getInstanceMethod(cls, getterSel);
+////    static Method methods[2];
+//
+//    Method *methods = (Method *)malloc(sizeof(Method));
+//
+//    methods[0] = setterMethod;
+//    methods[1] = getterMethod;
+//    free(ch_setter);
+//    return methods;
+//}
+
+//NS_INLINE void rwud_typeEncodings(NSUserDefaults *userDefault, Method *methods, const char *attribute) {
+//    Method setter = methods[0];
+//    Method getter = methods[1];
+
+NS_INLINE void rwud_typeEncodings(NSUserDefaults *userDefault, Class cls, const char *name, const char *attribute) {
+    
     char *ch_setter;
     asprintf(&ch_setter, "set%c%s:", toupper(name[0]), name + 1);
     SEL setterSel = sel_registerName(ch_setter);
-    Method setterMethod = class_getInstanceMethod(cls, setterSel);
+    Method setter = class_getInstanceMethod(cls, setterSel);
     
     SEL getterSel = sel_registerName(name);
-    Method getterMethod = class_getInstanceMethod(cls, getterSel);
+    Method getter = class_getInstanceMethod(cls, getterSel);
+    free(ch_setter);
     
-    Method methods[2];
-    methods[0] = setterMethod;
-    methods[1] = getterMethod;
-    
-    Method *retMethods = methods;
-    return retMethods;
-}
-
-NS_INLINE void rwud_typeEncodings(NSUserDefaults *userDefault, Method *methods, const char *attribute) {
-    Method setter = methods[0];
-    Method getter = methods[1];
     NSString *key = NSStringFromSelector(method_getName(getter));
     switch (attribute[0]) {
         case 's':  // short
@@ -148,8 +163,11 @@ NS_INLINE void rwud_typeEncodings(NSUserDefaults *userDefault, Method *methods, 
     [[CocoaCracker handle:aClass] copyPropertyList:^(objc_property_t  _Nonnull property) {
         const char *name = property_getName(property);
         const char *attributes = property_copyAttributeValue(property, "T");
-        Method *methods = rwud_setterGetterMethods(aClass, name);
-        rwud_typeEncodings(_userDefault, methods, attributes);
+        rwud_typeEncodings(_userDefault, aClass, name, attributes);
+        
+//        Method *methods = rwud_setterGetterMethods(aClass, name);
+//        rwud_typeEncodings(_userDefault, methods, attributes);
+//      free(methods);
     }];
 
 //    CFAbsoluteTime end = CFAbsoluteTimeGetCurrent();
