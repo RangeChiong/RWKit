@@ -10,6 +10,9 @@
 
 @interface UIImage (Handle)
 
+#pragma mark-  剪裁图片
+- (UIImage *)rw_clipImage;
+
 #pragma mark-  blur effect
 
 - (UIImage *)rw_applyingLightEffect;

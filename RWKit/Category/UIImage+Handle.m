@@ -11,7 +11,27 @@
 
 @implementation UIImage (Handle)
 
-#pragma mark -
+#pragma mark-  剪裁图片
+
+- (UIImage *)rw_clipImageWithRect:(CGRect)rect {
+
+    CGImageRef subImageRef = CGImageCreateWithImageInRect(self.CGImage, rect);
+
+    UIGraphicsBeginImageContext(rect.size);
+
+    CGContextRef context = UIGraphicsGetCurrentContext();
+
+    CGContextDrawImage(context, rect, subImageRef);
+
+    UIImage *smallImage = [UIImage imageWithCGImage:subImageRef];
+
+    UIGraphicsEndImageContext();
+    
+    CGImageRelease(subImageRef);
+    
+    return smallImage;
+}
+
 #pragma mark - Effects
 
 //| ----------------------------------------------------------------------------
