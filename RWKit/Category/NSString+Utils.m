@@ -40,6 +40,51 @@
 
 @implementation NSString (Reg)
 
+#pragma mark-  获取字符数量
+- (int)rw_wordsCount {
+    NSInteger n = self.length;
+    int i;
+    int l = 0, a = 0, b = 0;
+    unichar c;
+    for (i = 0; i < n; i++) {
+        c = [self characterAtIndex:i];
+        if (isblank(c)) {
+            b++;
+        } else if (isascii(c)) {
+            a++;
+        } else {
+            l++;
+        }
+    }
+    if (a == 0 && l == 0) {
+        return 0;
+    }
+    return l + (int)ceilf((float)(a + b) / 2.0);
+}
+
+#pragma mark-   是否包含中文
+- (BOOL)rw_isContainChinese {
+    NSUInteger length = [self length];
+    for (NSUInteger i = 0; i < length; i++) {
+        NSRange range = NSMakeRange(i, 1);
+        NSString *subString = [self substringWithRange:range];
+        const char *cString = [subString UTF8String];
+        if (strlen(cString) == 3) {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+#pragma mark-   是否包含空格
+- (BOOL)rw_isContainBlank {
+    NSRange range = [self rangeOfString:@" "];
+    if (range.location != NSNotFound) {
+        return YES;
+    }
+    return NO;
+}
+
 #pragma mark-  判断纯数字字符串
 - (BOOL)rw_isPureInt {
     NSScanner *scan = [NSScanner scannerWithString:self];
@@ -47,9 +92,8 @@
     return [scan scanInt:&val] && [scan isAtEnd];
 }
 
-
 #pragma 正则匹配11位手机号
-- (BOOL)rw_checkPhoneNumber {
+- (BOOL)rw_isPhoneNumber {
     
     NSString * MOBILE = @"^1(3[0-9]|5[0-35-9]|8[025-9])\\d{8}$";
     

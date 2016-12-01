@@ -39,8 +39,17 @@
 
 @interface NSString (Reg)
 
+/** 获取字符数量 */
+- (int)rw_wordsCount;
+
+/** 判断是否包含中文 */
+- (BOOL)rw_isContainChinese;
+
+/** 判断是否包含空格 */
+- (BOOL)rw_isContainBlank;
+
 /** 正则匹配11位手机号码 */
-- (BOOL)rw_checkPhoneNumber;
+- (BOOL)rw_isPhoneNumber;
 
 /** 判断纯数字字符串 */
 - (BOOL)rw_isPureInt;
