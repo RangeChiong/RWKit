@@ -11,7 +11,7 @@
 @interface UIImage (Handle)
 
 #pragma mark-  改变图片颜色
-- (UIImage *)imageWithColor:(UIColor *)color;
+- (UIImage *)rw_renderColor:(UIColor *)color;
 #pragma mark-  剪裁图片
 - (UIImage *)rw_clipImage;
 

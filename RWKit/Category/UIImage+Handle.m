@@ -12,7 +12,7 @@
 @implementation UIImage (Handle)
 
 #pragma mark-  改变图片颜色
-- (UIImage *)imageWithColor:(UIColor *)color {
+- (UIImage *)rw_renderColor:(UIColor *)color {
     UIGraphicsBeginImageContextWithOptions(self.size, NO, self.scale);
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextTranslateCTM(context, 0, self.size.height);
