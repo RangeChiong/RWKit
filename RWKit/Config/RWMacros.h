@@ -35,11 +35,11 @@
 #define Height_TopBar   Height_NavigationBar + Height_StatusBar
 
 // 线条的高度
-#define kCommonLineHeight (1.0/[UIScreen mainScreen].scale)
+#define kCommonLineHeight          (1.0/[UIScreen mainScreen].scale)
 #define kCommonLineHeight_offset   ((1.0f / [UIScreen mainScreen].scale) / 2.0f)
 
 // 字体
-#define Font_System(size) [UIFont systemFontOfSize:size]
+#define Font_System(size)      [UIFont systemFontOfSize:size]
 #define Font_System_Bold(size) [UIFont boldSystemFontOfSize:size]
 
 // 16进制颜色转UIColor  ColorHex(0x000000)
@@ -47,17 +47,17 @@
 // RGB颜色
 #define Color_RGBA(r,g,b,a)   [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a]
 #define Color_RGB(r,g,b)      ColorRGBA(r,g,b,1.0f)
-#define Color_Random ColorRGB(arc4random_uniform(256), arc4random_uniform(256), arc4random_uniform(256))
+#define Color_Random          ColorRGB(arc4random_uniform(256), arc4random_uniform(256), arc4random_uniform(256))
 
 // 常用色
-#define Color_Main  ColorHex(0x915cd2)
-#define Color_Mask [UIColor colorWithWhite:0.0 alpha:0.6]
-#define Color_Clear [UIColor clearColor]
-#define Color_White [UIColor whiteColor]
-#define Color_Black [UIColor blackColor]
+#define Color_Main   [UIColor colorWithRed:0.2 green:0.592 blue:0.9451 alpha:1] // ColorHex(0x915cd2)
+#define Color_Mask   [UIColor colorWithWhite:0.0 alpha:0.6]
+#define Color_Clear  [UIColor clearColor]
+#define Color_White  [UIColor whiteColor]
+#define Color_Black  [UIColor blackColor]
 #define Color_Orange [UIColor orangeColor]
-#define Color_Red [UIColor redColor]
-#define Color_Green [UIColor greenColor]
+#define Color_Red    [UIColor redColor]
+#define Color_Green  [UIColor greenColor]
 
 //读取图片
 #define Image_Named(name) [UIImage imageNamed:name]
