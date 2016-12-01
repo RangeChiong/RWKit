@@ -13,7 +13,7 @@
 #pragma mark-  改变图片颜色
 - (UIImage *)rw_renderColor:(UIColor *)color;
 #pragma mark-  剪裁图片
-- (UIImage *)rw_clipImage;
+- (UIImage *)rw_clipImageWithRect:(CGRect)rect;
 
 #pragma mark-  blur effect
 
