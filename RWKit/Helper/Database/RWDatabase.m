@@ -183,7 +183,7 @@
     
     int rc                   = 0x00;
     sqlite3_stmt *pStmt      = 0x00;
-    RWStatement *cachedStmt = 0x00;
+    RWStatement *cachedStmt  = 0x00;
     
     if (_traceExecution && sql) { DBLog(@"当前执行：%@ executeUpdate: %@", self, sql); }
     
@@ -917,15 +917,19 @@ NS_INLINE int RWDatabaseExecuteBulkSQLCallback(void *theBlockAsVoid, int columns
     return (long)sqlite3_column_int64(_myStatement.sqlStatement, columnIdx);
 }
 
-- (sqlite_int64)longLongIntForColumnIndex:(int)columnIdx {
+- (long long int)longLongIntForColumn:(NSString *)columnName {
+    return [self longLongIntForColumnIndex:[self columnIndexForName:columnName]];
+}
+
+- (long long int)longLongIntForColumnIndex:(int)columnIdx {
     return sqlite3_column_int64(_myStatement.sqlStatement, columnIdx);
 }
 
-- (sqlite3_uint64)unsignedLongLongIntForColumn:(NSString *)columnName {
+- (unsigned long long int)unsignedLongLongIntForColumn:(NSString *)columnName {
     return [self unsignedLongLongIntForColumnIndex:[self columnIndexForName:columnName]];
 }
 
-- (sqlite3_uint64)unsignedLongLongIntForColumnIndex:(int)columnIdx {
+- (unsigned long long int)unsignedLongLongIntForColumnIndex:(int)columnIdx {
     return (sqlite3_uint64)[self longLongIntForColumnIndex:columnIdx];
 }
 

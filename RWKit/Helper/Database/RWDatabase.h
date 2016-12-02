@@ -32,9 +32,9 @@
 @property (readonly) NSString *lastErrorMessage;//!< 最近的错误日志
 
 // 初始化
-+ (instancetype)databaseWithPath:(NSString*)aPath;
++ (instancetype)databaseWithPath:(NSString *)aPath;
 - (instancetype)init;
-- (instancetype)initWithPath:(NSString*)aPath;
+- (instancetype)initWithPath:(NSString *)aPath;
 
 - (BOOL)tableExists:(NSString *)tableName;
 
@@ -124,10 +124,11 @@
 - (int)intForColumnIndex:(int)columnIdx;
 - (long)longForColumn:(NSString *)columnName;
 - (long)longForColumnIndex:(int)columnIdx;
-- (sqlite3_int64)longLongIntForColumnIndex:(int)columnIdx;
-- (sqlite3_uint64)unsignedLongLongIntForColumn:(NSString *)columnName;
-- (sqlite3_uint64)unsignedLongLongIntForColumnIndex:(int)columnIdx;
-- (BOOL)boolForColumn:(NSString *)columnName;
+- (long long int)longLongIntForColumn:(NSString *)columnName
+- (long long int)longLongIntForColumnIndex:(int)columnIdx;
+- (unsigned long long int)unsignedLongLongIntForColumn:(NSString *)columnName;
+- (unsigned long long int)unsignedLongLongIntForColumnIndex:(int)columnIdx;
+- (BOOL)boolForColumn:(NSString*)columnName;
 - (BOOL)boolForColumnIndex:(int)columnIdx;
 - (double)doubleForColumn:(NSString *)columnName;
 - (double)doubleForColumnIndex:(int)columnIdx;

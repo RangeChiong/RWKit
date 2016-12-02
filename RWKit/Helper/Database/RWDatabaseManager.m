@@ -54,10 +54,9 @@
     }
     
     _dbQueue = dispatch_queue_create("com.rangerchiong.rwdatabase", DISPATCH_QUEUE_SERIAL);
-    
+    DBLog(@"数据库文件路径 : %@", sqliteFilePath);
     _database = [RWDatabase databaseWithPath:sqliteFilePath];
     _database.shouldCacheStatements = YES;
-    
     if (!_database.open) {
         !done ?: done(NO);
         return;
@@ -225,7 +224,7 @@
     __block NSString *tmpSql = @"";
     [[CocoaCracker handle:cls] copyPropertyInfo:^(NSString *pName, NSString *pType) {
         NSString *tmpStr = [self typeNameWithPropertyAttri:pType];
-        tmpSql = [tmpSql stringByAppendingString:[NSString stringWithFormat:@" ,%@ %@", pName, tmpStr]];
+        tmpSql = [tmpSql stringByAppendingString:[NSString stringWithFormat:@",%@ %@", pName, tmpStr]];
     } copyAttriEntirely:NO];
     
     if (!tmpSql) return NO;
