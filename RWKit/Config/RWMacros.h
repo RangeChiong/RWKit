@@ -46,8 +46,8 @@
 #define Color_Hex(hexValue)   [UIColor colorWithRed:((float)((hexValue & 0xFF0000) >> 16)) / 255.0 green:((float)((hexValue & 0xFF00) >> 8)) / 255.0 blue:((float)(hexValue & 0xFF)) / 255.0 alpha:1.0]
 // RGB颜色
 #define Color_RGBA(r,g,b,a)   [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a]
-#define Color_RGB(r,g,b)      ColorRGBA(r,g,b,1.0f)
-#define Color_Random          ColorRGB(arc4random_uniform(256), arc4random_uniform(256), arc4random_uniform(256))
+#define Color_RGB(r,g,b)      Color_RGBA(r,g,b,1.0f)
+#define Color_Random          Color_RGB(arc4random_uniform(256), arc4random_uniform(256), arc4random_uniform(256))
 
 // 常用色
 #define Color_Main   [UIColor colorWithRed:0.2 green:0.592 blue:0.9451 alpha:1] // ColorHex(0x915cd2)
