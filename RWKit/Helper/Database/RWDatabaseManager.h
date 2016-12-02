@@ -15,19 +15,19 @@
 /**
  *  打开数据库
  *
- *  @param sqliteFilePath 数据库文件路径 如果没有 则创建
+ *  @param dbPath 数据库文件路径 如果没有 则创建
  *  @param tableDict      @{@"tableName" : Class<tableModel> cls}
  */
-- (void)open:(NSString *)sqliteFilePath dict:(NSDictionary<NSString *, Class> *)tableDict;
+- (void)open:(NSString *)dbPath dict:(NSDictionary<NSString *, Class> *)tableDict;
 
 /**
  *  打开数据库
  *
- *  @param sqliteFilePath 数据库文件路径 如果没有 则创建
+ *  @param dbPath 数据库文件路径 如果没有 则创建
  *  @param tableDict      @{@"tableName" : Class<tableModel> cls}
  *  @param done           操作完成后的回调 返回bool表示该操作是否成功
  */
-- (void)open:(NSString *)sqliteFilePath dict:(NSDictionary<NSString *, Class> *)tableDict done:(void(^)(BOOL success))done;
+- (void)open:(NSString *)dbPath dict:(NSDictionary<NSString *, Class> *)tableDict done:(void(^)(BOOL success))done;
 
 /**
  *  插入数据
@@ -60,6 +60,8 @@
  *  @param tableName 表名字
  */
 - (void)dropTable:(NSString *)tableName;
+
+- (void)dropTable:(NSString *)tableName done:(void(^)(BOOL success))done;
 
 /**
  *  删除数据

@@ -124,7 +124,7 @@
 - (int)intForColumnIndex:(int)columnIdx;
 - (long)longForColumn:(NSString *)columnName;
 - (long)longForColumnIndex:(int)columnIdx;
-- (long long int)longLongIntForColumn:(NSString *)columnName
+- (long long int)longLongIntForColumn:(NSString *)columnName;
 - (long long int)longLongIntForColumnIndex:(int)columnIdx;
 - (unsigned long long int)unsignedLongLongIntForColumn:(NSString *)columnName;
 - (unsigned long long int)unsignedLongLongIntForColumnIndex:(int)columnIdx;

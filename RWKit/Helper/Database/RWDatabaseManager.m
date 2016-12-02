@@ -43,19 +43,19 @@
 
 #pragma mark-  open data base
 
-- (void)open:(NSString *)sqliteFilePath dict:(NSDictionary *)tableDict {
-    [self open:sqliteFilePath dict:tableDict done:nil];
+- (void)open:(NSString *)dbPath dict:(NSDictionary *)tableDict {
+    [self open:dbPath dict:tableDict done:nil];
 }
 
-- (void)open:(NSString *)sqliteFilePath dict:(NSDictionary *)tableDict done:(void(^)(BOOL success))done {
+- (void)open:(NSString *)dbPath dict:(NSDictionary *)tableDict done:(void(^)(BOOL success))done {
     if (_database) {
         [_database close];
         _database = nil;
     }
     
     _dbQueue = dispatch_queue_create("com.rangerchiong.rwdatabase", DISPATCH_QUEUE_SERIAL);
-    DBLog(@"数据库文件路径 : %@", sqliteFilePath);
-    _database = [RWDatabase databaseWithPath:sqliteFilePath];
+    DBLog(@"数据库文件路径 : %@", dbPath);
+    _database = [RWDatabase databaseWithPath:dbPath];
     _database.shouldCacheStatements = YES;
     if (!_database.open) {
         !done ?: done(NO);
@@ -84,6 +84,27 @@
             });
         });
     }
+}
+
+#pragma mark-   删除表
+- (void)dropTable:(NSString *)tableName {
+    [self dropTable:tableName done:nil];
+}
+
+- (void)dropTable:(NSString *)tableName done:(void(^)(BOOL success))done {
+    
+    dispatch_async(_dbQueue, ^{
+        BOOL bRet = NO;
+        bRet = [self makeDropSql:tableName];
+        if (bRet) {
+            DBLog(@"删除 [ %@ ] 表成功", tableName);
+        } else {
+            DBLog(@"删除表失败 [%@]", tableName);
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            !done ?: done(bRet);
+        });
+    });
 }
 
 #pragma mark-   插入数据
@@ -235,6 +256,18 @@
     return result;
 }
 
+- (BOOL)makeDropSql:(NSString *)tableName {
+    BOOL result = [_database tableExists:tableName];
+    if (result) {
+        NSString *sql = [self dropTableStatement:tableName];
+        result = [_database executeUpdate:sql];
+    }
+    else {
+        DBLog(@"表[%@]不存在", tableName);
+    }
+    return result;
+}
+
 - (BOOL)makeInsertSql:(NSString *)tableName model:(id)aModel {
     /***    INSERT INTO tableName [insertKey] VALUES [insertValue]   ***/
     __block NSString *insertKey = @"" , *insertValue = @"";
@@ -299,6 +332,11 @@
 // craete sql
 - (NSString *)createStatement:(NSString *)tableName params:(NSString *)params {
     return [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (id Integer PRIMARY KEY %@)", tableName, params];
+}
+
+// drop table
+- (NSString *)dropTableStatement:(NSString *)tableName {
+    return [NSString stringWithFormat:@"DROP TABLE %@", tableName];
 }
 
 // insert sql
