@@ -19,6 +19,28 @@ static const void *RWButtonActionBlock = &RWButtonActionBlock;
 
 @implementation UIButton (Utils)
 
+- (void)rw_setNormalTitle:(NSString *)title {
+    [self rw_setNormalTitle:title titleColor:nil];
+}
+
+- (void)rw_setNormalTitle:(NSString *)title titleColor:(UIColor *)titleColor {
+    if (titleColor) {
+        [self setTitleColor:titleColor forState:UIControlStateNormal];
+    }
+    [self setTitle:title forState:UIControlStateNormal];
+}
+
+- (void)rw_setSelectedTitle:(NSString *)title {
+    [self rw_setSelectedTitle:title titleColor:nil];
+}
+
+- (void)rw_setSelectedTitle:(NSString *)title titleColor:(UIColor *)titleColor {
+    if (titleColor) {
+        [self setTitleColor:titleColor forState:UIControlStateSelected];
+    }
+    [self setTitle:title forState:UIControlStateSelected];
+}
+
 - (void)rw_addTarget:(id)target action:(SEL)action {
     NSAssert([target respondsToSelector:action], @"selector & action 必须存在");
 
@@ -26,7 +48,7 @@ static const void *RWButtonActionBlock = &RWButtonActionBlock;
 }
 
 - (void)rw_actionforTouchUpInsideUsingBlock:(void (^)(UIButton *sender))block {
-    [self rw_actionforTouchUpInsideUsingBlock:block];
+    [self rw_actionforControlEvents:UIControlEventTouchUpInside usingBlock:block];
 }
 
 - (void)rw_actionforControlEvents:(UIControlEvents)controlEvents usingBlock:(void (^)(UIButton *sender))block {
@@ -40,11 +62,11 @@ static const void *RWButtonActionBlock = &RWButtonActionBlock;
     self.actionBlock(sender);
 }
 
-- (void)setHandler:(void (^)(UITapGestureRecognizer *tap))handler {
+- (void)setActionBlock:(void (^)(UIButton *sender))handler {
     objc_setAssociatedObject(self, RWButtonActionBlock, handler, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
-- (void (^)(UITapGestureRecognizer *tap))handler {
+- (void (^)(UIButton *sender))actionBlock {
     return objc_getAssociatedObject(self, RWButtonActionBlock);
 }
 

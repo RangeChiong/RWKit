@@ -12,9 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIBarButtonItem (Utils)
 
-+ (instancetype)itemWithTarget:(id)target button:(void (^)(UIButton *sender))sender action:(SEL)action;
++ (instancetype)itemWithTarget:(id)target button:(void (^)(UIButton *sender))block action:(SEL)action;
 
-+ (instancetype)itemWithButton:(void (^)(UIButton *sender))sender action:(void (^)(UIButton *sender))action;
++ (instancetype)itemWithButton:(void (^)(UIButton *button))block action:(void (^)(UIButton *sender))action;
 
 @end
 

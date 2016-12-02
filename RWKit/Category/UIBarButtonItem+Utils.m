@@ -11,7 +11,7 @@
 
 @implementation UIBarButtonItem (Utils)
 
-+ (instancetype)itemWithTarget:(id)target button:(void (^)(UIButton *sender))sender action:(SEL)action {
++ (instancetype)itemWithTarget:(id)target button:(void (^)(UIButton *sender))block action:(SEL)action {
     UIButton *itemButton = [UIButton buttonWithType:UIButtonTypeCustom];
     !sender ?: sender(itemButton);
     [itemButton rw_addTarget:target action:action];
@@ -19,9 +19,9 @@
     return item;
 }
 
-+ (instancetype)itemWithButton:(void (^)(UIButton *sender))sender action:(void (^)(UIButton *sender))action {
++ (instancetype)itemWithButton:(void (^)(UIButton *button))block action:(void (^)(UIButton *sender))action {
     UIButton *itemButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    !sender ?: sender(itemButton);
+    !button ?: button(itemButton);
     [itemButton rw_actionforTouchUpInsideUsingBlock:action];
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:itemButton];
     return item;
