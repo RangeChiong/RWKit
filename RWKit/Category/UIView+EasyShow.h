@@ -8,28 +8,25 @@
 
 #import <UIKit/UIKit.h>
 
-#pragma mark-  EasyShow
-
 @interface UIView (EasyShow)
 
-@property (nonatomic, assign, getter = left,   setter = setLeft:)  CGFloat x;
-@property (nonatomic, assign, getter = top,    setter = setTop:)   CGFloat y;
-@property (nonatomic, assign, getter = right,  setter = setRight:) CGFloat maxX;
-@property (nonatomic, assign, getter = bottom, setter = setBottom:)CGFloat maxY;
-@property (nonatomic, assign) CGFloat centerX;
-@property (nonatomic, assign) CGFloat centerY;
-@property (nonatomic, assign) CGFloat width;
-@property (nonatomic, assign) CGFloat height;
-@property (nonatomic, assign) CGSize  size;
-@property (nonatomic, assign) CGPoint origin;
-@property (nonatomic, assign) CGFloat cornerRadius;     //!< 圆角半径
+@property (nonatomic, assign, getter = rw_left,   setter = setRw_left:)  CGFloat rw_x;
+@property (nonatomic, assign, getter = rw_top,    setter = setRw_top:)   CGFloat rw_y;
+@property (nonatomic, assign, getter = rw_right,  setter = setRw_right:) CGFloat rw_maxX;
+@property (nonatomic, assign, getter = rw_bottom, setter = setRw_bottom:)CGFloat rw_maxY;
+@property (nonatomic, assign) CGFloat rw_centerX;
+@property (nonatomic, assign) CGFloat rw_centerY;
+@property (nonatomic, assign) CGFloat rw_width;
+@property (nonatomic, assign) CGFloat rw_height;
+@property (nonatomic, assign) CGSize  rw_size;
+@property (nonatomic, assign) CGPoint rw_origin;
+@property (nonatomic, assign) CGFloat rw_cornerRadius;     //!< 圆角半径
 
-- (void)round;  //!< 圆形view
+- (void)rw_round;  //!< 圆形view
 
 @end
 
-#pragma mark-  XibHelper
-
+//---------------------------------- XibHelper ----------------------------------
 IB_DESIGNABLE
 @interface UIView (XibHelper)
 
