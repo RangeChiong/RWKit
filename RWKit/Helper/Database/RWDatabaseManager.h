@@ -29,6 +29,24 @@
  */
 - (void)open:(NSString *)dbPath dict:(NSDictionary<NSString *, Class> *)tableDict done:(void(^)(BOOL success))done;
 
+
+/**
+ *  删除表
+ *
+ *  @param tableName 表名字
+ */
+- (void)dropTable:(NSString *)tableName;
+
+
+/**
+ 删除表
+
+ @param tableName 表名字
+ @param done 操作完成后的回调 返回bool表示该操作是否成功
+ */
+- (void)dropTable:(NSString *)tableName done:(void(^)(BOOL success))done;
+
+
 /**
  *  插入数据
  *
@@ -53,15 +71,6 @@
  *  @param conditions 查询到需要删除数据的条件 @[NSDictionary1, NSDictionary2] 需要用到哪个条件去查询 就对model的哪个属性赋值
  */
 - (void)deleteData:(NSString *)tableName conditions:(NSArray<NSDictionary *> *)conditions;
-
-/**
- *  删除表
- *
- *  @param tableName 表名字
- */
-- (void)dropTable:(NSString *)tableName;
-
-- (void)dropTable:(NSString *)tableName done:(void(^)(BOOL success))done;
 
 /**
  *  删除数据

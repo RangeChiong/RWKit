@@ -21,6 +21,8 @@
     RWDatabase *_database;
 }
 
+@property (nonatomic, strong) NSDictionary *propertyTypeMap;
+
 @end
 
 @implementation RWDatabaseManager
@@ -43,20 +45,22 @@
 
 #pragma mark-  open data base
 
-- (void)open:(NSString *)dbPath dict:(NSDictionary *)tableDict {
+- (void)open:(NSString *)dbPath dict:(NSDictionary<NSString *, Class> *)tableDict {
     [self open:dbPath dict:tableDict done:nil];
 }
 
-- (void)open:(NSString *)dbPath dict:(NSDictionary *)tableDict done:(void(^)(BOOL success))done {
+- (void)open:(NSString *)dbPath dict:(NSDictionary<NSString *, Class> *)tableDict done:(void(^)(BOOL success))done {
     if (_database) {
         [_database close];
         _database = nil;
     }
     
-    _dbQueue = dispatch_queue_create("com.rangerchiong.rwdatabase", DISPATCH_QUEUE_SERIAL);
+    _dbQueue = dispatch_queue_create("com.rangerchiong.com.rwdatabase", DISPATCH_QUEUE_SERIAL);
+    
     DBLog(@"数据库文件路径 : %@", dbPath);
     _database = [RWDatabase databaseWithPath:dbPath];
     _database.shouldCacheStatements = YES;
+    
     if (!_database.open) {
         !done ?: done(NO);
         return;
@@ -67,7 +71,7 @@
             if (tableDict) {
                 [tableDict enumerateKeysAndObjectsUsingBlock:^(NSString *key, Class cls, BOOL *stop) {
                     if (![_database tableExists:key]) {
-                        if (![self makeCreateSql:key tableModel:cls]) {
+                        if (![self makeCreateSql:key tableModelClass:cls]) {
                             DBLog(@"数据库表格: [%@] 创建失败", key);
                             *stop = YES;
                             result = NO;
@@ -87,12 +91,12 @@
 }
 
 #pragma mark-   删除表
+
 - (void)dropTable:(NSString *)tableName {
     [self dropTable:tableName done:nil];
 }
 
 - (void)dropTable:(NSString *)tableName done:(void(^)(BOOL success))done {
-    
     dispatch_async(_dbQueue, ^{
         BOOL bRet = NO;
         bRet = [self makeDropSql:tableName];
@@ -109,20 +113,20 @@
 
 #pragma mark-   插入数据
 
-- (void)insert:(NSString *)tableName models:(NSArray *)modelArr {
+- (void)insert:(NSString *)tableName models:(NSArray<NSDictionary *> *)modelArr {
     [self insert:tableName models:modelArr done:nil];
 }
 
-- (void)insert:(NSString *)tableName models:(NSArray *)modelArr done:(void(^)(BOOL success))done {
+- (void)insert:(NSString *)tableName models:(NSArray<NSDictionary *> *)modelArr done:(void(^)(BOOL success))done {
     
     dispatch_async(_dbQueue, ^{
         [_database beginTransaction];
         BOOL bRet = NO;
         @try {
-            for (id model in modelArr) {
-                bRet = [self makeInsertSql:tableName model:model];
+            for (NSDictionary *keyValues in modelArr) {
+                bRet = [self makeInsertSql:tableName keyValues:keyValues];
                 if (!bRet) {
-                    DBLog(@"向[%@] 表中插入 [%@] 的数据 失败", tableName, [model class]);
+                    DBLog(@"向[%@] 表中插入 [%@] 的数据 失败", tableName, keyValues);
                     break;
                 }
             }
@@ -145,13 +149,11 @@
     });
 }
 
-#pragma mark-   删除数据
-
-- (void)deleteData:(NSString *)tableName conditions:(NSArray *)conditions {
+- (void)deleteData:(NSString *)tableName conditions:(NSArray<NSDictionary *> *)conditions {
     [self deleteData:tableName conditions:conditions done:nil];
 }
 
-- (void)deleteData:(NSString *)tableName conditions:(NSArray *)conditions done:(void(^)(BOOL success))done {
+- (void)deleteData:(NSString *)tableName conditions:(NSArray<NSDictionary *> *)conditions done:(void(^)(BOOL success))done {
     dispatch_async(_dbQueue, ^{
         [_database beginTransaction];
         BOOL bRet = NO;
@@ -179,7 +181,6 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             !done ?: done(bRet);
         });
-        
     });
 }
 
@@ -217,7 +218,6 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             !done ?: done(bRet);
         });
-        
     });
 }
 
@@ -239,16 +239,48 @@
     });
 }
 
+// 根据条件查找表中数据
+- (void)query:(NSString *)tableName condition:(NSDictionary *)condition perRow:(nullable void(^)(NSDictionary *dict))block done:(dispatch_block_t)done {
+    dispatch_async(_dbQueue, ^{
+        RWResultSet *result = [self makeQuerySql:tableName condition:condition];
+        while ([result next]) {
+            NSDictionary *dict = [result resultDictionary];
+            !block ?: block(dict);
+        }
+        [result close];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            !done ?: done();
+        });
+    });
+}
+
+// 按照传入的字段指定顺序查找表中数据
+- (void)query:(NSString *)tableName condition:(NSArray<NSString *> *)condition isOrder:(BOOL)isOrder perRow:(void(^)(NSDictionary *dict))block done:(dispatch_block_t)done {
+    dispatch_async(_dbQueue, ^{
+        RWResultSet *result = [self makeQuerySql:tableName condition:condition isOrder:isOrder];
+        while ([result next]) {
+            NSDictionary *dict = [result resultDictionary];
+            !block ?: block(dict);
+        }
+        [result close];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            !done ?: done();
+        });
+    });
+}
+
 #pragma mark-   make sql statements methods
 
-- (BOOL)makeCreateSql:(NSString *)tableName tableModel:(Class)cls {
+- (BOOL)makeCreateSql:(NSString *)tableName tableModelClass:(Class)cls {
     __block NSString *tmpSql = @"";
     [[CocoaCracker handle:cls] copyPropertyInfo:^(NSString *pName, NSString *pType) {
         NSString *tmpStr = [self typeNameWithPropertyAttri:pType];
-        tmpSql = [tmpSql stringByAppendingString:[NSString stringWithFormat:@",%@ %@", pName, tmpStr]];
+        tmpSql = [tmpSql stringByAppendingString:[NSString stringWithFormat:@" ,%@ %@", pName, tmpStr]];
     } copyAttriEntirely:NO];
     
-    if (!tmpSql) return NO;
+    if (!tmpSql.length) return NO;
     
     NSString *sql = [self createStatement:tableName params:tmpSql];
     BOOL result = [_database executeUpdate:sql];
@@ -256,27 +288,13 @@
     return result;
 }
 
-- (BOOL)makeDropSql:(NSString *)tableName {
-    BOOL result = [_database tableExists:tableName];
-    if (result) {
-        NSString *sql = [self dropTableStatement:tableName];
-        result = [_database executeUpdate:sql];
-    }
-    else {
-        DBLog(@"表[%@]不存在", tableName);
-    }
-    return result;
-}
-
-- (BOOL)makeInsertSql:(NSString *)tableName model:(id)aModel {
+- (BOOL)makeInsertSql:(NSString *)tableName keyValues:(NSDictionary *)keyValues {
     /***    INSERT INTO tableName [insertKey] VALUES [insertValue]   ***/
     __block NSString *insertKey = @"" , *insertValue = @"";
     
-    NSMutableArray *pNamesArray = @[].mutableCopy;
-    [[CocoaCracker handle:[aModel class]] copyPropertyName:^(NSString *pName) {
-        insertKey = [insertKey stringByAppendingString:[NSString stringWithFormat:@",%@ ", pName]];
-        insertValue = [insertValue stringByAppendingString:[NSString stringWithFormat:@",:%@ ", pName]];
-        [pNamesArray addObject:pName];
+    [keyValues enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL * stop) {
+        insertKey = [insertKey stringByAppendingString:[NSString stringWithFormat:@",%@ ", key]];
+        insertValue = [insertValue stringByAppendingString:[NSString stringWithFormat:@",:%@ ", key]];
     }];
     
     // 结束遍历时  将开头多余的","删掉
@@ -286,8 +304,7 @@
     if (!insertValue.length) return NO;
     insertValue = [insertValue substringFromIndex:1];
     NSString *sql = [self insertStatement:tableName key:insertKey value:insertValue];
-    NSDictionary *paramDict = [aModel dictionaryWithValuesForKeys:pNamesArray];
-    BOOL bRet = [_database executeUpdate:sql withParameterDictionary:paramDict];
+    BOOL bRet = [_database executeUpdate:sql withParameterDictionary:keyValues];
     
     return bRet;
 }
@@ -309,14 +326,26 @@
     conditionStr = [conditionStr substringFromIndex:5];
     
     NSString *sql = [self updateStatement:tableName params:paramStr condition:conditionStr];
-    BOOL bRet = [_database executeUpdate:sql];
+    BOOL bRet = [_database executeUpdate:sql ];
     return bRet;
+}
+
+- (BOOL)makeDropSql:(NSString *)tableName {
+    BOOL result = [_database tableExists:tableName];
+    if (result) {
+        NSString *sql = [self dropTableStatement:tableName];
+        result = [_database executeUpdate:sql];
+    }
+    else {
+        DBLog(@"表[%@]不存在", tableName);
+    }
+    return result;
 }
 
 - (BOOL)makeDeleteSql:(NSString *)tableName condition:(NSDictionary *)condition {
     __block NSString *keyValue = @"";
     [condition enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL * stop) {
-        keyValue = [keyValue stringByAppendingString:[NSString stringWithFormat:@" AND %@ = %@",key, value]];
+        keyValue = [keyValue stringByAppendingString:[NSString stringWithFormat:@" AND %@ = '%@'",key, value]];
     }];
     
     if (!keyValue.length) return NO;
@@ -327,16 +356,37 @@
     return result;
 }
 
+- (RWResultSet *)makeQuerySql:(NSString *)tableName condition:(NSDictionary *)condition {
+    __block NSString *keyValue = @"";
+    [condition enumerateKeysAndObjectsUsingBlock:^(NSString *key, NSString *value, BOOL * stop) {
+        keyValue = [keyValue stringByAppendingString:[NSString stringWithFormat:@" AND %@ = '%@'",key, value]];
+    }];
+    
+    if (!keyValue.length) return nil;
+    keyValue = [keyValue substringFromIndex:5];
+    
+    NSString *sql = [self queryStatement:tableName condition:keyValue];
+    DBLog(@"%@", sql);
+    return [_database executeQuery:sql];
+}
+
+- (RWResultSet *)makeQuerySql:(NSString *)tableName condition:(NSArray *)condition isOrder:(BOOL)isOrder {
+    NSString *conditionStr = @"";
+    for (NSString *key in condition) {
+        conditionStr = [conditionStr stringByAppendingString:[NSString stringWithFormat:@",%@ %@",key, isOrder ? @"DESC" : @"ASC"]];
+    }
+    if (!conditionStr.length) return nil;
+    conditionStr = [conditionStr substringFromIndex:1];
+    NSString *sql = [self queryOrderlyStatement:tableName condition:conditionStr];
+    DBLog(@"%@", sql);
+    return [_database executeQuery:sql];
+}
+
 #pragma mark-   sql statements
 
 // craete sql
 - (NSString *)createStatement:(NSString *)tableName params:(NSString *)params {
     return [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (id Integer PRIMARY KEY %@)", tableName, params];
-}
-
-// drop table
-- (NSString *)dropTableStatement:(NSString *)tableName {
-    return [NSString stringWithFormat:@"DROP TABLE %@", tableName];
 }
 
 // insert sql
@@ -349,8 +399,8 @@
     return [NSString stringWithFormat:@"DELETE FROM %@ WHERE %@", tableName, condition];
 }
 
-- (NSString *)deleteTableStatement:(NSString *)tableName {
-    return [NSString stringWithFormat:@"DELETE FROM %@", tableName];
+- (NSString *)dropTableStatement:(NSString *)tableName {
+    return [NSString stringWithFormat:@"DROP TABLE %@", tableName];
 }
 
 // update
@@ -392,22 +442,22 @@
 }
 
 - (NSDictionary *)propertyTypeMap {
-    return @{
-             @"NSString" : @"text",
-             @"NSDate" : @"text",
-             @"NSData" : @"blob",
-             @"NSNumber" : @"integer",
-             @"q" : @"integer",
-             @"Q" : @"integer",
-             @"i" : @"integer",
-             @"I" : @"integer",
-             @"B" : @"integer",
-             @"c" : @"integer",
-             @"S" : @"integer",
-             @"s" : @"integer",
-             @"d" : @"real",
-             @"f" : @"real",
-             };
+    return _propertyTypeMap ? _propertyTypeMap : @{
+                                                 @"NSString" : @"text",
+                                                 @"NSDate" : @"text",
+                                                 @"NSData" : @"blob",
+                                                 @"NSNumber" : @"integer",
+                                                 @"q" : @"integer",
+                                                 @"Q" : @"integer",
+                                                 @"i" : @"integer",
+                                                 @"I" : @"integer",
+                                                 @"B" : @"integer",
+                                                 @"c" : @"integer",
+                                                 @"S" : @"integer",
+                                                 @"s" : @"integer",
+                                                 @"d" : @"real",
+                                                 @"f" : @"real"
+                                                };
 }
 
 @end
