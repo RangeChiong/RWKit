@@ -18,7 +18,7 @@
 
 + (instancetype)rw_scheduleTimerWithTimeInterval:(NSTimeInterval)ti
                                          repeats:(BOOL)rep
-                                            mode:(NSString *)mode
+                                            mode:(NSRunLoopMode)mode
                                       usingBlock:(void (^)(NSTimer *timer))block {
     NSTimer *timer = [self rw_timerWithTimeInterval:ti repeats:rep usingBlock:block];
     [NSRunLoop.currentRunLoop addTimer:timer forMode:mode];

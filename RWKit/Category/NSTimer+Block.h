@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 /** 开启一个定时器 */
 + (instancetype)rw_scheduleTimerWithTimeInterval:(NSTimeInterval)ti
                                          repeats:(BOOL)rep
-                                            mode:(NSString *)mode
+                                            mode:(NSRunLoopMode)mode
                                       usingBlock:(void (^)(NSTimer *timer))block;
 
 /*!
