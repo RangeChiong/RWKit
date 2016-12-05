@@ -8,15 +8,15 @@
 
 #import "RWKeyChain.h"
 
-NSString *const kRWKeyChainErrorDomain = @"com.ranger.rwkeychain";
-NSString *const kRWKeyChainAccountKey = @"com.ranger.acct";
-NSString *const kRWKeyChainUUIDKey = @"com.ranger.UUID";
-NSString *const kRWKeyChainCreatedAtKey = @"com.ranger.cdat";
-NSString *const kRWKeyChainClassKey = @"com.ranger.cls";
-NSString *const kRWKeyChainDescriptionKey = @"desc";
-NSString *const kRWKeyChainLabelKey = @"com.ranger.labl";
-NSString *const kRWKeyChainLastModifiedKey = @"com.ranger.mdat";
-NSString *const kRWKeyChainWhereKey = @"com.ranger.svce";
+NSString *const kRWKeyChain_ErrorDomain = @"com.ranger.rwkeychain";
+NSString *const kRWKeyChain_AccountKey = @"com.ranger.acct";
+NSString *const kRWKeyChain_UUIDKey = @"com.ranger.UUID";
+NSString *const kRWKeyChain_CreatedAtKey = @"com.ranger.cdat";
+NSString *const kRWKeyChain_ClassKey = @"com.ranger.cls";
+NSString *const kRWKeyChain_DescriptionKey = @"desc";
+NSString *const kRWKeyChain_LabelKey = @"com.ranger.labl";
+NSString *const kRWKeyChain_LastModifiedKey = @"com.ranger.mdat";
+NSString *const kRWKeyChain_WhereKey = @"com.ranger.svce";
 
 @implementation RWKeyChain
 
@@ -46,7 +46,7 @@ NSString *const kRWKeyChainWhereKey = @"com.ranger.svce";
     CFTypeRef result = NULL;
     status = SecItemCopyMatching((__bridge CFDictionaryRef)query, &result);
     if (status != noErr && error != NULL) {
-        *error = [NSError errorWithDomain:kRWKeyChainErrorDomain code:status userInfo:nil];
+        *error = [NSError errorWithDomain:kRWKeyChain_ErrorDomain code:status userInfo:nil];
         return nil;
     }
     
@@ -77,7 +77,7 @@ NSString *const kRWKeyChainWhereKey = @"com.ranger.svce";
     OSStatus status = RWKeyChainError_BadArguments;
     if (!service || !account) {
         if (error) {
-            *error = [NSError errorWithDomain:kRWKeyChainErrorDomain code:status userInfo:nil];
+            *error = [NSError errorWithDomain:kRWKeyChain_ErrorDomain code:status userInfo:nil];
         }
         return nil;
     }
@@ -89,7 +89,7 @@ NSString *const kRWKeyChainWhereKey = @"com.ranger.svce";
     status = SecItemCopyMatching((__bridge CFDictionaryRef)query, &result);
     
     if (status != noErr && error != NULL) {
-        *error = [NSError errorWithDomain:kRWKeyChainErrorDomain code:status userInfo:nil];
+        *error = [NSError errorWithDomain:kRWKeyChain_ErrorDomain code:status userInfo:nil];
         return nil;
     }
     return (__bridge_transfer NSData *)result;
@@ -109,7 +109,7 @@ NSString *const kRWKeyChainWhereKey = @"com.ranger.svce";
         status = SecItemDelete((__bridge CFDictionaryRef)query);
     }
     if (status != noErr && error != NULL) {
-        *error = [NSError errorWithDomain:kRWKeyChainErrorDomain code:status userInfo:nil];
+        *error = [NSError errorWithDomain:kRWKeyChain_ErrorDomain code:status userInfo:nil];
     }
     return (status == noErr);
     
@@ -141,7 +141,7 @@ NSString *const kRWKeyChainWhereKey = @"com.ranger.svce";
         status = SecItemAdd((__bridge CFDictionaryRef)query, NULL);
     }
     if (status != noErr && error != NULL) {
-        *error = [NSError errorWithDomain:kRWKeyChainErrorDomain code:status userInfo:nil];
+        *error = [NSError errorWithDomain:kRWKeyChain_ErrorDomain code:status userInfo:nil];
     }
     return (status == noErr);
 }

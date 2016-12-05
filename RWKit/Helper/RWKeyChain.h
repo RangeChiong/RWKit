@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM(NSInteger, RWKeyChainErrorCode) {
-    RWKeyChainErrorNone = noErr,
+    RWKeyChainError_None = noErr,
     RWKeyChainError_BadArguments = -1001,
     RWKeyChainError_NoPassword = -1002,
     RWKeyChainError_InvalidParameter = errSecParam,
@@ -22,15 +22,15 @@ typedef NS_ENUM(NSInteger, RWKeyChainErrorCode) {
     RWKeyChainError_FailedToDecode = errSecDecode
 };
 
-extern NSString *const kSSKeychainErrorDomain;
-extern NSString *const kSSKeychainAccountKey;
-extern NSString *const kRWKeyChainUUIDKey;
-extern NSString *const kSSKeychainCreatedAtKey;
-extern NSString *const kSSKeychainClassKey;
-extern NSString *const kSSKeychainDescriptionKey;
-extern NSString *const kSSKeychainLabelKey;
-extern NSString *const kSSKeychainLastModifiedKey;
-extern NSString *const kSSKeychainWhereKey;
+extern NSString *const kRWKeychain_ErrorDomain;
+extern NSString *const kRWKeychain_AccountKey;
+extern NSString *const kRWKeyChain_UUIDKey;
+extern NSString *const kRWKeychain_CreatedAtKey;
+extern NSString *const kRWKeychain_ClassKey;
+extern NSString *const kRWKeychain_DescriptionKey;
+extern NSString *const kRWKeychain_LabelKey;
+extern NSString *const kRWKeychain_LastModifiedKey;
+extern NSString *const kRWKeychain_WhereKey;
 
 @interface RWKeyChain : NSObject
 

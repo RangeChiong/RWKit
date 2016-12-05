@@ -11,11 +11,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NS_ENUM(NSInteger, RequestNormalType) {
-    RequestNormalType_Get = 0,
-    RequestNormalType_Post,
-    RequestNormalType_Put,
-    RequestNormalType_Delete
+typedef NS_ENUM(NSInteger, RWRequestNormalType) {
+    RWRequestNormalType_Get = 0,
+    RWRequestNormalType_Post,
+    RWRequestNormalType_Put,
+    RWRequestNormalType_Delete
 };
 
 @interface RWRequest : NSObject
@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger, RequestNormalType) {
 + (instancetype)shareRequest;
 
 /*!
- *  设置请求超时时间  默认20s
+ *  设置请求超时时间  默认10s
  */
 - (void)setTimeoutInterval:(NSTimeInterval)timeoutInterval;
 
@@ -31,7 +31,7 @@ typedef NS_ENUM(NSInteger, RequestNormalType) {
  *  根据type请求
  */
 - (void)request:(NSString *)url
-           type:(RequestNormalType)type
+           type:(RWRequestNormalType)type
          params:(NSDictionary *)params
         success:(void (^)(NSDictionary *dict))success
         failure:(nullable void (^)(NSError *error))failure;

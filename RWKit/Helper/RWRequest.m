@@ -10,7 +10,7 @@
 
 @implementation NSData (utils)
 
-- (NSDictionary *)parseJson {
+- (NSDictionary *)rw_parseJson {
     NSError *error;
     NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:self
                                                          options:NSJSONReadingMutableContainers | NSJSONReadingMutableLeaves
@@ -20,7 +20,7 @@
 
 @end
 
-static NSString *const TimeOutKeyPath = @"timeoutInterval";
+static NSString *const kRWRequest_TimeOutKeyPath = @"timeoutInterval";
 
 @interface RWRequest () {
     AFHTTPSessionManager *_requestManager;
@@ -45,22 +45,22 @@ static NSString *const TimeOutKeyPath = @"timeoutInterval";
         _requestManager = [AFHTTPSessionManager manager];
         _requestManager.requestSerializer = [AFHTTPRequestSerializer serializer];
         _requestManager.responseSerializer = [AFHTTPResponseSerializer serializer];
-        [self setTimeoutInterval:20.0];
+        [self setTimeoutInterval:10.0];
     }
     return self;
 }
 
 - (void)setTimeoutInterval:(NSTimeInterval)timeoutInterval {
-    [_requestManager.requestSerializer willChangeValueForKey:TimeOutKeyPath];
+    [_requestManager.requestSerializer willChangeValueForKey:kRWRequest_TimeOutKeyPath];
     _requestManager.requestSerializer.timeoutInterval = timeoutInterval;
-    [_requestManager.requestSerializer didChangeValueForKey:TimeOutKeyPath];
+    [_requestManager.requestSerializer didChangeValueForKey:kRWRequest_TimeOutKeyPath];
 
 }
 
 #pragma mark-   request
 
 - (void)request:(NSString *)url
-           type:(RequestNormalType)type
+           type:(RWRequestNormalType)type
          params:(NSDictionary *)params
         success:(void (^)(NSDictionary *dict))success
         failure:(void (^)(NSError *error))failure {
@@ -68,7 +68,7 @@ static NSString *const TimeOutKeyPath = @"timeoutInterval";
     // 请求成功的回调
     void (^successfulRequest) (NSURLSessionDataTask *, id) = ^(NSURLSessionDataTask *task, id responseObject) {
         if (success) {
-            NSDictionary *dict = [responseObject parseJson];
+            NSDictionary *dict = [responseObject rw_parseJson];
             success(dict);
         }
     };
@@ -79,7 +79,7 @@ static NSString *const TimeOutKeyPath = @"timeoutInterval";
     };
     
     switch (type) {
-        case RequestNormalType_Get: {
+        case RWRequestNormalType_Get: {
             [_requestManager GET:url
                       parameters:params
                         progress:nil
@@ -88,7 +88,7 @@ static NSString *const TimeOutKeyPath = @"timeoutInterval";
         }
             break;
             
-        case RequestNormalType_Post: {
+        case RWRequestNormalType_Post: {
             [_requestManager POST:url
                        parameters:params
                          progress:nil
@@ -97,7 +97,7 @@ static NSString *const TimeOutKeyPath = @"timeoutInterval";
         }
             break;
             
-        case RequestNormalType_Put: {
+        case RWRequestNormalType_Put: {
             [_requestManager PUT:url
                       parameters:params
                          success:successfulRequest
@@ -105,7 +105,7 @@ static NSString *const TimeOutKeyPath = @"timeoutInterval";
         }
             break;
             
-        case RequestNormalType_Delete: {
+        case RWRequestNormalType_Delete: {
             [_requestManager DELETE:url
                          parameters:params
                             success:successfulRequest
@@ -130,7 +130,7 @@ static NSString *const TimeOutKeyPath = @"timeoutInterval";
          progress:nil
           success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
               if (success) {
-                  NSDictionary *dict = [responseObject parseJson];
+                  NSDictionary *dict = [responseObject rw_parseJson];
                   success(dict);
               }
     }
