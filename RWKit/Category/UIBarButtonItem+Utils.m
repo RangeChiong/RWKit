@@ -13,7 +13,7 @@
 
 + (instancetype)itemWithTarget:(id)target button:(void (^)(UIButton *sender))block action:(SEL)action {
     UIButton *itemButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    !sender ?: sender(itemButton);
+    !block ?: block(itemButton);
     [itemButton rw_addTarget:target action:action];
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:itemButton];
     return item;
@@ -21,7 +21,7 @@
 
 + (instancetype)itemWithButton:(void (^)(UIButton *button))block action:(void (^)(UIButton *sender))action {
     UIButton *itemButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    !button ?: button(itemButton);
+    !block ?: block(itemButton);
     [itemButton rw_actionforTouchUpInsideUsingBlock:action];
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:itemButton];
     return item;

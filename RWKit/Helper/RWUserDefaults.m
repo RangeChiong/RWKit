@@ -50,7 +50,7 @@ Make_Getter_Method(type, getStatement)
 //    Method setter = methods[0];
 //    Method getter = methods[1];
 
-NS_INLINE void rwud_typeEncodings(NSUserDefaults *userDefault, Class cls, const char *name, const char *attribute) {
+NS_INLINE void __typeEncodings(NSUserDefaults *userDefault, Class cls, const char *name, const char *attribute) {
     
     char *ch_setter;
     asprintf(&ch_setter, "set%c%s:", toupper(name[0]), name + 1);
@@ -163,7 +163,7 @@ NS_INLINE void rwud_typeEncodings(NSUserDefaults *userDefault, Class cls, const 
     [[CocoaCracker handle:aClass] copyPropertyList:^(objc_property_t  _Nonnull property) {
         const char *name = property_getName(property);
         const char *attributes = property_copyAttributeValue(property, "T");
-        rwud_typeEncodings(_userDefault, aClass, name, attributes);
+        __typeEncodings(_userDefault, aClass, name, attributes);
         
 //        Method *methods = rwud_setterGetterMethods(aClass, name);
 //        rwud_typeEncodings(_userDefault, methods, attributes);
