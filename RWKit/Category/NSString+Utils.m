@@ -129,8 +129,8 @@
     return [self rw_objectFromMainBundleForKey:@"CFBundleShortVersionString"];
 }
 
-+ (NSInteger)rw_buildVersion {
-    return [self rw_objectFromMainBundleForKey:@"CFBundleVersion"].integerValue;
++ (NSString *)rw_buildVersion {
+    return [self rw_objectFromMainBundleForKey:@"CFBundleVersion"];
 }
 
 + (NSString *)rw_identifier {

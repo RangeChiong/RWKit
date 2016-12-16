@@ -64,7 +64,7 @@
 + (NSString *)rw_shortVersion;
 
 /** 获取当前工程的内部版本 */
-+ (NSInteger)rw_buildVersion;
++ (NSString *)rw_buildVersion;
 
 /** 获取当前工程的唯一标识 */
 + (NSString *)rw_identifier;
