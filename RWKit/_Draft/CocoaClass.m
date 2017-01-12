@@ -8,6 +8,108 @@
 
 #import "CocoaClass.h"
 
+#pragma mark-  functions
+
+CCInstanceEncodingType CCGetInstanceEncodingType(const char *typeEncoding) {
+    char *type = (char *)typeEncoding;
+    if (!type) return CCInstanceEncodingType_Unknown;
+    size_t len = strlen(type);
+    if (len == 0) return CCInstanceEncodingType_Unknown;
+    
+    CCInstanceEncodingType qualifier = 0;
+    bool prefix = true;
+    while (prefix) {
+        switch (*type) {
+            case 'r': {
+                qualifier |= CCInstanceEncodingType_QualifierConst;
+                type++;
+            } break;
+            case 'n': {
+                qualifier |= CCInstanceEncodingType_QualifierIn;
+                type++;
+            } break;
+            case 'N': {
+                qualifier |= CCInstanceEncodingType_QualifierInout;
+                type++;
+            } break;
+            case 'o': {
+                qualifier |= CCInstanceEncodingType_QualifierOut;
+                type++;
+            } break;
+            case 'O': {
+                qualifier |= CCInstanceEncodingType_QualifierBycopy;
+                type++;
+            } break;
+            case 'R': {
+                qualifier |= CCInstanceEncodingType_QualifierByref;
+                type++;
+            } break;
+            case 'V': {
+                qualifier |= CCInstanceEncodingType_QualifierOneway;
+                type++;
+            } break;
+            default: { prefix = false; } break;
+        }
+    }
+    
+    len = strlen(type);
+    if (len == 0) return CCInstanceEncodingType_Unknown | qualifier;
+    
+    switch (*type) {
+        case 'v': return CCInstanceEncodingType_Void | qualifier;
+        case 'B': return CCInstanceEncodingType_Bool | qualifier;
+        case 'c': return CCInstanceEncodingType_Int8 | qualifier;
+        case 'C': return CCInstanceEncodingType_UInt8 | qualifier;
+        case 's': return CCInstanceEncodingType_Int16 | qualifier;
+        case 'S': return CCInstanceEncodingType_UInt16 | qualifier;
+        case 'i': return CCInstanceEncodingType_Int32 | qualifier;
+        case 'I': return CCInstanceEncodingType_UInt32 | qualifier;
+        case 'l': return CCInstanceEncodingType_Int32 | qualifier;
+        case 'L': return CCInstanceEncodingType_UInt32 | qualifier;
+        case 'q': return CCInstanceEncodingType_Int64 | qualifier;
+        case 'Q': return CCInstanceEncodingType_UInt64 | qualifier;
+        case 'f': return CCInstanceEncodingType_Float | qualifier;
+        case 'd': return CCInstanceEncodingType_Double | qualifier;
+        case 'D': return CCInstanceEncodingType_LongDouble | qualifier;
+        case '#': return CCInstanceEncodingType_Class | qualifier;
+        case ':': return CCInstanceEncodingType_SEL | qualifier;
+        case '*': return CCInstanceEncodingType_CString | qualifier;
+        case '^': return CCInstanceEncodingType_Pointer | qualifier;
+        case '[': return CCInstanceEncodingType_CArray | qualifier;
+        case '(': return CCInstanceEncodingType_Union | qualifier;
+        case '{': return CCInstanceEncodingType_Struct | qualifier;
+        case '@': {
+            if (len == 2 && *(type + 1) == '?')
+                return CCInstanceEncodingType_Block | qualifier;
+            else
+                return CCInstanceEncodingType_Object | qualifier;
+        }
+        default: return CCInstanceEncodingType_Unknown | qualifier;
+    }
+}
+
+CCClassEncodingType CCGetClassEncodingType (Class cls) {
+    if (!cls) return CCClassEncodingType_Unknown;
+    if ([cls isSubclassOfClass:[NSMutableString class]]) return CCClassEncodingType_NSMutableString;
+    if ([cls isSubclassOfClass:[NSString class]]) return CCClassEncodingType_NSString;
+    if ([cls isSubclassOfClass:[NSDecimalNumber class]]) return CCClassEncodingType_NSDecimalNumber;
+    if ([cls isSubclassOfClass:[NSNumber class]]) return CCClassEncodingType_NSNumber;
+    if ([cls isSubclassOfClass:[NSValue class]]) return CCClassEncodingType_NSValue;
+    if ([cls isSubclassOfClass:[NSMutableData class]]) return CCClassEncodingType_NSMutableData;
+    if ([cls isSubclassOfClass:[NSData class]]) return CCClassEncodingType_NSData;
+    if ([cls isSubclassOfClass:[NSDate class]]) return CCClassEncodingType_NSDate;
+    if ([cls isSubclassOfClass:[NSURL class]]) return CCClassEncodingType_NSURL;
+    if ([cls isSubclassOfClass:[NSMutableArray class]]) return CCClassEncodingType_NSMutableArray;
+    if ([cls isSubclassOfClass:[NSArray class]]) return CCClassEncodingType_NSArray;
+    if ([cls isSubclassOfClass:[NSMutableDictionary class]]) return CCClassEncodingType_NSMutableDictionary;
+    if ([cls isSubclassOfClass:[NSDictionary class]]) return CCClassEncodingType_NSDictionary;
+    if ([cls isSubclassOfClass:[NSMutableSet class]]) return CCClassEncodingType_NSMutableSet;
+    if ([cls isSubclassOfClass:[NSSet class]]) return CCClassEncodingType_NSSet;
+    return CCClassEncodingType_Unknown;
+}
+
+#pragma mark-  CocoaClass
+
 @implementation CocoaClass {
     BOOL _needUpdate;
 }
@@ -17,8 +119,7 @@
 @synthesize ivarInfos = _ivarInfos;
 
 + (instancetype)resolve:(Class)cls {
-    NSParameterAssert(cls);
-    
+
     static CFMutableDictionaryRef classCache;
     static CFMutableDictionaryRef metaCache;
     static dispatch_once_t onceToken;
@@ -51,7 +152,7 @@
 }
 
 - (instancetype)initWithClass:(Class)cls {
-    NSParameterAssert(cls);
+    if (!cls) return nil;
 
     self = [super init];
     if (self) {
@@ -157,11 +258,11 @@
     NSMutableDictionary *propertyInfos = [NSMutableDictionary new];
     _propertyInfos = propertyInfos;
     [self copyPropertyList:^(objc_property_t  _Nonnull property) {
-        CocoaProperty *info = [[CocoaProperty alloc] initWithProperty:property];
+        CocoaProperty *info = [CocoaProperty resolve:property];
         if (info.name) propertyInfos[info.name] = info;
     }];
 
-    return _propertyInfos ?: @{};
+    return _propertyInfos;
 }
 
 - (NSDictionary<NSString *,CocoaMethod *> *)methodInfos {
@@ -169,12 +270,11 @@
     
     NSMutableDictionary *methodInfos = [NSMutableDictionary new];
     _methodInfos = methodInfos;
-    [self copyPropertyList:^(objc_property_t  _Nonnull property) {
-        CocoaProperty *info = [[CocoaProperty alloc] initWithProperty:property];
+    [self copyMethodList:^(Method  _Nonnull method) {
+        CocoaMethod *info = [CocoaMethod resolve:method];
         if (info.name) methodInfos[info.name] = info;
     }];
-    
-    return _methodInfos ?: @{};
+    return _methodInfos;
 }
 
 - (NSDictionary<NSString *,CocoaIvar *> *)ivarInfos {
@@ -182,12 +282,11 @@
     
     NSMutableDictionary *ivarInfos = [NSMutableDictionary new];
     _ivarInfos = ivarInfos;
-    [self copyPropertyList:^(objc_property_t  _Nonnull property) {
-        CocoaProperty *info = [[CocoaProperty alloc] initWithProperty:property];
+    [self copyIvarList:^(Ivar  _Nonnull ivar) {
+        CocoaIvar *info = [CocoaIvar resolve:ivar];
         if (info.name) ivarInfos[info.name] = info;
     }];
-    
-    return _ivarInfos ?: @{};
+    return _ivarInfos;
 }
 
 @end
@@ -196,84 +295,6 @@
 #pragma mark-  CocoaProperty
 
 @implementation CocoaProperty
-
-CPEncodingType CPGetEncodingType(const char *typeEncoding) {
-    char *type = (char *)typeEncoding;
-    if (!type) return CPEncodingType_Unknown;
-    size_t len = strlen(type);
-    if (len == 0) return CPEncodingType_Unknown;
-    
-    CPEncodingType qualifier = 0;
-    bool prefix = true;
-    while (prefix) {
-        switch (*type) {
-            case 'r': {
-                qualifier |= CPEncodingType_QualifierConst;
-                type++;
-            } break;
-            case 'n': {
-                qualifier |= CPEncodingType_QualifierIn;
-                type++;
-            } break;
-            case 'N': {
-                qualifier |= CPEncodingType_QualifierInout;
-                type++;
-            } break;
-            case 'o': {
-                qualifier |= CPEncodingType_QualifierOut;
-                type++;
-            } break;
-            case 'O': {
-                qualifier |= CPEncodingType_QualifierBycopy;
-                type++;
-            } break;
-            case 'R': {
-                qualifier |= CPEncodingType_QualifierByref;
-                type++;
-            } break;
-            case 'V': {
-                qualifier |= CPEncodingType_QualifierOneway;
-                type++;
-            } break;
-            default: { prefix = false; } break;
-        }
-    }
-    
-    len = strlen(type);
-    if (len == 0) return CPEncodingType_Unknown | qualifier;
-    
-    switch (*type) {
-        case 'v': return CPEncodingType_Void | qualifier;
-        case 'B': return CPEncodingType_Bool | qualifier;
-        case 'c': return CPEncodingType_Int8 | qualifier;
-        case 'C': return CPEncodingType_UInt8 | qualifier;
-        case 's': return CPEncodingType_Int16 | qualifier;
-        case 'S': return CPEncodingType_UInt16 | qualifier;
-        case 'i': return CPEncodingType_Int32 | qualifier;
-        case 'I': return CPEncodingType_UInt32 | qualifier;
-        case 'l': return CPEncodingType_Int32 | qualifier;
-        case 'L': return CPEncodingType_UInt32 | qualifier;
-        case 'q': return CPEncodingType_Int64 | qualifier;
-        case 'Q': return CPEncodingType_UInt64 | qualifier;
-        case 'f': return CPEncodingType_Float | qualifier;
-        case 'd': return CPEncodingType_Double | qualifier;
-        case 'D': return CPEncodingType_LongDouble | qualifier;
-        case '#': return CPEncodingType_Class | qualifier;
-        case ':': return CPEncodingType_SEL | qualifier;
-        case '*': return CPEncodingType_CString | qualifier;
-        case '^': return CPEncodingType_Pointer | qualifier;
-        case '[': return CPEncodingType_CArray | qualifier;
-        case '(': return CPEncodingType_Union | qualifier;
-        case '{': return CPEncodingType_Struct | qualifier;
-        case '@': {
-            if (len == 2 && *(type + 1) == '?')
-                return CPEncodingType_Block | qualifier;
-            else
-                return CPEncodingType_Object | qualifier;
-        }
-        default: return CPEncodingType_Unknown | qualifier;
-    }
-}
 
 + (instancetype)resolve:(objc_property_t)property {
     return [[self alloc] initWithProperty:property];
@@ -289,7 +310,7 @@ CPEncodingType CPGetEncodingType(const char *typeEncoding) {
         _name = [NSString stringWithUTF8String:name];
     }
     
-    CPEncodingType type = 0;
+    CCInstanceEncodingType type = 0;
     u_int attrCount;
     objc_property_attribute_t *attrs = property_copyAttributeList(property, &attrCount);
     for (unsigned int i = 0; i < attrCount; i++) {
@@ -299,8 +320,8 @@ CPEncodingType CPGetEncodingType(const char *typeEncoding) {
             case 'T': { // Type encoding
                 if (attrValue) {
                     _typeEncoding = [NSString stringWithUTF8String:attrValue];
-                    type = CPGetEncodingType(attrValue);
-                    if ((type & CPEncodingType_Mask) == CPEncodingType_Object) {
+                    type = CCGetInstanceEncodingType(attrValue);
+                    if ((type & CCInstanceEncodingType_Mask) == CCInstanceEncodingType_Object) {
                         size_t len = strlen(attrValue);
                         if (len > 3) {
                             char clsName[len - 2];
@@ -317,31 +338,31 @@ CPEncodingType CPGetEncodingType(const char *typeEncoding) {
                 }
             } break;
             case 'R': {
-                type |= CPEncodingType_PropertyReadonly;
+                type |= CCInstanceEncodingType_PropertyReadonly;
             } break;
             case 'C': {
-                type |= CPEncodingType_PropertyCopy;
+                type |= CCInstanceEncodingType_PropertyCopy;
             } break;
             case '&': {
-                type |= CPEncodingType_PropertyRetain;
+                type |= CCInstanceEncodingType_PropertyRetain;
             } break;
             case 'N': {
-                type |= CPEncodingType_PropertyNonatomic;
+                type |= CCInstanceEncodingType_PropertyNonatomic;
             } break;
             case 'D': {
-                type |= CPEncodingType_PropertyDynamic;
+                type |= CCInstanceEncodingType_PropertyDynamic;
             } break;
             case 'W': {
-                type |= CPEncodingType_PropertyWeak;
+                type |= CCInstanceEncodingType_PropertyWeak;
             } break;
             case 'G': {
-                type |= CPEncodingType_PropertyCustomGetter;
+                type |= CCInstanceEncodingType_PropertyCustomGetter;
                 if (attrValue) {
                     _getter = sel_registerName(attrValue);
                 }
             } break;
             case 'S': {
-                type |= CPEncodingType_PropertyCustomSetter;
+                type |= CCInstanceEncodingType_PropertyCustomSetter;
                 if (attrValue) {
                     _setter = sel_registerName(attrValue);
                 }
@@ -371,11 +392,72 @@ CPEncodingType CPGetEncodingType(const char *typeEncoding) {
 
 @end
 
-@implementation CocoaMethod
-
-@end
+#pragma mark-  CocoaIvar
 
 @implementation CocoaIvar
 
++ (instancetype)resolve:(Ivar)ivar {
+    return [[self alloc] initWithIvar:ivar];
+}
+
+- (instancetype)initWithIvar:(Ivar)ivar {
+    if (!ivar) return nil;
+    self = [super init];
+    _ivar = ivar;
+    const char *name = ivar_getName(ivar);
+    if (name) {
+        _name = [NSString stringWithUTF8String:name];
+    }
+    _offset = ivar_getOffset(ivar);
+    const char *typeEncoding = ivar_getTypeEncoding(ivar);
+    if (typeEncoding) {
+        _typeEncoding = [NSString stringWithUTF8String:typeEncoding];
+        _type = CCGetInstanceEncodingType(typeEncoding);
+    }
+    return self;
+}
+
 @end
+
+@implementation CocoaMethod
+
++ (instancetype)resolve:(Method)method {
+    return [[self alloc] initWithMethod:method];
+}
+
+- (instancetype)initWithMethod:(Method)method {
+    if (!method) return nil;
+    self = [super init];
+    _method = method;
+    _sel = method_getName(method);
+    _imp = method_getImplementation(method);
+    const char *name = sel_getName(_sel);
+    if (name) {
+        _name = [NSString stringWithUTF8String:name];
+    }
+    const char *typeEncoding = method_getTypeEncoding(method);
+    if (typeEncoding) {
+        _typeEncoding = [NSString stringWithUTF8String:typeEncoding];
+    }
+    char *returnType = method_copyReturnType(method);
+    if (returnType) {
+        _returnTypeEncoding = [NSString stringWithUTF8String:returnType];
+        free(returnType);
+    }
+    unsigned int argumentCount = method_getNumberOfArguments(method);
+    if (argumentCount > 0) {
+        NSMutableArray *argumentTypes = [NSMutableArray new];
+        for (unsigned int i = 0; i < argumentCount; i++) {
+            char *argumentType = method_copyArgumentType(method, i);
+            NSString *type = argumentType ? [NSString stringWithUTF8String:argumentType] : nil;
+            [argumentTypes addObject:type ? type : @""];
+            if (argumentType) free(argumentType);
+        }
+        _argumentTypeEncodings = argumentTypes;
+    }
+    return self;
+}
+
+@end
+
 

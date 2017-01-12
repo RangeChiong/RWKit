@@ -79,12 +79,12 @@
 @interface NSString (Calculation)
 
 /** 计算单位 ：xxx万 xxx亿 */
-- (NSString *)calculateUnit;
+- (NSString *)rw_calculateUnit;
 
 /** 添加千分符号 1,000,000 */
-- (NSString *)addSeparator;
+- (NSString *)rw_addSeparator;
 
 /** 计算文字宽高 */
-- (CGSize)stringSize:(UIFont *)font regularHeight:(CGFloat)height;
+- (CGSize)rw_stringSize:(UIFont *)font regularHeight:(CGFloat)height;
 
 @end

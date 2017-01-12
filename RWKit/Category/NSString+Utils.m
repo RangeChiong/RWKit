@@ -150,7 +150,7 @@
 
 #pragma mark-  handler
 // 计算单位
-- (NSString *)calculateUnit {
+- (NSString *)rw_calculateUnit {
     NSInteger nRet = 0;
     NSInteger value = self.integerValue;
     NSString *resultStr = @"";
@@ -166,7 +166,7 @@
 }
 
 // 添加逗号分割 20000 = 20,000
-- (NSString *)addSeparator {
+- (NSString *)rw_addSeparator {
     NSMutableString *mStr = self.mutableCopy;
     NSRange range = [mStr rangeOfString:@"."];  // 防止有小数点
     NSInteger index = (range.location != NSNotFound) ? range.location : self.length;
@@ -179,7 +179,7 @@
 
 #pragma mark-  string length
 
-- (CGSize)stringSize:(UIFont *)font regularHeight:(CGFloat)height {
+- (CGSize)rw_stringSize:(UIFont *)font regularHeight:(CGFloat)height {
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:self];
     NSDictionary *attrSyleDict = [[NSDictionary alloc] initWithObjectsAndKeys:
                                   font, NSFontAttributeName,
