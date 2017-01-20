@@ -44,6 +44,7 @@ typedef NS_ENUM(NSInteger, ZFProgressHUDBackgroundStyle) {
 @property (nonatomic, assign) ZFProgressHUDPosition position;
 @property (nonatomic, assign) ZFProgressHUDMode mode;
 @property (nonatomic, assign) ZFProgressHUDAnimation animationType;
+@property (nonatomic, assign) BOOL interactionEnabled;
 @property (nonatomic, assign) BOOL removeFromSuperViewOnHide;
 
 @property (nonatomic, strong) ZFBackgroundView *backgroundView;

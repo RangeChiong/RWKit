@@ -13,17 +13,19 @@
 static const CGFloat ZFDefaultLabelFontSize = 16.f;
 static const CGFloat ZFDefaultDetailLabelFontSize = 12.f;
 static const CGFloat ZFProgressHUDHeightWhenTopPosition = 64.f;
-static const CGFloat ZFProgressHUDHeightWhenBottomPosition = 54.f;
+static const CGFloat ZFProgressHUDMarginWhenBottomPosition = 60.f;
 
-@interface ZFProgressHUD () {
-    BOOL _finished;
-}
+@interface ZFProgressHUD ()
 
 @property (nonatomic, strong) UIView *indicator;
 
 @end
 
 @implementation ZFProgressHUD
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 #pragma mark-  class methods
 
@@ -61,8 +63,6 @@ static const CGFloat ZFProgressHUDHeightWhenBottomPosition = 54.f;
         [self performSelectorOnMainThread:@selector(showAnimated:) withObject:@(animated) waitUntilDone:YES];
         return;
     }
-    
-    _finished = NO;
     [self showAnimated:animated done:nil];
 }
 
@@ -92,7 +92,6 @@ static const CGFloat ZFProgressHUDHeightWhenBottomPosition = 54.f;
         return;
     }
     
-    _finished = YES;
     [self hideAnimated:animated delay:0.0 done:nil];
 }
 
@@ -104,7 +103,6 @@ static const CGFloat ZFProgressHUDHeightWhenBottomPosition = 54.f;
         return;
     }
     
-    _finished = YES;
     [self hideAnimated:animated delay:0.0 done:block];
 }
 
@@ -174,12 +172,9 @@ static const CGFloat ZFProgressHUDHeightWhenBottomPosition = 54.f;
 }
 
 - (void)done {
-    
-    if (_finished) {
-        self.alpha = 0.0f;
-        if (self.removeFromSuperViewOnHide) {
-            [self removeFromSuperview];
-        }
+    self.alpha = 0.0f;
+    if (self.removeFromSuperViewOnHide) {
+        [self removeFromSuperview];
     }
 }
 
@@ -251,6 +246,7 @@ static const CGFloat ZFProgressHUDHeightWhenBottomPosition = 54.f;
     [self setupViews];
 
     _margin = 20.f;
+    _removeFromSuperViewOnHide = YES;
     self.position = ZFProgressHUDPosition_Center;
     self.mode = ZFProgressHUDMode_Indeterminate;
         
@@ -261,7 +257,7 @@ static const CGFloat ZFProgressHUDHeightWhenBottomPosition = 54.f;
     for (UIView *view in @[self.backgroundView, self.bezelView]) {
         [self addSubview:view];
     }
-
+    
     for (UIView *view in @[self.titleLabel, self.detailLabel]) {
         view.translatesAutoresizingMaskIntoConstraints = NO;
         [self.bezelView addSubview:view];
@@ -281,7 +277,7 @@ static const CGFloat ZFProgressHUDHeightWhenBottomPosition = 54.f;
 
 #pragma mark-  layout
 
-- (void)updateConstraints {
+- (void)updateConstraints {    
     UIView *bezel = self.bezelView;
     [bezel removeConstraints:bezel.constraints];
     
@@ -289,8 +285,7 @@ static const CGFloat ZFProgressHUDHeightWhenBottomPosition = 54.f;
     if (self.indicator) [subviews insertObject:self.indicator atIndex:0];
 
     NSMutableArray *bezelConstraints = [NSMutableArray array];
-    
-    CGFloat padding = self.titleLabel.text.length || self.detailLabel.text.length ? self.margin/2 : self.margin;
+
     if (self.position == ZFProgressHUDPosition_Top) {
         CGFloat padding = 10;
         [subviews enumerateObjectsUsingBlock:^(UIView *view, NSUInteger idx, BOOL *stop) {
@@ -318,24 +313,33 @@ static const CGFloat ZFProgressHUDHeightWhenBottomPosition = 54.f;
     }
     else {
         [subviews enumerateObjectsUsingBlock:^(UIView *view, NSUInteger idx, BOOL *stop) {
-            
             [bezelConstraints addObject:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:bezel attribute:NSLayoutAttributeCenterX multiplier:1.f constant:0.f]];
             [bezelConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(>=margin)-[view]-(>=margin)-|" options:0 metrics:@{@"margin": @(self.margin)} views:NSDictionaryOfVariableBindings(view)]];
-            if (idx == 0) {
-                [bezelConstraints addObject:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:bezel attribute:NSLayoutAttributeTop multiplier:1.f constant:padding]];
+            
+            if ([subviews containsObject:self.indicator]) {
+                if (idx == 0) {
+//                    [bezelConstraints addObject:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:bezel attribute:NSLayoutAttributeTop multiplier:1.f constant:self.margin]];
+                    [bezelConstraints addObject:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeHeight multiplier:1.f constant:0.f]];
+                    [bezelConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=padding)-[view(height)]-(>=padding)-|" options:0 metrics:@{@"padding": @(self.margin), @"height": @(self.indicator.frame.size.width)} views:NSDictionaryOfVariableBindings(view)]];
+                }
+                else if (idx > 0) {
+                    [bezelConstraints addObject:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:subviews[idx - 1] attribute:NSLayoutAttributeBottom multiplier:1.f constant:self.margin/2]];
+                }
             }
-            else if (idx == subviews.count - 1) {
-                [bezelConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[view]-(margin)-|" options:0 metrics:@{@"margin": @(self.detailLabel.text ? padding : 0)} views:NSDictionaryOfVariableBindings(view)]];
-                
+            else {
+                if (idx == 0) {
+//                    [bezelConstraints addObject:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:bezel attribute:NSLayoutAttributeTop multiplier:1.f constant:self.margin/2]];
+                }
             }
-            if (idx > 0) {
-                [bezelConstraints addObject:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:subviews[idx - 1] attribute:NSLayoutAttributeBottom multiplier:1.f constant:padding]];
+            
+            if (idx == subviews.count - 1) {
+                UIView *lastView = subviews[idx - 1];
+                [bezelConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=margin)-[lastView][view]-(>=margin)-|" options:0 metrics:@{@"margin": @(self.margin/2)} views:NSDictionaryOfVariableBindings(lastView, view)]];
             }
         }];
     }
-
+//    [self applyPriority:999.f toConstraints:bezelConstraints];
     [bezel addConstraints:bezelConstraints];
-    
     [super updateConstraints];
 }
 
@@ -347,7 +351,6 @@ static const CGFloat ZFProgressHUDHeightWhenBottomPosition = 54.f;
     [constraints addObject:[NSLayoutConstraint constraintWithItem:self.bezelView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.f constant:0]];
 
     if (position == ZFProgressHUDPosition_Center) {
-        
         [constraints addObject:[NSLayoutConstraint constraintWithItem:self.bezelView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.f constant:0]];
     }
     else if (position == ZFProgressHUDPosition_Bottom) {
@@ -357,7 +360,7 @@ static const CGFloat ZFProgressHUDHeightWhenBottomPosition = 54.f;
         [constraints addObject:[NSLayoutConstraint constraintWithItem:self.bezelView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1.f constant:0]];
     }
     
-    [self applyPriority:998.f toConstraints:constraints];
+//    [self applyPriority:998.f toConstraints:constraints];
     return constraints;
 }
 
@@ -373,13 +376,13 @@ static const CGFloat ZFProgressHUDHeightWhenBottomPosition = 54.f;
     }
     else if (position == ZFProgressHUDPosition_Bottom) {
         [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(>=margin)-[bezel]-(>=margin)-|" options:0 metrics:metrics views:NSDictionaryOfVariableBindings(bezel)]];
-        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=margin)-[bezel]-(height)-|" options:0 metrics:@{@"height":@(ZFProgressHUDHeightWhenBottomPosition)} views:NSDictionaryOfVariableBindings(bezel)]];
+        [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=margin)-[bezel]-(padding)-|" options:0 metrics:@{@"margin":@(self.margin), @"padding":@(ZFProgressHUDMarginWhenBottomPosition)} views:NSDictionaryOfVariableBindings(bezel)]];
     }
     else {
         [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"|-0-[bezel]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(bezel)]];
         [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[bezel(==height)]" options:0 metrics:@{@"height":@(ZFProgressHUDHeightWhenTopPosition)} views:NSDictionaryOfVariableBindings(bezel)]];
     }
-    [self applyPriority:998.f toConstraints:constraints];
+//    [self applyPriority:998.f toConstraints:constraints];
     return constraints;
 }
 
@@ -444,6 +447,10 @@ static const CGFloat ZFProgressHUDHeightWhenBottomPosition = 54.f;
         indicator = self.customView;
         [self.bezelView addSubview:indicator];
     }
+    
+    [indicator setContentCompressionResistancePriority:998.f forAxis:UILayoutConstraintAxisHorizontal];
+    [indicator setContentCompressionResistancePriority:998.f forAxis:UILayoutConstraintAxisVertical];
+
     indicator.translatesAutoresizingMaskIntoConstraints = NO;
     self.indicator = indicator;
     [self setNeedsUpdateConstraints];
@@ -477,6 +484,12 @@ static const CGFloat ZFProgressHUDHeightWhenBottomPosition = 54.f;
     }
 }
 
+- (void)setInteractionEnabled:(BOOL)interactionEnabled {
+    _interactionEnabled = interactionEnabled;
+    self.backgroundView.hidden = !interactionEnabled;
+    self.userInteractionEnabled = interactionEnabled;
+}
+
 - (ZFBackgroundView *)backgroundView {
     if (_backgroundView) return _backgroundView;
     ZFBackgroundView *backgroundView = [[ZFBackgroundView alloc] initWithFrame:self.bounds];
@@ -489,10 +502,10 @@ static const CGFloat ZFProgressHUDHeightWhenBottomPosition = 54.f;
 - (ZFBackgroundView *)bezelView {
     if (_bezelView) return _bezelView;
     
-    ZFBackgroundView *bezelView = [ZFBackgroundView new];
+    ZFBackgroundView *bezelView = [[ZFBackgroundView alloc] init];
     bezelView.style = ZFProgressHUDBackgroundStyle_BlurDark;
     bezelView.translatesAutoresizingMaskIntoConstraints = NO;
-    bezelView.layer.cornerRadius = 5.f;
+    bezelView.layer.cornerRadius = 10.f;
     bezelView.alpha = 0.f;
     _bezelView = bezelView;
     
@@ -585,7 +598,7 @@ static const CGFloat ZFProgressHUDHeightWhenBottomPosition = 54.f;
 - (UIVisualEffectView *)effectView {
     if (_effectView) return _effectView;
     
-    UIVisualEffectView *effectView = [UIVisualEffectView new];
+    UIVisualEffectView *effectView = [[UIVisualEffectView alloc] init];
     [self addSubview:effectView];
     effectView.frame = self.bounds;
     effectView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
