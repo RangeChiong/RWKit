@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 /** 移除当前view的所有子视图 */
 - (void)rw_removeAllSubviews;
 
+- (UIViewController *)rw_viewController;
+
 @end
 
 #pragma mark-  Gesture
